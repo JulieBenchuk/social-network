@@ -1,0 +1,8 @@
+.nav_bar {
+    grid-area: nav-bar;
+    background-color: #94ce5e;
+}
+
+.item a {
+    color: honeydew;
+}

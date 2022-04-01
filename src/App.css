@@ -1,33 +1,12 @@
 .app-wrapper {
-  width: 1200px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-areas:
+    width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-areas:
 "header header header"
 "nav-bar content content";
-  grid-template-rows: 60px 1fr;
-  grid-template-columns: 2fr 10fr;
-  grid-gap: 10px;
+    grid-template-rows: 60px 1fr;
+    grid-template-columns: 2fr 10fr;
+    grid-gap: 10px;
 }
-.nav-bar {
-  grid-area: nav-bar;
-  background-color: #94ce5e;
 
-}
-.header {
-  grid-area: header;
-  background-color: #884fc2;
-}
-.header  img {
-  width: 60px;
-}
-.profile {
-  grid-area: content;
-  background-color: #b0b0b0;
-}
-.profile-header {
-  width: 400px;
-}
-.profile-avatar {
-  width: 150px;
-}
