@@ -15,6 +15,9 @@
 .companion {
     padding: 5px;
 }
+.companion a {
+    text-decoration: none;
+}
 
 .conversation {
     padding: 5px;
