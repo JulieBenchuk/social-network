@@ -4,5 +4,10 @@
 }
 
 .item a {
-    color: honeydew;
+    color: #ffffff;
+}
+
+.item a.activeLink {
+    color: #466446;
+    font-size: large;
 }
