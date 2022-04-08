@@ -1,0 +1,26 @@
+.dialogs {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+}
+
+.listOfCompanions {
+    padding: 5px;
+}
+
+.listOfCompanions .active {
+    font-size: large;
+    color: #f5ed34;
+}
+
+.companion {
+    padding: 5px;
+}
+
+.conversation {
+    padding: 5px;
+}
+
+.messageInConversation {
+    padding: 5px;
+    color: white;
+}
