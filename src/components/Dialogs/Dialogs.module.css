@@ -3,27 +3,28 @@
     grid-template-columns: 1fr 4fr;
 }
 
-.listOfCompanions {
-    padding: 5px;
+.dialogItems {
+    padding: 10px;
 }
 
-.listOfCompanions .active {
-    font-size: large;
-    color: #f5ed34;
-}
-
-.companion {
-    padding: 5px;
-}
-.companion a {
+.dialogItem {
+    color: gold;
     text-decoration: none;
+    padding: 10px;
 }
 
-.conversation {
-    padding: 5px;
+.dialogItemLink {
+    padding: 10px;
+}
+.dialogItemActive {
+    color: #000000;
 }
 
-.messageInConversation {
-    padding: 5px;
+.messageItems {
+    padding: 10px;
+}
+
+.messageItem {
     color: white;
+    padding: 10px;
 }
