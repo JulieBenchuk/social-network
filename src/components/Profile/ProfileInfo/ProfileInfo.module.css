@@ -1,0 +1,14 @@
+.profile_top img {
+    width: 900px;
+    height: 100px;
+
+}
+
+.profile_avatar img {
+    width: 150px;
+}
+.description {
+    padding: 10px;
+    color: #424242;
+    font-size: large;
+}

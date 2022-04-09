@@ -1,8 +1,19 @@
-.item {
-    color: #412a8f;
+.postStyle {
+    width: 300px;
+    color: white;
+    padding-left: 10px;
+    background-color: #919191;
 }
-
-.item img {
+.avatarOfPost img {
     width: 40px;
     border-radius: 40px;
+    padding: 10px;
+
+}
+.likeCount {
+    width: 300px;
+    background-color: #919191;
+    padding-left: 10px;
+    color: brown;
+    text-align: end;
 }

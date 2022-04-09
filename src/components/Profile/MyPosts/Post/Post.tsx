@@ -3,16 +3,19 @@ import classes from "./Post.module.css";
 
 
 type PostPropsType = {
-    message: string
+    id: number
+    post: string
     like: number
 }
-const Post = (props:PostPropsType) => {
+const Post = (props: PostPropsType) => {
     return (
-        <div className={classes.item}>
+        <div className={classes.avatarOfPost}>
             <img
                 src="https://media.istockphoto.com/photos/armored-superhero-picture-id1304490906?b=1&k=20&m=1304490906&s=170667a&w=0&h=3uVpIGiOjPZLhOwqkmH6BjqZilUsMVj1SupxWSmCvww="/>
-            {props.message}
-            <div>
+            <div className={classes.postStyle}>
+                {props.post}
+            </div>
+            <div className={classes.likeCount}>
                 <span>Like</span> {props.like}
             </div>
         </div>
