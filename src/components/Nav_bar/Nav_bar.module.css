@@ -1,18 +1,23 @@
 .nav_bar {
     grid-area: nav-bar;
     background-color: #ffffff;
-    padding: 10px;
     border-radius: 5px;
+    margin-left: 5px;
+}
+
+.item {
+    padding: 10px;
+    font-weight: bold;
+    font-size: 20px;
 }
 
 .item a {
     color: #000000;
     text-decoration: none;
-    font-weight: bold;
 }
 
 .item a.activeLink {
     color: #205ac2;
-    font-size: large;
+    font-size: 25px;
 
 }
