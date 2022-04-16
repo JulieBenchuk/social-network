@@ -4,6 +4,12 @@ import Post from "./Post/Post";
 
 
 const MyPosts = () => {
+    let postsData = [
+        {id: 1, post: "Hello!", likeCount: 100},
+        {id: 2, post: "How many of us are here!", likeCount: 140},
+        {id: 3, post: "I like this network!", likeCount: 200},
+        {id: 4, post: "Woooow", likeCount: 200}
+    ]
     return (
         <div>
             <div className={classes.myPostsHeader}>
@@ -17,12 +23,9 @@ const MyPosts = () => {
                     <button>Add post</button>
                 </div>
             </div>
-            <Post id={1} post={"Hello!"} like = {150}/>
-            <Post id={2} post={"How many of us are here!"} like = {100}/>
-            <Post id={3} post={"Follow me)"} like = {99}/>
-            <Post id={4} post={"I like this network"} like = {50}/>
+            {postsData.map(post => (<Post id={post.id} post={post.post} likeCount={post.likeCount}/>))}
         </div>
-    );
+    )
 }
 
 export default MyPosts;

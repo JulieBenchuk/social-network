@@ -16,10 +16,6 @@
 .dialogItemLink {
     padding: 10px;
 }
-.dialogItemActive {
-    color: #000000;
-
-}
 
 .messageItems {
     padding: 5px;
@@ -33,6 +29,7 @@
     border-radius: 5px;
     margin: 10px;
 }
+
 /*
 .triangle {
     width: 0;

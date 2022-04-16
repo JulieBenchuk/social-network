@@ -5,7 +5,7 @@ import classes from "./Post.module.css";
 type PostPropsType = {
     id: number
     post: string
-    like: number
+    likeCount: number
 }
 const Post = (props: PostPropsType) => {
     return (
@@ -17,7 +17,7 @@ const Post = (props: PostPropsType) => {
                     {props.post}
                 </div>
                 <div className={classes.likeCount}>
-                    <span>Like</span> {props.like}
+                    <span>Like</span> {props.likeCount}
                 </div>
             </div>
         </div>

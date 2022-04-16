@@ -1,51 +1,36 @@
 import React from 'react';
 import classes from "./Dialogs.module.css";
-import {NavLink, Route} from "react-router-dom";
-import Profile from "../Profile/Profile";
+import MessageItem from "./Message/Message";
+import DialogItem from "./DialogItem/DialogItem"
 
-type DialogPropsType = {
-    id: number
-    name: string
-};
-type MessagePropsType = {
-    id: number
-    message: string
-}
-const MessageItem = (props: MessagePropsType) => {
-    return (
-        <div>
-            <div className={classes.triangle}>
-                <div className={classes.messageItem}>{props.message}</div>
-            </div>
-        </div>
-    )
-}
-const DialogItem = (props: DialogPropsType) => {
-    let path = "messages/" + props.id
-    return (
-        <div className={classes.dialogItemLink}>
-            <NavLink to={path} className={classes.dialogItem}>{props.name}</NavLink>
-        </div>
-    )
-}
 const Dialogs = () => {
+    let messagesData = [
+        {id: 1, message: "Hello!"},
+        {id: 2, message: "How are you?"},
+        {id: 3, message: "Wow! You look great!"},
+        {id: 4, message: "Let's go out)"},
+        {id: 5, message: "Nice to meet you!"},
+        {id: 6, message: "I'm Julie."}
+
+    ]
+    let dialogsData = [
+        {id: 1, name: "Aleksandra"},
+        {id: 2, name: "Vladislav"},
+        {id: 3, name: "Veronika"}
+    ]
     return (
         <div className={classes.dialogs}>
             <div className={classes.dialogItems}>
-                <DialogItem id={1} name={"Aleksandra"}/>
-                <DialogItem id={2} name={"Vladislav"}/>
-                <DialogItem id={3} name={"Ekaterina"}/>
+                {dialogsData.map(dialog => (<DialogItem id={dialog.id} name={dialog.name}/>))}
             </div>
             <div className={classes.messageItems}>
-                <MessageItem id={1} message={"Hello!"}/>
-                <MessageItem id={2} message={"How are you?"}/>
-                <MessageItem id={3} message={"Wow! You look great!"}/>
-                <MessageItem id={4} message={"Let's go out))"}/>
+                {messagesData.map(message => (
+                    <MessageItem id={message.id} message={message.message}/>))}
             </div>
         </div>
     )
 }
 
-export default Dialogs
+export default Dialogs;
 
 
