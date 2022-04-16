@@ -1,15 +1,12 @@
 import React from "react";
 import classes from "./MyPosts.module.css";
-import Post from "./Post/Post";
+import Post, {PostPropsType} from "./Post/Post";
 
+type MyPostsPropsType = {
+    post: Array<PostPropsType>
+}
+const MyPosts = (props: MyPostsPropsType) => {
 
-const MyPosts = () => {
-    let postsData = [
-        {id: 1, post: "Hello!", likeCount: 100},
-        {id: 2, post: "How many of us are here!", likeCount: 140},
-        {id: 3, post: "I like this network!", likeCount: 200},
-        {id: 4, post: "Woooow", likeCount: 200}
-    ]
     return (
         <div>
             <div className={classes.myPostsHeader}>
@@ -23,7 +20,7 @@ const MyPosts = () => {
                     <button>Add post</button>
                 </div>
             </div>
-            {postsData.map(post => (<Post id={post.id} post={post.post} likeCount={post.likeCount}/>))}
+            {props.post.map(post => (<Post id={post.id} post={post.post} likeCount={post.likeCount}/>))}
         </div>
     )
 }
