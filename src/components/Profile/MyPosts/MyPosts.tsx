@@ -11,7 +11,7 @@ const MyPosts = () => {
             </div>
             <div className={classes.textArea_Button}>
                 <div>
-                    <textarea></textarea>
+                    <textarea placeholder={"What's new?"}></textarea>
                 </div>
                 <div>
                     <button>Add post</button>
