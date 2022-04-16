@@ -1,12 +1,11 @@
-
 export let state = {
-    postsData: [
+    posts: [
             {id: 1, post: "Hello!", likeCount: 100},
             {id: 2, post: "How many of us are here!", likeCount: 140},
             {id: 3, post: "I like this network!", likeCount: 200},
             {id: 4, post: "Woooow", likeCount: 200}
         ],
-    messagesData: [
+    message: [
         {id: 1, message: "Hello!"},
         {id: 2, message: "How are you?"},
         {id: 3, message: "Wow! You look great!"},
@@ -15,7 +14,7 @@ export let state = {
         {id: 6, message: "I'm Julie."}
 
     ],
-    dialogsData: [
+    dialog: [
         {id: 1, name: "Aleksandra"},
         {id: 2, name: "Vladislav"},
         {id: 3, name: "Veronika"}
