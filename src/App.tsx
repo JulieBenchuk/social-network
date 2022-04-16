@@ -13,7 +13,7 @@ import {MessagePropsType} from "./components/Dialogs/Message/Message";
 import {DialogItemPropsType} from "./components/Dialogs/DialogItem/DialogItem";
 
 type AppPropsType = {
-    post: Array<PostPropsType>
+    posts: Array<PostPropsType>
     message: Array<MessagePropsType>
     dialog: Array<DialogItemPropsType>
 }
@@ -24,7 +24,7 @@ const App = (props: AppPropsType) => {
                 <Header/>
                 <Nav_bar/>
                 <div className="app-wrapper-content">
-                    <Route path="/profile" render={()=> <Profile post={props.post}/>}/>
+                    <Route path="/profile" render={()=> <Profile posts={props.posts}/>}/>
                     <Route path="/messages" render={()=> <Dialogs dialog={props.dialog} message={props.message} />}/>
                     <Route path="/news" render={()=> <News />}/>
                     <Route path="/music" render={()=> <Music />}/>

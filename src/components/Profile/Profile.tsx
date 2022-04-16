@@ -4,13 +4,13 @@ import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import {PostPropsType} from "./MyPosts/Post/Post";
 
 type ProfilePropsType = {
-    post: Array<PostPropsType>
+    posts: Array<PostPropsType>
 }
 const Profile = (props: ProfilePropsType) => {
     return (
         <div>
             <ProfileInfo />
-            <MyPosts post={props.post}/>
+            <MyPosts posts={props.posts}/>
         </div>
     )
 }

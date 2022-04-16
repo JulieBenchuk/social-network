@@ -25,6 +25,6 @@ let dialogsData = [
 ]
 
 ReactDOM.render(
-    <App post={postsData} message={messagesData} dialog={dialogsData}/>,
+    <App posts={postsData} message={messagesData} dialog={dialogsData}/>,
     document.getElementById('root')
 );
