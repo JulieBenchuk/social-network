@@ -3,7 +3,7 @@ import classes from "./MyPosts.module.css";
 import Post, {PostPropsType} from "./Post/Post";
 
 type MyPostsPropsType = {
-    posts: Array<PostPropsType>
+    post: Array<PostPropsType>
 }
 const MyPosts = (props: MyPostsPropsType) => {
 
@@ -20,7 +20,7 @@ const MyPosts = (props: MyPostsPropsType) => {
                     <button>Add post</button>
                 </div>
             </div>
-            {props.posts.map(p => (<Post id={p.id} post={p.post} likeCount={p.likeCount}/>))}
+            {props.post.map(p => (<Post id={p.id} post={p.post} likeCount={p.likeCount}/>))}
         </div>
     )
 }
