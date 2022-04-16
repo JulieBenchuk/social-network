@@ -9,14 +9,16 @@ type PostPropsType = {
 }
 const Post = (props: PostPropsType) => {
     return (
-        <div className={classes.avatarOfPost}>
-            <img
-                src="https://media.istockphoto.com/photos/armored-superhero-picture-id1304490906?b=1&k=20&m=1304490906&s=170667a&w=0&h=3uVpIGiOjPZLhOwqkmH6BjqZilUsMVj1SupxWSmCvww="/>
-            <div className={classes.postStyle}>
-                {props.post}
-            </div>
-            <div className={classes.likeCount}>
-                <span>Like</span> {props.like}
+        <div className={classes.post}>
+            <div className={classes.avatarOfPost}>
+                <img
+                    src="https://static.vecteezy.com/system/resources/previews/004/899/833/large_2x/beautiful-girl-with-blue-hair-avatar-of-woman-for-social-network-vector.jpg"/>
+                <div className={classes.postStyle}>
+                    {props.post}
+                </div>
+                <div className={classes.likeCount}>
+                    <span>Like</span> {props.like}
+                </div>
             </div>
         </div>
     )

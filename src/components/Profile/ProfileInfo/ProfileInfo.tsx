@@ -3,14 +3,14 @@ import classes from "./ProfileInfo.module.css";
 
 const ProfileInfo = () => {
     return (
-        <div>
+        <div className={classes.profileInfo}>
             <div className={classes.profile_top}>
                 <img
-                    src="https://previews.123rf.com/images/godruma/godruma1905/godruma190500132/123182674-abstract-big-data-futuristic-light-wallpaper-design-.jpg"/>
+                    src="https://www.xmple.com/wallpaper/blue-violet-gradient-linear-1920x1080-c2-1e90ff-66078b-a-225-f-14.svg"/>
             </div>
             <div className={classes.profile_avatar}>
                 <img
-                    src="https://media.istockphoto.com/photos/armored-superhero-picture-id1304490906?b=1&k=20&m=1304490906&s=170667a&w=0&h=3uVpIGiOjPZLhOwqkmH6BjqZilUsMVj1SupxWSmCvww="/>
+                    src="https://static.vecteezy.com/system/resources/previews/004/899/833/large_2x/beautiful-girl-with-blue-hair-avatar-of-woman-for-social-network-vector.jpg"/>
             </div>
             <div className={classes.description}>
                 Description

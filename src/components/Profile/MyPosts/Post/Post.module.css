@@ -1,19 +1,25 @@
+.post {
+    width: 600px;
+    margin: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px #d5dfea;
+}
 .postStyle {
     width: 300px;
-    color: white;
-    padding-left: 10px;
-    background-color: #919191;
+    color: #424242;
+    background-color: #ffffff;
 }
 .avatarOfPost img {
     width: 40px;
     border-radius: 40px;
-    padding: 10px;
+    border: 1px solid #502a80;
+
 
 }
 .likeCount {
-    width: 300px;
-    background-color: #919191;
-    padding-left: 10px;
-    color: brown;
+    width: 600px;
+    background-color: #ffffff;
+    color: #e86767;
     text-align: end;
+
 }

@@ -14,7 +14,9 @@ type MessagePropsType = {
 const MessageItem = (props: MessagePropsType) => {
     return (
         <div>
-            <div className={classes.messageItem}>{props.message}</div>
+            <div className={classes.triangle}>
+                <div className={classes.messageItem}>{props.message}</div>
+            </div>
         </div>
     )
 }
