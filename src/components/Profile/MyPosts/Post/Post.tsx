@@ -17,7 +17,7 @@ const Post = (props: PostPropsType) => {
                     {props.post}
                 </div>
                 <div className={classes.likeCount}>
-                    <span>Like</span> {props.likeCount}
+                    <span> <img src="https://www.pinclipart.com/picdir/middle/59-595072_heart-instagram-like-icon-png-clipart.png" alt="likes"/></span> {props.likeCount}
                 </div>
             </div>
         </div>
