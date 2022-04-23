@@ -3,7 +3,7 @@ import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import {PostPropsType} from "./MyPosts/Post/Post";
 
-type ProfilePropsType = {
+export type ProfilePropsType = {
     post: Array<PostPropsType>
 }
 const Profile = (props: ProfilePropsType) => {
