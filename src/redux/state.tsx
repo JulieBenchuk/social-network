@@ -1,4 +1,31 @@
-export let state = {
+type PostType = {
+    id: number
+    post: string
+    likeCount: number
+}
+type ProfilePageType = {
+    posts: Array<PostType>
+}
+type MessageType = {
+    id: number
+    message: string
+}
+type DialogType = {
+    id: number
+    name: string
+    avatar: string
+}
+type DialogsPageType = {
+    messages: Array<MessageType>
+    dialogs: Array<DialogType>
+}
+type RootStateType = {
+    profilePage: ProfilePageType
+    dialogsPage: DialogsPageType
+}
+
+
+export let state: RootStateType = {
     profilePage: {
         posts: [
             {id: 1, post: "Hello!", likeCount: 100},
@@ -18,9 +45,21 @@ export let state = {
 
         ],
         dialogs: [
-            {id: 1, name: "Aleksandra", avatar: "https://image.shutterstock.com/z/stock-vector-portrait-of-an-asian-girl-with-pink-hair-avatar-for-a-social-network-subcultures-anime-and-1397661953.jpg"},
-            {id: 2, name: "Vladislav", avatar: "https://static.vecteezy.com/system/resources/previews/002/275/817/large_2x/asian-female-avatar-woman-icon-for-network-vector.jpg"},
-            {id: 3, name: "Veronika", avatar: "https://as1.ftcdn.net/v2/jpg/02/85/98/20/1000_F_285982046_zzxKDt4O2ntMLBObfqU2bdEovgRclEqa.jpg"}
+            {
+                id: 1,
+                name: "Aleksandra",
+                avatar: "https://image.shutterstock.com/z/stock-vector-portrait-of-an-asian-girl-with-pink-hair-avatar-for-a-social-network-subcultures-anime-and-1397661953.jpg"
+            },
+            {
+                id: 2,
+                name: "Vladislav",
+                avatar: "https://static.vecteezy.com/system/resources/previews/002/275/817/large_2x/asian-female-avatar-woman-icon-for-network-vector.jpg"
+            },
+            {
+                id: 3,
+                name: "Veronika",
+                avatar: "https://as1.ftcdn.net/v2/jpg/02/85/98/20/1000_F_285982046_zzxKDt4O2ntMLBObfqU2bdEovgRclEqa.jpg"
+            }
         ]
     }
 }
