@@ -1,21 +1,23 @@
-type PostType = {
+import {rerenderEntireTree} from "../render";
+
+export type PostType = {
     id: number
     post: string
     likeCount: number
 }
-type ProfilePageType = {
+export type ProfilePageType = {
     posts: Array<PostType>
 }
-type MessageType = {
+export type MessageType = {
     id: number
     message: string
 }
-type DialogType = {
+export type DialogType = {
     id: number
     name: string
     avatar: string
 }
-type DialogsPageType = {
+export type DialogsPageType = {
     messages: Array<MessageType>
     dialogs: Array<DialogType>
 }
@@ -62,4 +64,15 @@ export let state: RootStateType = {
             }
         ]
     }
+}
+
+export const addPost = (newPostText: string) => {
+    debugger
+    const newPost = {
+        id: 5,
+        post: newPostText,
+        likeCount: 0
+    }
+    state.profilePage.posts.push(newPost)
+    rerenderEntireTree(state)
 }

@@ -1,16 +1,21 @@
-import React, {LegacyRef} from "react";
+import React from "react";
 import classes from "./MyPosts.module.css";
 import Post, {PostPropsType} from "./Post/Post";
 
 type MyPostsPropsType = {
-    post: Array<PostPropsType>
+    posts: Array<PostPropsType>
+    addPost: (newPostText: string) => void
 }
 const MyPosts = (props: MyPostsPropsType) => {
-    let postElements = props.post.map(p => (<Post id={p.id} post={p.post} likeCount={p.likeCount}/>))
+    let postElements = props.posts.map(p => (<Post id={p.id} post={p.post} likeCount={p.likeCount}/>))
     let newPostElement = React.createRef<HTMLTextAreaElement>()
-    const addPost = () => {
+    let onAddPostClickHandler = () => {
+        debugger
         let textOfNewPost = newPostElement.current?.value;
-        alert(textOfNewPost)
+        textOfNewPost && props.addPost(textOfNewPost);
+        if (newPostElement.current?.value) {
+            newPostElement.current.value = "";
+        }
     }
 
     return (
@@ -21,7 +26,7 @@ const MyPosts = (props: MyPostsPropsType) => {
                     <textarea ref={newPostElement} placeholder={"What's new?"}/>
                 </div>
                 <div>
-                    <button onClick={addPost}>Add post</button>
+                    <button onClick={onAddPostClickHandler}>Add post</button>
                 </div>
             </div>
             {postElements}

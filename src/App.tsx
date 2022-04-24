@@ -13,20 +13,24 @@ import {RootStateType} from "./redux/state";
 
 type AppPropsType = {
     state: RootStateType
+    addPost: (newPostText: string) => void
 }
 const App = (props: AppPropsType) => {
     return (
-            <div className="app-wrapper">
-                <Header/>
-                <Nav_bar/>
-                <div className="app-wrapper-content">
-                    <Route path={"/profile"} render={() => <Profile post={props.state.profilePage.posts}/>}/>
-                    <Route path={"/messages"} render={() => <Dialogs dialog={props.state.dialogsPage.dialogs} message={props.state.dialogsPage.messages}/>}/>
-                    <Route path={"/news"} render={() => <News/>}/>
-                    <Route path={"/music"} render={() => <Music/>}/>
-                    <Route path={"/settings"} render={() => <Settings/>}/>
-                </div>
+        <div className="app-wrapper">
+            <Header/>
+            <Nav_bar/>
+            <div className="app-wrapper-content">
+                <Route path={"/profile"}
+                       render={() => <Profile profilePage={props.state.profilePage} addPost={props.addPost}/>}
+                />
+                <Route path={"/messages"} render={() => <Dialogs dialog={props.state.dialogsPage.dialogs}
+                                                                 message={props.state.dialogsPage.messages}/>}/>
+                <Route path={"/news"} render={() => <News/>}/>
+                <Route path={"/music"} render={() => <Music/>}/>
+                <Route path={"/settings"} render={() => <Settings/>}/>
             </div>
+        </div>
     );
 }
 
