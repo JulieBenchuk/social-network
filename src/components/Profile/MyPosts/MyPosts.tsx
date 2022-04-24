@@ -10,10 +10,9 @@ const MyPosts = (props: MyPostsPropsType) => {
     let postElements = props.posts.map(p => (<Post id={p.id} post={p.post} likeCount={p.likeCount}/>))
     let newPostElement = React.createRef<HTMLTextAreaElement>()
     let onAddPostClickHandler = () => {
-        debugger
         let textOfNewPost = newPostElement.current?.value;
         textOfNewPost && props.addPost(textOfNewPost);
-        if (newPostElement.current?.value) {
+        if (newPostElement.current) {
             newPostElement.current.value = "";
         }
     }

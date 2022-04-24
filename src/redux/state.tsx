@@ -68,7 +68,7 @@ export let state: RootStateType = {
 
 export const addPost = (newPostText: string) => {
     debugger
-    const newPost = {
+    const newPost: PostType = {
         id: 5,
         post: newPostText,
         likeCount: 0
