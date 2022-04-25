@@ -5,7 +5,7 @@ import {ProfilePageType} from "../../redux/state";
 
 export type ProfilePropsType = {
     profilePage: ProfilePageType
-    addPost: (text: string)=> void
+    addPost: ()=> void
     onChangeText: (text: string)=> void
 
 }

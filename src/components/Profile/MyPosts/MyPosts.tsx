@@ -4,7 +4,7 @@ import Post, {PostPropsType} from "./Post/Post";
 
 type MyPostsPropsType = {
     posts: Array<PostPropsType>
-    addPost: (text: string) => void
+    addPost: () => void
     onChangeText: (text: string)=> void
     newPostText: string
 }
@@ -12,11 +12,7 @@ const MyPosts = (props: MyPostsPropsType) => {
     let postElements = props.posts.map(p => (<Post id={p.id} post={p.post} likeCount={p.likeCount}/>))
     let newPostElement = React.createRef<HTMLTextAreaElement>()
     let onAddPostClickHandler = () => {
-        let textOfNewPost = newPostElement.current?.value;
-        textOfNewPost && props.addPost(textOfNewPost);
-        if (newPostElement.current) {
-            newPostElement.current.value = "";
-        }
+        props.addPost();
     }
     let onChangeText = ()=> {
         let textOfNewPost = newPostElement.current?.value;

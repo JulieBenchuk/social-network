@@ -36,7 +36,7 @@ export let state: RootStateType = {
             {id: 3, post: "I like this network!", likeCount: 200},
             {id: 4, post: "Woooow", likeCount: 200}
         ],
-        newPostText: "" //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        newPostText: ""
     },
     dialogsPage: {
         messages: [
@@ -68,10 +68,10 @@ export let state: RootStateType = {
     }
 }
 
-export const addPost = (newPostText: string) => {
+export const addPost = () => {
     const newPost: PostType = {
         id: 5,
-        post: newPostText,
+        post: state.profilePage.newPostText,
         likeCount: 0
     }
     state.profilePage.posts.push(newPost)
