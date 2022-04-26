@@ -27,15 +27,12 @@ export type RootStateType = {
 }
 export type StoreType = {
     _state: RootStateType
-    onChangeText: (text: string)=> void
+    onChangeText: (text: string) => void
     addPost: () => void
-    subscriber: (observer: ()=>void) => void
-    getState: ()=>RootStateType
+    subscriber: (observer: () => void) => void
+    getState: () => RootStateType
+    rerenderEntireTree: () => void
 
-}
-// RERENDER !!!!!!!
-let rerenderEntireTree = () => {
-    console.log("Tree is rerendering")
 }
 
 // STORE
@@ -79,25 +76,28 @@ export let store: StoreType = {
             ]
         }
     },
-    onChangeText (text: string)  {
-        this._state.profilePage.newPostText=text
-        rerenderEntireTree()
+    onChangeText(text: string) {
+        this._state.profilePage.newPostText = text
+        this.rerenderEntireTree()
     },
-    addPost () {
+    addPost() {
         const newPost: PostType = {
             id: 5,
             post: this._state.profilePage.newPostText,
             likeCount: 0
         }
         this._state.profilePage.posts.push(newPost)
-        this._state.profilePage.newPostText=""
-        rerenderEntireTree()
+        this._state.profilePage.newPostText = ""
+        this.rerenderEntireTree()
     },
-    subscriber (observer) {
-        rerenderEntireTree=observer
+    subscriber(observer) {
+        this.rerenderEntireTree = observer
     },
-    getState () {
+    getState() {
         return this._state
+    },
+    rerenderEntireTree() {
+        console.log("Tree is rerendering")
     }
 
 }
