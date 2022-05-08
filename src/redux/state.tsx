@@ -27,13 +27,21 @@ export type RootStateType = {
 }
 export type StoreType = {
     _state: RootStateType
-    onChangeText: (text: string) => void
-    addPost: () => void
     subscriber: (observer: () => void) => void
     getState: () => RootStateType
-    rerenderEntireTree: () => void
+    _callSubscriber: () => void
+    dispatch: (action: ActionsType)=>void
 
 }
+type addPostType = {
+    type: "ADD-POST"
+
+}
+type UpdateTextType = {
+    type: "UPDATE-NEW-POST-TEXT"
+    text: string
+}
+export type ActionsType = UpdateTextType | addPostType
 
 // STORE
 export let store: StoreType = {
@@ -76,28 +84,31 @@ export let store: StoreType = {
             ]
         }
     },
-    onChangeText(text: string) {
-        this._state.profilePage.newPostText = text
-        this.rerenderEntireTree()
+    _callSubscriber() {
+        console.log("Tree is rerendering")
     },
-    addPost() {
-        const newPost: PostType = {
-            id: 5,
-            post: this._state.profilePage.newPostText,
-            likeCount: 0
-        }
-        this._state.profilePage.posts.push(newPost)
-        this._state.profilePage.newPostText = ""
-        this.rerenderEntireTree()
-    },
-    subscriber(observer) {
-        this.rerenderEntireTree = observer
-    },
+
     getState() {
         return this._state
     },
-    rerenderEntireTree() {
-        console.log("Tree is rerendering")
+    subscriber(observer) {
+        this._callSubscriber = observer
+    },
+
+    dispatch(action) {
+        if (action.type === "ADD-POST") {
+            const newPost: PostType = {
+                id: 5,
+                post: this._state.profilePage.newPostText,
+                likeCount: 0
+            }
+            this._state.profilePage.posts.push(newPost)
+            this._state.profilePage.newPostText = ""
+            this._callSubscriber()
+        } else if (action.type === "UPDATE-NEW-POST-TEXT") {
+            this._state.profilePage.newPostText = action.text
+            this._callSubscriber()
+        }
     }
 
 }

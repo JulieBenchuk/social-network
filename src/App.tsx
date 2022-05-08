@@ -24,8 +24,8 @@ const App = (props: AppPropsType) => {
                 <Route path={"/profile"}
                        render={() => <Profile
                            profilePage={state.profilePage}
-                           addPost={props.store.addPost.bind(props.store)}
-                           onChangeText={props.store.onChangeText.bind(props.store)}/>}
+                           dispatch={props.store.dispatch.bind(props.store)}
+                           />}
                 />
                 <Route path={"/messages"} render={() => <Dialogs dialog={state.dialogsPage.dialogs}
                                                                  message={state.dialogsPage.messages}/>}/>
