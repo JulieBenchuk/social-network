@@ -37,7 +37,7 @@ export type StoreType = {
     subscriber: (observer: () => void) => void
     getState: () => RootStateType
     _callSubscriber: () => void
-    dispatch: (action: ActionsType)=>void
+    dispatch: (action: ActionsType) => void
 
 }
 type addPostType = {
@@ -55,6 +55,8 @@ type sendMessageType = {
     type: "SEND_MESSAGE"
 }
 export type ActionsType = updateTextType | addPostType | updateMessageType | sendMessageType
+//ReturnType<typeof addPostActionCreator> | ReturnType<typeof updateNewPostTextActionCreator> | ReturnType<typeof sendMessageCreator> | ReturnType<typeof updateNewMessageBodyCreator>
+
 
 // STORE
 export let store: StoreType = {
@@ -131,7 +133,7 @@ export let store: StoreType = {
                 message: this._state.dialogsPage.newMessageBody
             }
             this._state.dialogsPage.messages.push(newMessage)
-            this._state.dialogsPage.newMessageBody=""
+            this._state.dialogsPage.newMessageBody = ""
             this._callSubscriber()
         }
     }
@@ -140,8 +142,14 @@ export let store: StoreType = {
 
 //ACTION CREATORS function
 export const addPostActionCreator = (): addPostType => ({type: ADD_POST})
-export const updateNewPostTextActionCreator = (textOfNewPost: string): updateTextType => ({type: UPDATE_NEW_POST_TEXT, text: textOfNewPost})
+export const updateNewPostTextActionCreator = (textOfNewPost: string): updateTextType => ({
+    type: UPDATE_NEW_POST_TEXT,
+    text: textOfNewPost
+})
 
 export const sendMessageCreator = (): sendMessageType => ({type: SEND_MESSAGE})
-export const updateNewMessageBodyCreator = (newMessage: string): updateMessageType => ({type: UPDATE_NEW_MESSAGE_BODY, message: newMessage})
+export const updateNewMessageBodyCreator = (newMessage: string): updateMessageType => ({
+    type: UPDATE_NEW_MESSAGE_BODY,
+    message: newMessage
+})
 
