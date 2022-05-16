@@ -1,6 +1,6 @@
 //TYPE OF ACTIONS NAME
-import {profileReducer} from "./profile-reducer";
-import {dialogsReducer} from "./dialogs-reducer";
+import {addPostType, profileReducer, updateTextType} from "./profile-reducer";
+import {dialogsReducer, sendMessageType, updateMessageType} from "./dialogs-reducer";
 
 //TYPES
 export type PostType = {
@@ -32,25 +32,11 @@ export type RootStateType = {
 }
 export type StoreType = {
     _state: RootStateType
-    subscriber: (observer: () => void) => void
+    subscribe: (observer: () => void) => void
     getState: () => RootStateType
     _callSubscriber: () => void
     dispatch: (action: ActionsType) => void
 
-}
-export type addPostType = {
-    type: "ADD-POST"
-}
-export type updateTextType = {
-    type: "UPDATE-NEW-POST-TEXT"
-    text: string
-}
-export type updateMessageType = {
-    type: "UPDATE_NEW_MESSAGE_BODY"
-    message: string
-}
-export type sendMessageType = {
-    type: "SEND_MESSAGE"
 }
 export type ActionsType = updateTextType | addPostType | updateMessageType | sendMessageType
 //ReturnType<typeof addPostActionCreator> | ReturnType<typeof updateNewPostTextActionCreator> | ReturnType<typeof sendMessageCreator> | ReturnType<typeof updateNewMessageBodyCreator>
@@ -105,7 +91,7 @@ export let store: StoreType = {
     getState() {
         return this._state
     },
-    subscriber(observer) {
+    subscribe(observer) {
         this._callSubscriber = observer
     },
 
