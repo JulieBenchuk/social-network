@@ -6,19 +6,21 @@ import {ActionsType} from "../../../redux/store";
 
 
 type MyPostsPropsType = {
+    updateNewPostText: (text: string) => void
+    addPost: () => void
     posts: Array<PostPropsType>
     newPostText: string
-    dispatch: (action: ActionsType ) => void
+    /*    dispatch: (action: ActionsType ) => void*/
 }
 const MyPosts = (props: MyPostsPropsType) => {
-    let postElements = props.posts.map(p => (<Post id={p.id} post={p.post} likeCount={p.likeCount}/>))
+    let postElements = props.posts.map((p, index) => (<Post key={index} id={p.id} post={p.post} likeCount={p.likeCount}/>))
     let newPostElement = React.createRef<HTMLTextAreaElement>()
     let onAddPostClickHandler = () => {
-        props.dispatch(addPostActionCreator());
+        props.addPost();
     }
-    let onChangeText = ()=> {
+    let onChangeText = () => {
         let textOfNewPost = newPostElement.current?.value;
-        textOfNewPost && props.dispatch(updateNewPostTextActionCreator(textOfNewPost))
+        textOfNewPost && props.updateNewPostText(textOfNewPost)
     }
 
     return (
@@ -26,7 +28,8 @@ const MyPosts = (props: MyPostsPropsType) => {
             <h3 className={classes.myPostsHeader}>My posts</h3>
             <div className={classes.textArea_Button}>
                 <div>
-                    <textarea ref={newPostElement} onChange={onChangeText} value={props.newPostText} placeholder={"What's new?"}/>
+                    <textarea ref={newPostElement} onChange={onChangeText} value={props.newPostText}
+                              placeholder={"What's new?"}/>
                 </div>
                 <div>
                     <button onClick={onAddPostClickHandler}>Add post</button>
