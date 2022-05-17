@@ -1,8 +1,6 @@
 import React from "react";
-import classes from "./MyPosts.module.css";
-import Post, {PostPropsType} from "./Post/Post";
 import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../redux/profile-reducer";
-import {ActionsType, StoreType} from "../../../redux/store";
+import {StoreType} from "../../../redux/store";
 import MyPosts from "./MyPosts";
 
 

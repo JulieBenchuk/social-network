@@ -1,9 +1,6 @@
 import React from "react";
 import classes from "./MyPosts.module.css";
 import Post, {PostPropsType} from "./Post/Post";
-import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../redux/profile-reducer";
-import {ActionsType} from "../../../redux/store";
-
 
 type MyPostsPropsType = {
     updateNewPostText: (text: string) => void
