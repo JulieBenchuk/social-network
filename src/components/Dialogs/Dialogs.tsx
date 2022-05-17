@@ -7,20 +7,21 @@ import {ActionsType, DialogsPageType} from "../../redux/store";
 
 type DialogsPropsType = {
     dialogsPage: DialogsPageType
-    dispatch: (action: ActionsType) => void
-
+    sendMessage: ()=>void
+    newMessageBodyChange: (text: string)=> void
+    newMessageBody: string
 }
 
 const Dialogs = (props: DialogsPropsType) => {
     const onSendMessageClick = () => {
-        props.dispatch(sendMessageCreator())
+        props.sendMessage()
     }
     const onNewMessageBodyChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let newMessageBody = e.currentTarget.value
-        props.dispatch(updateNewMessageBodyCreator(newMessageBody))
+        props.newMessageBodyChange(newMessageBody)
 
     }
-    const newMessageBody = props.dialogsPage.newMessageBody
+    const newMessageBody = props.newMessageBody
 
     return (
         <div className={classes.dialogs}>
