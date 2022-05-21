@@ -1,14 +1,10 @@
 import React from 'react';
 import {sendMessageCreator, updateNewMessageBodyCreator} from "../../redux/dialogs-reducer";
-import {StoreType} from "../../redux/store";
 import Dialogs from "./Dialogs";
 import StoreContext from "../../StoreContext";
 
-type DialogsPropsType = {
-        store: StoreType
-}
 
-const DialogsContainer = (props: any) => {
+const DialogsContainer = () => {
     return (<StoreContext.Consumer>
         {
             (store) => {
