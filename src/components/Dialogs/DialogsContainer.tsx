@@ -4,11 +4,11 @@ import {StoreType} from "../../redux/store";
 import Dialogs from "./Dialogs";
 import StoreContext from "../../StoreContext";
 
-/*type DialogsPropsType = {
+type DialogsPropsType = {
         store: StoreType
-}*/
+}
 
-const DialogsContainer = (/*props: DialogsPropsType*/) => {
+const DialogsContainer = (props: any) => {
     return (<StoreContext.Consumer>
         {
             (store) => {

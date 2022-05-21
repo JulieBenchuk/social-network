@@ -7,7 +7,6 @@ type MyPostsPropsType = {
     addPost: () => void
     posts: Array<PostPropsType>
     newPostText: string
-    /*    dispatch: (action: ActionsType ) => void*/
 }
 const MyPosts = (props: MyPostsPropsType) => {
     let postElements = props.posts.map((p, index) => (<Post key={index} id={p.id} post={p.post} likeCount={p.likeCount}/>))
