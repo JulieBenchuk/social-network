@@ -6,14 +6,14 @@ import MyPostsContainer from "./MyPosts/MyPostsContainer";
 export type ProfilePropsType = {
 /*    profilePage: ProfilePageType
     dispatch: (action: ActionsType) => void*/
-    store: StoreType
+   /* store: StoreType*/
 }
 
 const Profile = (props: ProfilePropsType) => {
     return (
         <div>
             <ProfileInfo />
-            <MyPostsContainer store={props.store} />
+            <MyPostsContainer {/*store={props.store}*/} />
         </div>
     )
 }
