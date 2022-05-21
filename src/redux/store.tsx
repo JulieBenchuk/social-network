@@ -26,11 +26,11 @@ export type DialogsPageType = {
     dialogs: Array<DialogType>
     newMessageBody: string
 }
-export type RootStateType = {
+ type RootStateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
 }
-export type StoreType = {
+ type StoreType = {
     _state: RootStateType
     subscribe: (observer: () => void) => void
     getState: () => RootStateType
