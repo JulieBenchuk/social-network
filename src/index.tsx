@@ -6,7 +6,7 @@ import {AppStateType, store} from "./redux/redux-store";
 import {Provider} from "react-redux";
 
 
-const rerenderEntireTree = (state: AppStateType) => {
+const rerenderEntireTree = () => {
     ReactDOM.render(
         <BrowserRouter>
             <Provider store={store}>
@@ -16,8 +16,7 @@ const rerenderEntireTree = (state: AppStateType) => {
         document.getElementById('root')
     );
 }
-rerenderEntireTree(store.getState());
+rerenderEntireTree();
 store.subscribe(() => {
-    let state = store.getState()
-    rerenderEntireTree(state)
+    rerenderEntireTree()
 })
