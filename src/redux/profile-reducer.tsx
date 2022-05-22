@@ -1,4 +1,3 @@
-
 export type addPostType = {
     type: "ADD-POST"
 }
@@ -20,30 +19,35 @@ type InitialStateType = {
     posts: PostType []
     newPostText: string
 }
-let initialState =  {
+let initialState = {
     posts: [
         {id: 1, post: "Hello!", likeCount: 100},
         {id: 2, post: "How many of us are here!", likeCount: 140},
         {id: 3, post: "I like this network!", likeCount: 200},
         {id: 4, post: "Woooow", likeCount: 200}
     ],
-        newPostText: ""
+    newPostText: ""
 }
 
 export const profileReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
-        case "ADD-POST":
+        case "ADD-POST": {
             const newPost: PostType = {
                 id: 5,
                 post: state.newPostText,
                 likeCount: 0
-            }
-            state.posts.push(newPost)
-            state.newPostText = ""
-            return state;
-        case "UPDATE-NEW-POST-TEXT":
-            state.newPostText = action.text
-            return state;
+            };
+            let stateCopy = {...state}
+            stateCopy.posts = [...state.posts]
+            stateCopy.posts.push(newPost)
+            stateCopy.newPostText = ""
+            return stateCopy;
+        }
+        case "UPDATE-NEW-POST-TEXT": {
+            let stateCopy = {...state}
+            stateCopy.newPostText = action.text
+            return stateCopy;
+        }
         default:
             return state;
     }
