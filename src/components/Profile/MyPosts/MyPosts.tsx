@@ -1,13 +1,8 @@
 import React from "react";
 import classes from "./MyPosts.module.css";
-import Post, {PostPropsType} from "./Post/Post";
+import Post from "./Post/Post";
+import {MyPostsPropsType} from "./MyPostsContainer";
 
-type MyPostsPropsType = {
-    updateNewPostText: (text: string) => void
-    addPost: () => void
-    posts: Array<PostPropsType>
-    newPostText: string
-}
 const MyPosts = (props: MyPostsPropsType) => {
     let postElements = props.posts.map((p, index) => (<Post key={index} id={p.id} post={p.post} likeCount={p.likeCount}/>))
     let newPostElement = React.createRef<HTMLTextAreaElement>()
