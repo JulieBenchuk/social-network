@@ -2,7 +2,7 @@ const FOLLOW = "FOLLOW"
 const UNFOLLOW = "UNFOLLOW"
 const SET_USERS = "SET-USERS"
 
-type UserType = {
+export type UserType = {
     id: number
     fullName: string
     status: string

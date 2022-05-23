@@ -1,9 +1,10 @@
 import React from 'react';
+import {UserPropsType} from "./UsersContainer";
 
-type UsersPropsType = {
+export const Users = (props: UserPropsType) => {
+    const setUsers = ()=>{
 
-}
-export const Users = (props: UsersPropsType) => {
+    }
     return (
         <div>
             USERS WIL BE HERE
