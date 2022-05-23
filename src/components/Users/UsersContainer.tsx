@@ -11,6 +11,8 @@ type MapStatePopsType = {
 }
 type MapDispatchToPropsType = {
     setUsers: (users: Array<UserType>)=>void
+    follow: (id: number)=>void
+    unfollow: (id: number)=>void
 }
 export type UserPropsType = MapStatePopsType & MapDispatchToPropsType
 let mapStateToProps = (state: AppStateType): MapStatePopsType => {
