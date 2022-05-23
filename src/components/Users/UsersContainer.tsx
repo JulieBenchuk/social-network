@@ -1,9 +1,9 @@
 import React from 'react';
 import {connect} from "react-redux";
-import Dialogs from "../Dialogs/Dialogs";
 import {followAC, setUsersAC, unFollowAC, UserType} from "../../redux/users-reducer";
 import {AppStateType} from "../../redux/redux-store";
 import {Dispatch} from "redux";
+
 import {Users} from "./Users";
 
 type MapStatePopsType = {
@@ -15,7 +15,7 @@ type MapDispatchToPropsType = {
 export type UserPropsType = MapStatePopsType & MapDispatchToPropsType
 let mapStateToProps = (state: AppStateType): MapStatePopsType => {
     return {
-        users: state.usersPage
+        users: state.usersPage.users
     }
 }
 let mapDispatchToProps = (dispatch: Dispatch)=> {
