@@ -2,7 +2,7 @@ import React from 'react';
 import {UserPropsType} from "./UsersContainer";
 import {UserType} from "../../redux/users-reducer";
 import s from "./Users.module.css"
-import * as axios from "axios";
+import axios from "axios";
 
 export const Users = (props: UserPropsType) => {
     if (props.users.length === 0) {
@@ -22,7 +22,7 @@ export const Users = (props: UserPropsType) => {
         <div>
             {props.users.map(u => <div key={u.id}>
                 <span>
-                    <div> <img src={u.photos.small} className={s.avatar}/></div>
+                    <div> <img src={u.photos.small ? u.photos.small : "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png"} className={s.avatar}/></div>
                     <div> {u.followed ? <button onClick={() => unfollow(u.id)}>Unfollowed</button> :
                         <button onClick={() => follow(u.id)}>Followed</button>}</div>
                 </span>
@@ -32,8 +32,8 @@ export const Users = (props: UserPropsType) => {
                         <div>{u.status}</div>
                     </span>
                     <span>
-                        <div>{u.location.country}</div>
-                        <div>{u.location.city}</div>
+                        <div>{"u.location.country"}</div>
+                        <div>{"u.location.city"}</div>
                     </span>
                 </span>
             </div>)}
