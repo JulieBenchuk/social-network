@@ -4,7 +4,7 @@ import {followAC, setUsersAC, unFollowAC, UserType} from "../../redux/users-redu
 import {AppStateType} from "../../redux/redux-store";
 import {Dispatch} from "redux";
 
-import {Users} from "./UsersC";
+import {Users} from "./Users";
 
 type MapStatePopsType = {
     users: Array<UserType>
