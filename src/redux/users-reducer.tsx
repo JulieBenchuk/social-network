@@ -3,6 +3,7 @@ const UNFOLLOW = "UNFOLLOW"
 const SET_USERS = "SET-USERS"
 const SET_CURRENT_PAGE = "SET_CURRENT_PAGE"
 const SET_TOTAL_USERS_COUNT = "SET_TOTAL_USERS_COUNT"
+const SET_IS_LOADING = "SET_IS_LOADING"
 
 export type UserType = {
     name: string
@@ -51,9 +52,13 @@ type setTotalUsersCountACType = {
     type: "SET_TOTAL_USERS_COUNT"
     count: number
 }
+type setLoadingACType = {
+    type: "SET_IS_LOADING"
+    isLoading: boolean
+}
 
 
-type ActionsType = followACType | unfollowACType | setUsers | setCurrentPageACType | setTotalUsersCountACType
+type ActionsType = followACType | unfollowACType | setUsers | setCurrentPageACType | setTotalUsersCountACType | setLoadingACType
 
 
 export const usersReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
@@ -78,12 +83,16 @@ export const usersReducer = (state: InitialStateType = initialState, action: Act
             return {
                 ...state, users: action.users
             }
-        case "SET_TOTAL_USERS_COUNT":
+        case SET_TOTAL_USERS_COUNT:
             return {
                 ...state, totalUsersCount: action.count
             }
-        case "SET_CURRENT_PAGE":
-            return {...state, currentPage: action.currentPage}
+        case SET_CURRENT_PAGE:
+            return {...state, currentPage: action.currentPage};
+        case SET_IS_LOADING:
+            return {
+                ...state, isLoading: action.isLoading
+            }
         default:
             return state;
     }
@@ -94,5 +103,6 @@ export const unFollowAC = (userID: number): unfollowACType => ({type: UNFOLLOW, 
 export const setUsersAC = (users: Array<UserType>) => ({type: SET_USERS, users: users})
 export const setCurrentPageAC = (currentPage: number) => ({type: SET_CURRENT_PAGE, currentPage: currentPage})
 export const setTotalUsersCountAC = (count: number) => ({type: SET_TOTAL_USERS_COUNT, count: count})
+export const setLoadingAC = (isLoading: boolean) => ({type: SET_IS_LOADING, isLoading: isLoading})
 
 

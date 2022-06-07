@@ -4,7 +4,7 @@ import {Users} from "./Users";
 import {connect} from "react-redux";
 import {
     followAC,
-    setCurrentPageAC,
+    setCurrentPageAC, setLoadingAC,
     setTotalUsersCountAC,
     setUsersAC,
     unFollowAC,
@@ -14,7 +14,7 @@ import {AppStateType} from "../../redux/redux-store";
 import {Dispatch} from "redux";
 import {Preloader} from "../../common/Preloader";
 
-type MapStatePopsType = {
+type MapStatePropsType = {
     users: Array<UserType>
     pageSize: number
     totalUsersCount: number
@@ -27,10 +27,11 @@ type MapDispatchToPropsType = {
     setUsers: (users: Array<UserType>) => void
     follow: (id: number) => void
     unfollow: (id: number) => void
+    setIsLoading: (isLoading: boolean)=> void
 }
-export type UserPropsType = MapStatePopsType & MapDispatchToPropsType
+export type UserPropsType = MapStatePropsType & MapDispatchToPropsType
 
-let mapStateToProps = (state: AppStateType): MapStatePopsType => {
+let mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
         users: state.usersPage.users,
         pageSize: state.usersPage.pageSize,
@@ -55,13 +56,18 @@ let mapDispatchToProps = (dispatch: Dispatch) => {
         },
         setTotalUsersCount: (count: number) => {
             dispatch(setTotalUsersCountAC(count))
+        },
+        setIsLoading: (isLoading: boolean) => {
+            dispatch(setLoadingAC(isLoading))
         }
     }
 }
 
 class UsersContainer extends React.Component<UserPropsType> {
     componentDidMount() {
+        this.props.setIsLoading(true)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
+            this.props.setIsLoading(false)
             this.props.setUsers(response.data.items)
             this.props.setTotalUsersCount(response.data.totalCount)
         })
@@ -76,9 +82,11 @@ class UsersContainer extends React.Component<UserPropsType> {
         console.log(`${id} will be unfollowed`)
     }
     changePage = (page: number) => {
+        this.props.setIsLoading(true)
         this.props.setCurrentPage(page)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`).then(response => {
             this.props.setUsers(response.data.items)
+            this.props.setIsLoading(false)
         })
     }
 
