@@ -3,11 +3,11 @@ import axios from "axios";
 import {Users} from "./Users";
 import {connect} from "react-redux";
 import {
-    followAC,
-    setCurrentPageAC, setLoadingAC,
-    setTotalUsersCountAC,
-    setUsersAC,
-    unFollowAC,
+    follow,
+    setCurrentPage, setLoading,
+    setTotalUsersCount,
+    setUsers,
+    unFollow,
     UserType
 } from "../../redux/users-reducer";
 import {AppStateType} from "../../redux/redux-store";
@@ -27,7 +27,7 @@ type MapDispatchToPropsType = {
     setUsers: (users: Array<UserType>) => void
     follow: (id: number) => void
     unfollow: (id: number) => void
-    setIsLoading: (isLoading: boolean)=> void
+    setIsLoading: (isLoading: boolean) => void
 }
 export type UserPropsType = MapStatePropsType & MapDispatchToPropsType
 
@@ -38,28 +38,6 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType => {
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
         isLoading: state.usersPage.isLoading
-    }
-}
-let mapDispatchToProps = (dispatch: Dispatch) => {
-    return {
-        follow: (id: number) => {
-            dispatch(followAC(id))
-        },
-        unfollow: (id: number) => {
-            dispatch(unFollowAC(id))
-        },
-        setUsers: (users: Array<UserType>) => {
-            dispatch(setUsersAC(users))
-        },
-        setCurrentPage: (page: number) => {
-            dispatch(setCurrentPageAC(page))
-        },
-        setTotalUsersCount: (count: number) => {
-            dispatch(setTotalUsersCountAC(count))
-        },
-        setIsLoading: (isLoading: boolean) => {
-            dispatch(setLoadingAC(isLoading))
-        }
     }
 }
 
@@ -93,7 +71,7 @@ class UsersContainer extends React.Component<UserPropsType> {
 
     render() {
         return <div>
-            {this.props.isLoading && <Preloader />}
+            {this.props.isLoading && <Preloader/>}
             <Users users={this.props.users} totalUsersCount={this.props.totalUsersCount}
                    pageSize={this.props.pageSize} currentPage={this.props.currentPage}
                    changePage={this.changePage}
@@ -102,4 +80,11 @@ class UsersContainer extends React.Component<UserPropsType> {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer)
+export default connect(mapStateToProps, {
+    follow: follow,
+    unfollow: unFollow,
+    setUsers: setUsers,
+    setCurrentPage: setCurrentPage,
+    setTotalUsersCount: setTotalUsersCount,
+    setIsLoading: setLoading
+})(UsersContainer)

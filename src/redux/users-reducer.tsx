@@ -98,11 +98,11 @@ export const usersReducer = (state: InitialStateType = initialState, action: Act
     }
 }
 
-export const followAC = (userID: number): followACType => ({type: FOLLOW, ID: userID})
-export const unFollowAC = (userID: number): unfollowACType => ({type: UNFOLLOW, ID: userID})
-export const setUsersAC = (users: Array<UserType>) => ({type: SET_USERS, users: users})
-export const setCurrentPageAC = (currentPage: number) => ({type: SET_CURRENT_PAGE, currentPage: currentPage})
-export const setTotalUsersCountAC = (count: number) => ({type: SET_TOTAL_USERS_COUNT, count: count})
-export const setLoadingAC = (isLoading: boolean) => ({type: SET_IS_LOADING, isLoading: isLoading})
+export const follow = (userID: number): followACType => ({type: FOLLOW, ID: userID})
+export const unFollow = (userID: number): unfollowACType => ({type: UNFOLLOW, ID: userID})
+export const setUsers = (users: Array<UserType>) => ({type: SET_USERS, users: users})
+export const setCurrentPage = (currentPage: number) => ({type: SET_CURRENT_PAGE, currentPage: currentPage})
+export const setTotalUsersCount = (count: number) => ({type: SET_TOTAL_USERS_COUNT, count: count})
+export const setLoading = (isLoading: boolean) => ({type: SET_IS_LOADING, isLoading: isLoading})
 
 
