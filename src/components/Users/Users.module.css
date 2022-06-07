@@ -2,3 +2,7 @@
     width: 100px;
     height: 100px;
 }
+.currentPade {
+    font-weight: bold;
+    font-size: larger;
+}

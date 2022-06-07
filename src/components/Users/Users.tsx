@@ -2,14 +2,15 @@ import React from 'react';
 import {UserPropsType} from "./UsersContainer";
 import s from "./Users.module.css"
 import axios from "axios";
+import {setTotalUsersCountAC} from "../../redux/users-reducer";
 
 export class Users extends React.Component<UserPropsType> {
     componentDidMount() {
-        axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
             this.props.setUsers(response.data.items)
+            this.props.setTotalUsersCount(response.data.totalCount)
         })
     }
-
     follow = (id: number) => {
         this.props.follow(id)
         console.log(`${id} will be followed`)
@@ -18,9 +19,26 @@ export class Users extends React.Component<UserPropsType> {
         this.props.unfollow(id)
         console.log(`${id} will be unfollowed`)
     }
+    changePage = (page: number)=> {
+        this.props.setCurrentPage(page)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`).then(response => {
+            this.props.setUsers(response.data.items)
+        })
+    }
+
 
     render() {
+        let pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize)
+        let allPages = []
+        for (let i = 1; i <= pagesCount; i++) {
+            allPages.push(i)
+        }
         return <div>
+            <div>
+                {allPages.map(p => {
+                    return <span className={(p === this.props.currentPage) ? s.currentPade : ""} onClick={(e)=>this.changePage(p)}>{p}</span>
+                })}
+            </div>
             {this.props.users.map(u => <div key={u.id}>
                 <span>
                     <div> <img
