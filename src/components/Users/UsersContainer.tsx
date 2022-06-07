@@ -12,12 +12,14 @@ import {
 } from "../../redux/users-reducer";
 import {AppStateType} from "../../redux/redux-store";
 import {Dispatch} from "redux";
+import {Preloader} from "../../common/Preloader";
 
 type MapStatePopsType = {
     users: Array<UserType>
     pageSize: number
     totalUsersCount: number
     currentPage: number
+    isLoading: boolean
 }
 type MapDispatchToPropsType = {
     setTotalUsersCount: (count: number) => void
@@ -33,7 +35,8 @@ let mapStateToProps = (state: AppStateType): MapStatePopsType => {
         users: state.usersPage.users,
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
-        currentPage: state.usersPage.currentPage
+        currentPage: state.usersPage.currentPage,
+        isLoading: state.usersPage.isLoading
     }
 }
 let mapDispatchToProps = (dispatch: Dispatch) => {
@@ -81,9 +84,13 @@ class UsersContainer extends React.Component<UserPropsType> {
 
 
     render() {
-        return <Users users={this.props.users} totalUsersCount={this.props.totalUsersCount}
-                      pageSize={this.props.pageSize} currentPage={this.props.currentPage} changePage={this.changePage}
-                      unfollow={this.unfollow} follow={this.follow}/>
+        return <div>
+            {this.props.isLoading && <Preloader />}
+            <Users users={this.props.users} totalUsersCount={this.props.totalUsersCount}
+                   pageSize={this.props.pageSize} currentPage={this.props.currentPage}
+                   changePage={this.changePage}
+                   unfollow={this.unfollow} follow={this.follow}/>
+        </div>
     }
 }
 

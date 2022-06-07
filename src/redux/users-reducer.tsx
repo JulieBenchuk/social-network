@@ -21,12 +21,14 @@ type InitialStateType = {
     pageSize: number
     totalUsersCount: number
     currentPage: number
+    isLoading: boolean
 }
 let initialState = {
     users: [],
     pageSize: 5,
     totalUsersCount: 0,
-    currentPage: 1
+    currentPage: 1,
+    isLoading: true
 }
 
 type followACType = {
