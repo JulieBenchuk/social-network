@@ -11,7 +11,6 @@ import {
     UserType
 } from "../../redux/users-reducer";
 import {AppStateType} from "../../redux/redux-store";
-import {Dispatch} from "redux";
 import {Preloader} from "../../common/Preloader";
 
 type MapStatePropsType = {
