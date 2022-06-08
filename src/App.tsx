@@ -21,7 +21,7 @@ const App = () => {
             <Header/>
             <Nav_bar/>
             <div className="app-wrapper-content">
-                <Route path={"/profile"}
+                <Route path={"/profile/:userID?"}
                        render={() => <ProfileContainer
                            />}
                 />
