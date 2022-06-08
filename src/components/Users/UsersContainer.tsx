@@ -40,7 +40,7 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType => {
     }
 }
 
-class UsersContainer extends React.Component<UserPropsType> {
+ class UsersContainer extends React.Component<UserPropsType> {
     componentDidMount() {
         this.props.setIsLoading(true)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
@@ -67,7 +67,7 @@ class UsersContainer extends React.Component<UserPropsType> {
         })
     }
 
-
+ 
     render() {
         return <div>
             {this.props.isLoading && <Preloader/>}

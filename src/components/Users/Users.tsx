@@ -1,6 +1,7 @@
 import React from 'react';
 import s from "./Users.module.css";
 import {UserType} from "../../redux/users-reducer";
+import {NavLink} from "react-router-dom";
 
 type UsersPropsType = {
     totalUsersCount: number
@@ -27,9 +28,11 @@ export const Users = (props: UsersPropsType) => {
             </div>
             {props.users.map(u => <div key={u.id}>
                 <span>
-                    <div> <img
-                        src={u.photos.small ? u.photos.small : "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png"}
-                        className={s.avatar}/></div>
+                    <div>
+                        <NavLink to={"/profile" + u.id}><img
+                            src={u.photos.small ? u.photos.small : "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png"}
+                            className={s.avatar}/></NavLink>
+                    </div>
                     <div> {u.followed ? <button onClick={() => props.unfollow(u.id)}>Unfollowed</button> :
                         <button onClick={() => props.follow(u.id)}>Followed</button>}</div>
                 </span>
@@ -45,5 +48,5 @@ export const Users = (props: UsersPropsType) => {
                 </span>
             </div>)}
         </div>
-);
+    );
 };
