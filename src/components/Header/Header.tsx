@@ -8,6 +8,7 @@ type HeaderPropsType = {
     isAuth: boolean
 }
 const Header = (props: any) => {
+    debugger
     return (
         <header className={style.header}>
             <img src="https://www.citypng.com/public/uploads/preview/-41601584220o1ckpwphjh.png"/>

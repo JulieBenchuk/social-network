@@ -6,12 +6,14 @@ import {connect} from "react-redux";
 import {setUserData} from "../../redux/auth-reducer";
 
 type MapStatePropsType = {
+    id: number | null
     email: string | null
     login: string | null
     isAuth: boolean
 }
 let mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
+        id: state.auth.id,
         email: state.auth.email,
         login: state.auth.login,
         isAuth: state.auth.isAuth
@@ -23,9 +25,9 @@ class HeaderContainer extends React.Component<any> {
         axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
             withCredentials: true
         }).then(response => {
-            if (response.data.resultCode===0){
+            if (response.data.resultCode === 0) {
                 let {id, email, login} = response.data.data
-                this.props.setUserData(id, email, login)
+                this.props.setUserData({id, email, login})
             }
         })
     }
