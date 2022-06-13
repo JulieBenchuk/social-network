@@ -13,8 +13,8 @@ type MapStatePropsType = {
 }
 let mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
-        id: state.auth.id,
         email: state.auth.email,
+        id: state.auth.id,
         login: state.auth.login,
         isAuth: state.auth.isAuth
     }
@@ -26,8 +26,9 @@ class HeaderContainer extends React.Component<any> {
             withCredentials: true
         }).then(response => {
             if (response.data.resultCode === 0) {
+                debugger
                 let data = response.data.data
-                this.props.setUserData(data)
+                this.props.setUserData(data.email, data.id, data.login, data.isAuth)
             }
         })
     }

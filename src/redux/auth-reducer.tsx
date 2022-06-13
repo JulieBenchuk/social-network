@@ -3,22 +3,22 @@ const SET_IS_LOADING = "SET_IS_LOADING"
 
 
 type InitialStateType = {
-    id: number | null
     email: string | null
+    id: number | null
     login: string | null
     isLoading: boolean
     isAuth: boolean
 }
 let initialState = {
-    id: null,
     email: null,
+    id: null,
     login: null,
     isLoading: false,
     isAuth: false
 }
 type dataType = {
-    id: number | null
     email: string | null
+    id: number | null
     login: string | null
 }
 
@@ -53,7 +53,7 @@ export const authReducer = (state: InitialStateType = initialState, action: Acti
     }
 }
 
-export const setUserData = (data: dataType) => ({type: SET_USER_DATA, data: data})
+export const setUserData = (  id: number, email: string, login: string) => ({type: SET_USER_DATA, data: {email: email, id: id,  login: login}})
 export const setLoading = (isLoading: boolean) => ({type: SET_IS_LOADING, isLoading: isLoading})
 
 

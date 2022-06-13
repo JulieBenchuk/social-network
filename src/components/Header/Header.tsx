@@ -2,11 +2,11 @@ import React from "react";
 import style from "./Header.module.css";
 import {NavLink} from "react-router-dom";
 
-type HeaderPropsType = {
+/*type HeaderPropsType = {
     email: string | null
     login: string | null
     isAuth: boolean
-}
+}*/
 const Header = (props: any) => {
     return (
         <header className={style.header}>

@@ -11,6 +11,7 @@
 }
 .loginBlock{
     background-color: #e86767;
+    z-index: 1;
 }
 .loginBlock a {
     color: white;
