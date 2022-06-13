@@ -7,7 +7,7 @@ import {
     setCurrentPage, setLoading,
     setTotalUsersCount,
     setUsers,
-    unFollow,
+    unfollow,
     UserType
 } from "../../redux/users-reducer";
 import {AppStateType} from "../../redux/redux-store";
@@ -81,7 +81,7 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType => {
 
 export default connect(mapStateToProps, {
     follow: follow,
-    unfollow: unFollow,
+    unfollow: unfollow,
     setUsers: setUsers,
     setCurrentPage: setCurrentPage,
     setTotalUsersCount: setTotalUsersCount,

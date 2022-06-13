@@ -2,6 +2,7 @@ import React from 'react';
 import s from "./Users.module.css";
 import {UserType} from "../../redux/users-reducer";
 import {NavLink} from "react-router-dom";
+import axios from "axios";
 
 type UsersPropsType = {
     totalUsersCount: number
@@ -33,8 +34,31 @@ export const Users = (props: UsersPropsType) => {
                             src={u.photos.small ? u.photos.small : "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png"}
                             className={s.avatar}/></NavLink>
                     </div>
-                    <div> {u.followed ? <button onClick={() => props.unfollow(u.id)}>Unfollowed</button> :
-                        <button onClick={() => props.follow(u.id)}>Followed</button>}</div>
+                    <div> {u.followed ? <button onClick={() => {
+                            axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
+                                withCredentials: true,
+                                headers: {
+                                    "API-KEY": "ebac7373-e171-4ad8-af57-03281cb1aee5"
+                                }
+                            })
+                                .then(response => {
+                                    if (response.data.resultCode === 0) {
+                                        props.unfollow(u.id)
+                                    }
+                                })
+                        }}>Unfollowed</button> :
+                        <button onClick={() => {
+                            axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
+                                withCredentials: true,
+                                headers: {
+                                    "API-KEY": "ebac7373-e171-4ad8-af57-03281cb1aee5"
+                                }
+                            }).then(response => {
+                                if (response.data.resultCode === 0) {
+                                    props.follow(u.id)
+                                }
+                            })
+                        }}>Followed</button>}</div>
                 </span>
                 <span>
                     <span>

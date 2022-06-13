@@ -99,7 +99,7 @@ export const usersReducer = (state: InitialStateType = initialState, action: Act
 }
 
 export const follow = (userID: number): followACType => ({type: FOLLOW, ID: userID})
-export const unFollow = (userID: number): unfollowACType => ({type: UNFOLLOW, ID: userID})
+export const unfollow = (userID: number): unfollowACType => ({type: UNFOLLOW, ID: userID})
 export const setUsers = (users: Array<UserType>) => ({type: SET_USERS, users: users})
 export const setCurrentPage = (currentPage: number) => ({type: SET_CURRENT_PAGE, currentPage: currentPage})
 export const setTotalUsersCount = (count: number) => ({type: SET_TOTAL_USERS_COUNT, count: count})
