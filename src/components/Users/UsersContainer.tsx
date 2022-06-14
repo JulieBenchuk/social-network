@@ -12,7 +12,7 @@ import {
 } from "../../redux/users-reducer";
 import {AppStateType} from "../../redux/redux-store";
 import {Preloader} from "../../common/Preloader";
-import {getUsers} from "../../api/api";
+import {usersAPI} from "../../api/api";
 
 type MapStatePropsType = {
     users: Array<UserType>
@@ -44,7 +44,7 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType => {
  class UsersContainer extends React.Component<UserPropsType> {
     componentDidMount() {
         this.props.setIsLoading(true)
-        getUsers(this.props.currentPage, this.props.pageSize).then(data => {
+        usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
             this.props.setIsLoading(false)
             this.props.setUsers(data.items)
             this.props.setTotalUsersCount(data.totalCount)
@@ -62,7 +62,7 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType => {
     changePage = (page: number) => {
         this.props.setIsLoading(true)
         this.props.setCurrentPage(page)
-        getUsers(page, this.props.pageSize).then(data => {
+        usersAPI.getUsers(page, this.props.pageSize).then(data => {
             this.props.setUsers(data.items)
             this.props.setIsLoading(false)
         })
