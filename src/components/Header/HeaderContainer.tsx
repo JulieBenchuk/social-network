@@ -26,7 +26,6 @@ class HeaderContainer extends React.Component<any> {
             withCredentials: true
         }).then(response => {
             if (response.data.resultCode === 0) {
-                debugger
                 let data = response.data.data
                 this.props.setUserData(data.email, data.id, data.login, data.isAuth)
             }
