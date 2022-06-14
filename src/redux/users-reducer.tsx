@@ -4,6 +4,7 @@ const SET_USERS = "SET-USERS"
 const SET_CURRENT_PAGE = "SET_CURRENT_PAGE"
 const SET_TOTAL_USERS_COUNT = "SET_TOTAL_USERS_COUNT"
 const SET_IS_LOADING = "SET_IS_LOADING"
+const FOLLOWING_IN_PROGRESS = "FOLLOWING_IN_PROGRESS"
 
 export type UserType = {
     name: string
@@ -16,6 +17,7 @@ export type UserType = {
     status: string
     followed: boolean
     location: { country: string, city: string }
+    followingInProgress: boolean
 }
 type InitialStateType = {
     users: Array<UserType>
@@ -29,7 +31,7 @@ let initialState = {
     pageSize: 5,
     totalUsersCount: 0,
     currentPage: 1,
-    isLoading: false
+    isLoading: false,
 }
 
 type followACType = {
@@ -56,9 +58,21 @@ type setLoadingACType = {
     type: "SET_IS_LOADING"
     isLoading: boolean
 }
+type setFollowingInProgressACType = {
+    type: "FOLLOWING_IN_PROGRESS"
+    id: number
+    followingInProgress: boolean
+}
 
 
-type ActionsType = followACType | unfollowACType | setUsers | setCurrentPageACType | setTotalUsersCountACType | setLoadingACType
+type ActionsType =
+    followACType
+    | unfollowACType
+    | setUsers
+    | setCurrentPageACType
+    | setTotalUsersCountACType
+    | setLoadingACType
+    | setFollowingInProgressACType
 
 
 export const usersReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
@@ -92,6 +106,14 @@ export const usersReducer = (state: InitialStateType = initialState, action: Act
         case SET_IS_LOADING:
             return {
                 ...state, isLoading: action.isLoading
+            };
+        case FOLLOWING_IN_PROGRESS:
+            return {
+                ...state, users: state.users.map(u=>{
+                    if (u.id===action.id) {
+                        return {...u, followingInProgress: action.followingInProgress}
+                    } else return u
+                })
             }
         default:
             return state;
@@ -104,5 +126,6 @@ export const setUsers = (users: Array<UserType>) => ({type: SET_USERS, users: us
 export const setCurrentPage = (currentPage: number) => ({type: SET_CURRENT_PAGE, currentPage: currentPage})
 export const setTotalUsersCount = (count: number) => ({type: SET_TOTAL_USERS_COUNT, count: count})
 export const setLoading = (isLoading: boolean) => ({type: SET_IS_LOADING, isLoading: isLoading})
+export const setFollowingInProgress = (id: number, followingInProgress: boolean) => ({type: FOLLOWING_IN_PROGRESS, id: id, followingInProgress: followingInProgress })
 
 

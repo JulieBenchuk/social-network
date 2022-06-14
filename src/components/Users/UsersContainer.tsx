@@ -4,7 +4,7 @@ import {Users} from "./Users";
 import {connect} from "react-redux";
 import {
     follow,
-    setCurrentPage, setLoading,
+    setCurrentPage, setFollowingInProgress, setLoading,
     setTotalUsersCount,
     setUsers,
     unfollow,
@@ -28,6 +28,8 @@ type MapDispatchToPropsType = {
     follow: (id: number) => void
     unfollow: (id: number) => void
     setIsLoading: (isLoading: boolean) => void
+    setFollowingInProgress: (id: number, followingInProgress: boolean)=> void
+
 }
 export type UserPropsType = MapStatePropsType & MapDispatchToPropsType
 
@@ -37,11 +39,11 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType => {
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
-        isLoading: state.usersPage.isLoading
+        isLoading: state.usersPage.isLoading,
     }
 }
 
- class UsersContainer extends React.Component<UserPropsType> {
+class UsersContainer extends React.Component<UserPropsType> {
     componentDidMount() {
         this.props.setIsLoading(true)
         usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
@@ -68,14 +70,14 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType => {
         })
     }
 
- 
+
     render() {
         return <div>
             {this.props.isLoading && <Preloader/>}
             <Users users={this.props.users} totalUsersCount={this.props.totalUsersCount}
                    pageSize={this.props.pageSize} currentPage={this.props.currentPage}
                    changePage={this.changePage}
-                   unfollow={this.unfollow} follow={this.follow}/>
+                   unfollow={this.unfollow} follow={this.follow}  setFollowingInProgress={this.props.setFollowingInProgress}/>
         </div>
     }
 }
@@ -86,5 +88,6 @@ export default connect(mapStateToProps, {
     setUsers: setUsers,
     setCurrentPage: setCurrentPage,
     setTotalUsersCount: setTotalUsersCount,
-    setIsLoading: setLoading
+    setIsLoading: setLoading,
+    setFollowingInProgress: setFollowingInProgress
 })(UsersContainer)

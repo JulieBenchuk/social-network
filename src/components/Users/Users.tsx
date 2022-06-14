@@ -13,6 +13,7 @@ type UsersPropsType = {
     users: Array<UserType>
     unfollow: (id: number) => void
     follow: (id: number) => void
+    setFollowingInProgress: (id: number, following: boolean) => void
 }
 export const Users = (props: UsersPropsType) => {
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
@@ -35,17 +36,21 @@ export const Users = (props: UsersPropsType) => {
                             src={u.photos.small ? u.photos.small : "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png"}
                             className={s.avatar}/></NavLink>
                     </div>
-                    <div> {u.followed ? <button onClick={() => {
-                        usersAPI.unfollowUser(u.id).then(data => {
-                                    if (data.resultCode === 0) {
-                                        props.unfollow(u.id)
-                                    }
-                                })
+                    <div> {u.followed ? <button disabled={u.followingInProgress} onClick={() => {
+                            props.setFollowingInProgress(u.id, true)
+                            usersAPI.unfollowUser(u.id).then(data => {
+                                if (data.resultCode === 0) {
+                                    props.unfollow(u.id)
+                                    props.setFollowingInProgress(u.id, false)
+                                }
+                            })
                         }}>Unfollowed</button> :
-                        <button onClick={() => {
-                          usersAPI.followUser(u.id).then(data => {
+                        <button disabled={u.followingInProgress} onClick={() => {
+                            props.setFollowingInProgress(u.id, true)
+                            usersAPI.followUser(u.id).then(data => {
                                 if (data.resultCode === 0) {
                                     props.follow(u.id)
+                                    props.setFollowingInProgress(u.id, false)
                                 }
                             })
                         }}>Followed</button>}</div>
