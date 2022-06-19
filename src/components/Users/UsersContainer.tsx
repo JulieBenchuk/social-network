@@ -1,9 +1,8 @@
 import React from 'react';
-import axios from "axios";
 import {Users} from "./Users";
 import {connect} from "react-redux";
 import {
-    follow,
+    follow, getUsersThunkCreator,
     setCurrentPage, setFollowingInProgress, setLoading,
     setTotalUsersCount,
     setUsers,
@@ -29,6 +28,7 @@ type MapDispatchToPropsType = {
     unfollow: (id: number) => void
     setIsLoading: (isLoading: boolean) => void
     setFollowingInProgress: (id: number, followingInProgress: boolean)=> void
+    getUsersThunkCreator: (currentPage: number, pageSize: number)=> void
 
 }
 export type UserPropsType = MapStatePropsType & MapDispatchToPropsType
@@ -45,12 +45,14 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType => {
 
 class UsersContainer extends React.Component<UserPropsType> {
     componentDidMount() {
-        this.props.setIsLoading(true)
+        this.props.getUsersThunkCreator(this.props.currentPage, this.props.pageSize)
+
+  /*      this.props.setIsLoading(true)
         usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
             this.props.setIsLoading(false)
             this.props.setUsers(data.items)
             this.props.setTotalUsersCount(data.totalCount)
-        })
+        })*/
     }
 
     follow = (id: number) => {
@@ -89,5 +91,6 @@ export default connect(mapStateToProps, {
     setCurrentPage: setCurrentPage,
     setTotalUsersCount: setTotalUsersCount,
     setIsLoading: setLoading,
-    setFollowingInProgress: setFollowingInProgress
+    setFollowingInProgress: setFollowingInProgress,
+    getUsersThunkCreator: getUsersThunkCreator
 })(UsersContainer)

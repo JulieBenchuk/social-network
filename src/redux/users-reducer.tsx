@@ -1,3 +1,6 @@
+import {usersAPI} from "../api/api";
+import {Dispatch} from "redux";
+
 const FOLLOW = "FOLLOW"
 const UNFOLLOW = "UNFOLLOW"
 const SET_USERS = "SET-USERS"
@@ -109,14 +112,24 @@ export const usersReducer = (state: InitialStateType = initialState, action: Act
             };
         case FOLLOWING_IN_PROGRESS:
             return {
-                ...state, users: state.users.map(u=>{
-                    if (u.id===action.id) {
+                ...state, users: state.users.map(u => {
+                    if (u.id === action.id) {
                         return {...u, followingInProgress: action.followingInProgress}
                     } else return u
                 })
             }
         default:
             return state;
+    }
+}
+export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
+    return (dispatch: Dispatch) => {
+        dispatch(setLoading(true))
+        usersAPI.getUsers(currentPage, pageSize).then(data => {
+            dispatch(setLoading(false))
+            dispatch(setUsers(data.items))
+            dispatch(setTotalUsersCount(data.totalCount))
+        })
     }
 }
 
@@ -126,6 +139,10 @@ export const setUsers = (users: Array<UserType>) => ({type: SET_USERS, users: us
 export const setCurrentPage = (currentPage: number) => ({type: SET_CURRENT_PAGE, currentPage: currentPage})
 export const setTotalUsersCount = (count: number) => ({type: SET_TOTAL_USERS_COUNT, count: count})
 export const setLoading = (isLoading: boolean) => ({type: SET_IS_LOADING, isLoading: isLoading})
-export const setFollowingInProgress = (id: number, followingInProgress: boolean) => ({type: FOLLOWING_IN_PROGRESS, id: id, followingInProgress: followingInProgress })
+export const setFollowingInProgress = (id: number, followingInProgress: boolean) => ({
+    type: FOLLOWING_IN_PROGRESS,
+    id: id,
+    followingInProgress: followingInProgress
+})
 
 

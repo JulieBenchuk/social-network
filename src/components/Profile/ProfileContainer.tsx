@@ -5,7 +5,6 @@ import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
 import {setUserProfile} from "../../redux/profile-reducer";
 import {RouteComponentProps, withRouter} from "react-router-dom";
-import profile from "./Profile";
 
 type MapStateToPropsType = {
     profile: any
