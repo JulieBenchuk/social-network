@@ -1,3 +1,6 @@
+import {Dispatch} from "redux";
+import axios from "axios";
+
 const ADD_POST = "ADD-POST"
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT"
 const SET_USER_PROFILE = "SET_USER_PROFILE"
@@ -66,3 +69,10 @@ export const setUserProfile = (profile: any): setUserProfileType => ({
     type: SET_USER_PROFILE,
     profile: profile
 })
+export const setUserProfileThunkCreator = (userID: number = 24112) => {
+    return (dispatch: Dispatch)=> {
+        axios.get("https://social-network.samuraijs.com/api/1.0/profile/" + userID).then(response => {
+            dispatch(setUserProfile(response.data))
+        })
+    }
+}

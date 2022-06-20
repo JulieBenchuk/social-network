@@ -67,7 +67,6 @@ type setFollowingInProgressACType = {
     followingInProgress: boolean
 }
 
-
 type ActionsType =
     followACType
     | unfollowACType
@@ -76,7 +75,6 @@ type ActionsType =
     | setTotalUsersCountACType
     | setLoadingACType
     | setFollowingInProgressACType
-
 
 export const usersReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
