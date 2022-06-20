@@ -2,8 +2,7 @@ import React from "react";
 import Header from "./Header";
 import {AppStateType} from "../../redux/redux-store";
 import {connect} from "react-redux";
-import {setUserData} from "../../redux/auth-reducer";
-import {usersAPI} from "../../api/api";
+import {setUserDataThunkCreator} from "../../redux/auth-reducer";
 
 type MapStatePropsType = {
     id: number | null
@@ -22,17 +21,12 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType => {
 
 class HeaderContainer extends React.Component<any> {
     componentDidMount() {
-        usersAPI.authMe().then(response => {
-            if (response.resultCode === 0) {
-                let data = response.data
-                this.props.setUserData(data.email, data.id, data.login, data.isAuth)
-            }
-        })
+        this.props.setUserData()
     }
 
     render() {
-        return <Header {...this.props}/>
+        return <Header login={this.props.login} isAuth={this.props.isAuth}/>
     }
 }
 
-export default connect(mapStateToProps, {setUserData})(HeaderContainer);
+export default connect(mapStateToProps, {setUserData: setUserDataThunkCreator})(HeaderContainer);
