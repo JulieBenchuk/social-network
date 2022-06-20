@@ -132,9 +132,31 @@ export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
         })
     }
 }
+export const followThunkCreator = (id: number) => {
+    return (dispatch: Dispatch) => {
+        dispatch(setFollowingInProgress(id, true))
+        usersAPI.followUser(id).then(data => {
+            if (data.resultCode === 0) {
+                dispatch(followSuccess(id))
+                dispatch(setFollowingInProgress(id, false))
+            }
+        })
+    }
+}
+export const unfollowThunkCreator = (id: number) => {
+    return (dispatch: Dispatch) => {
+        dispatch(setFollowingInProgress(id, true))
+        usersAPI.unfollowUser(id).then(data => {
+            if (data.resultCode === 0) {
+                dispatch(unfollowSuccess(id))
+                dispatch(setFollowingInProgress(id, false))
+            }
+        })
+    }
+}
 
-export const follow = (userID: number): followACType => ({type: FOLLOW, ID: userID})
-export const unfollow = (userID: number): unfollowACType => ({type: UNFOLLOW, ID: userID})
+export const followSuccess = (userID: number): followACType => ({type: FOLLOW, ID: userID})
+export const unfollowSuccess = (userID: number): unfollowACType => ({type: UNFOLLOW, ID: userID})
 export const setUsers = (users: Array<UserType>) => ({type: SET_USERS, users: users})
 export const setCurrentPage = (currentPage: number) => ({type: SET_CURRENT_PAGE, currentPage: currentPage})
 export const setTotalUsersCount = (count: number) => ({type: SET_TOTAL_USERS_COUNT, count: count})

@@ -1,8 +1,7 @@
 import React from 'react';
 import s from "./Users.module.css";
-import {UserType} from "../../redux/users-reducer";
+import {followThunkCreator, unfollowThunkCreator, UserType} from "../../redux/users-reducer";
 import {NavLink} from "react-router-dom";
-import {usersAPI} from "../../api/api";
 
 type UsersPropsType = {
     totalUsersCount: number
@@ -12,7 +11,6 @@ type UsersPropsType = {
     users: Array<UserType>
     unfollow: (id: number) => void
     follow: (id: number) => void
-    setFollowingInProgress: (id: number, following: boolean) => void
 }
 export const Users = (props: UsersPropsType) => {
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
@@ -36,22 +34,10 @@ export const Users = (props: UsersPropsType) => {
                             className={s.avatar}/></NavLink>
                     </div>
                     <div> {u.followed ? <button disabled={u.followingInProgress} onClick={() => {
-                            props.setFollowingInProgress(u.id, true)
-                            usersAPI.unfollowUser(u.id).then(data => {
-                                if (data.resultCode === 0) {
-                                    props.unfollow(u.id)
-                                    props.setFollowingInProgress(u.id, false)
-                                }
-                            })
+                          props.unfollow(u.id)
                         }}>Unfollowed</button> :
                         <button disabled={u.followingInProgress} onClick={() => {
-                            props.setFollowingInProgress(u.id, true)
-                            usersAPI.followUser(u.id).then(data => {
-                                if (data.resultCode === 0) {
-                                    props.follow(u.id)
-                                    props.setFollowingInProgress(u.id, false)
-                                }
-                            })
+                            props.follow(u.id)
                         }}>Followed</button>}</div>
                 </span>
                 <span>
