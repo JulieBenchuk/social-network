@@ -3,14 +3,14 @@ import Profile from "./Profile";
 import axios from "axios";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
-import {setUserProfile, setUserProfileThunkCreator} from "../../redux/profile-reducer";
+import {setUserProfile, getUserProfileThunkCreator} from "../../redux/profile-reducer";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 
 type MapStateToPropsType = {
     profile: any
 }
 type MapDispatchToPropsType = {
-    setUserProfile: (profile: any) => void
+    getUserProfile: (profile: any) => void
 }
 type OwnPropsType = MapStateToPropsType & MapDispatchToPropsType
 type PathParamsType = {
@@ -25,7 +25,7 @@ let mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
 class ProfileContainer extends React.Component<PropsType> {
     componentDidMount() {
         let userID = this.props.match.params.userID
-        this.props.setUserProfile(userID)
+        this.props.getUserProfile(userID)
     }
 
     render() {
@@ -36,4 +36,4 @@ class ProfileContainer extends React.Component<PropsType> {
 }
 
 const WithUrlDataContainer = withRouter(ProfileContainer)
-export default connect(mapStateToProps, {setUserProfile: setUserProfileThunkCreator})(WithUrlDataContainer);
+export default connect(mapStateToProps, {getUserProfile: getUserProfileThunkCreator})(WithUrlDataContainer);

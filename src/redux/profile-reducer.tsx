@@ -70,7 +70,7 @@ export const setUserProfile = (profile: any): setUserProfileType => ({
     type: SET_USER_PROFILE,
     profile: profile
 })
-export const setUserProfileThunkCreator = (userID: number = 24112) => {
+export const getUserProfileThunkCreator = (userID: number = 24112) => {
     return (dispatch: Dispatch)=> {
         usersAPI.setUserProfile(userID).then(response => {
             dispatch(setUserProfile(response.data))
