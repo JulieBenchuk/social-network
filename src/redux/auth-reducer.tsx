@@ -1,5 +1,5 @@
 import {Dispatch} from "redux";
-import {usersAPI} from "../api/api";
+import {authAPI, usersAPI} from "../api/api";
 
 const SET_USER_DATA = "SET_USER_DATA"
 const SET_IS_LOADING = "SET_IS_LOADING"
@@ -61,7 +61,7 @@ export const setUserData = (  id: number, email: string, login: string, isAuth: 
 export const setLoading = (isLoading: boolean) => ({type: SET_IS_LOADING, isLoading: isLoading})
 export const setUserDataThunkCreator = () => {
     return (dispatch: Dispatch)=> {
-        usersAPI.authMe().then(response => {
+        authAPI.me().then(response => {
             if (response.resultCode === 0) {
                 let data = response.data
                 dispatch(setUserData(data.email, data.id, data.login, data.isAuth))

@@ -13,9 +13,6 @@ export const usersAPI = {
     getUsers(currentPage: number = 1, pageSize: number = 5){
         return  instance.get(`users?page=${currentPage}&count=${pageSize}`).then(response=> response.data)
     },
-    authMe(){
-       return  instance.get(`auth/me`).then(response=>response.data) ///need to use headers??????
-    },
     unfollowUser(id: number){
         return instance.delete(`follow/`+ id).then(response=>response.data)
     },
@@ -25,6 +22,11 @@ export const usersAPI = {
     setUserProfile (userID: number){
         return instance.get("profile/" + userID)
     }
+}
+export const authAPI = {
+    me(){
+        return  instance.get(`auth/me`).then(response=>response.data) ///need to use headers??????
+    },
 }
 
 
