@@ -16,6 +16,7 @@ type MapStatePropsType = {
     totalUsersCount: number
     currentPage: number
     isLoading: boolean
+    isAuth: boolean
 }
 type MapDispatchToPropsType = {
     setCurrentPage: (page: number) => void
@@ -33,6 +34,7 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType => {
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
         isLoading: state.usersPage.isLoading,
+        isAuth: state.auth.isAuth
     }
 }
 
@@ -61,7 +63,7 @@ class UsersContainer extends React.Component<UserPropsType> {
             <Users users={this.props.users} totalUsersCount={this.props.totalUsersCount}
                    pageSize={this.props.pageSize} currentPage={this.props.currentPage}
                    changePage={this.changePage}
-                   unfollow={this.unfollow} follow={this.follow}
+                   unfollow={this.unfollow} follow={this.follow} isAuth={this.props.isAuth}
                   />
         </div>
     }

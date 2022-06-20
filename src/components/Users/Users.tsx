@@ -1,12 +1,13 @@
 import React from 'react';
 import s from "./Users.module.css";
 import {followThunkCreator, unfollowThunkCreator, UserType} from "../../redux/users-reducer";
-import {NavLink} from "react-router-dom";
+import {NavLink, Redirect} from "react-router-dom";
 
 type UsersPropsType = {
     totalUsersCount: number
     pageSize: number
     currentPage: number
+    isAuth: boolean
     changePage: (page: number) => void
     users: Array<UserType>
     unfollow: (id: number) => void
@@ -18,6 +19,7 @@ export const Users = (props: UsersPropsType) => {
     for (let i = 1; i <= pagesCount; i++) {
         allPages.push(i)
     }
+    if (!props.isAuth) return <Redirect to="/login"/>
     return (
         <div>
             <div>
