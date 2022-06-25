@@ -19,7 +19,6 @@ export const Users = (props: UsersPropsType) => {
     for (let i = 1; i <= pagesCount; i++) {
         allPages.push(i)
     }
-    if (!props.isAuth) return <Redirect to="/login"/>
     return (
         <div>
             <div>
