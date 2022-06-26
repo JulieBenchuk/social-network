@@ -50,7 +50,7 @@ let initialState = {
     ],
     newPostText: "",
     profile: null,
-    status: "bla bla"
+    status: ""
 }
 
 export const profileReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
