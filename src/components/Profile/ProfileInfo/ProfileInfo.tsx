@@ -28,7 +28,7 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
                         <h2>{props.profile.fullName}</h2>
                         <p>{props.profile.aboutMe}</p>
                         <p>Looking job: {props.profile.lookingForAJobDescription}</p>
-                        <ProfileStatus status={props.status}/>
+                        <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
                     </div>
                 </div>
             </>

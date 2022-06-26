@@ -50,7 +50,7 @@ let initialState = {
     ],
     newPostText: "",
     profile: null,
-    status: "nonoonoononono"
+    status: "bla bla"
 }
 
 export const profileReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
@@ -90,10 +90,6 @@ export const setProfileStatus = (status: string): setProfileStatus => ({
     status:  status
 })
 
-/*export const updateProfileStatus = (status: string): updateProfileStatus => ({
-    type: UPDATE_PROFILE_STATUS,
-    status:  status
-})*/
 export const getUserProfileThunkCreator = (userID: number = 24112) => {
     return (dispatch: Dispatch) => {
         profileAPI.setUserProfile(userID).then(response => {

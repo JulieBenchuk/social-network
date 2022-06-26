@@ -18,7 +18,7 @@ type MapStateToPropsType = {
 }
 type MapDispatchToPropsType = {
     getUserProfile: (profile: any) => void
-    getUserStatus: (userID: string) => void
+    getUserStatus: (userID: number ) => void
     updateStatus: (status: string)=> void
 }
 type OwnPropsType = MapStateToPropsType & MapDispatchToPropsType
@@ -34,8 +34,10 @@ let mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
 
 class ProfileContainer extends React.Component<PropsType> {
     componentDidMount() {
-        debugger
-        let userID = this.props.match.params.userID
+        let userID = Number(this.props.match.params.userID)
+        if(!userID){
+            userID=24112
+        }
         this.props.getUserProfile(userID)
         this.props.getUserStatus(userID)
     }
@@ -47,6 +49,6 @@ class ProfileContainer extends React.Component<PropsType> {
     }
 }
 
-export default compose(withAuthRedirect,
+export default compose <React.ComponentType>(
     connect(mapStateToProps, {getUserProfile: getUserProfileThunkCreator, getUserStatus: getProfileStatusThunkCreator, updateStatus: updateProfileStatusThunkCreator}),
-    withRouter)(ProfileContainer)
+    withRouter, withAuthRedirect)(ProfileContainer)
