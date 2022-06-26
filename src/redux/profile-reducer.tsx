@@ -90,25 +90,25 @@ export const setProfileStatus = (status: string): setProfileStatus => ({
     status:  status
 })
 
-export const getUserProfileThunkCreator = (userID: number = 24112) => {
+export const getUserProfileThunkCreator = (userID: number) => {
     return (dispatch: Dispatch) => {
-        profileAPI.setUserProfile(userID).then(response => {
+        profileAPI.getUserProfile(userID).then(response => {
             dispatch(setUserProfile(response.data))
         })
     }
 }
-export const getProfileStatusThunkCreator = (userID: number = 24112) => {
+export const getStatusThunkCreator = (userID: number) => {
     return (dispatch: Dispatch) => {
         profileAPI.getStatus(userID).then(response => {
             dispatch(setProfileStatus(response.data))
         })
     }
 }
-export const updateProfileStatusThunkCreator = (status: string) => {
+export const updateStatusThunkCreator = (status: string) => {
     return (dispatch: Dispatch) => {
         profileAPI.updateStatus(status).then(response => {
             if (response.data.resultCode === 0) {
-                dispatch(setProfileStatus(response.data))
+                dispatch(setProfileStatus(status))
             }
         })
     }

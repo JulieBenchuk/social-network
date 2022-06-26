@@ -3,9 +3,9 @@ import Profile from "./Profile";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
 import {
-    getProfileStatusThunkCreator,
+    getStatusThunkCreator,
     getUserProfileThunkCreator,
-    updateProfileStatusThunkCreator
+    updateStatusThunkCreator
 } from "../../redux/profile-reducer";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
@@ -44,11 +44,11 @@ class ProfileContainer extends React.Component<PropsType> {
 
     render() {
         return (
-            <Profile profile={this.props.profile} status={this.props.status} updateStatus={this.props.updateStatus}/>
+            <Profile {...this.props} profile={this.props.profile} status={this.props.status} updateStatus={this.props.updateStatus}/>
         )
     }
 }
 
 export default compose <React.ComponentType>(
-    connect(mapStateToProps, {getUserProfile: getUserProfileThunkCreator, getUserStatus: getProfileStatusThunkCreator, updateStatus: updateProfileStatusThunkCreator}),
+    connect(mapStateToProps, {getUserProfile: getUserProfileThunkCreator, getUserStatus: getStatusThunkCreator, updateStatus: updateStatusThunkCreator}),
     withRouter, withAuthRedirect)(ProfileContainer)
