@@ -1,11 +1,8 @@
-export type updateMessageType = {
-    type: "UPDATE_NEW_MESSAGE_BODY"
-    message: string
-}
+
 export type sendMessageType = {
-    type: "SEND_MESSAGE"
+    type: "SEND_MESSAGE",
+    newMessageBody: string
 }
-const UPDATE_NEW_MESSAGE_BODY = "UPDATE_NEW_MESSAGE_BODY"
 const SEND_MESSAGE = "SEND_MESSAGE"
 
 type MessageType = {
@@ -20,9 +17,8 @@ type DialogType = {
 export type InitialStateType = {
     messages: Array<MessageType>
     dialogs: Array<DialogType>
-    newMessageBody: string
 }
-type ActionsType = updateMessageType | sendMessageType
+type ActionsType =  sendMessageType
 
 let initialState = {
     messages: [
@@ -50,8 +46,7 @@ let initialState = {
             name: "Veronika",
             avatar: "https://as1.ftcdn.net/v2/jpg/02/85/98/20/1000_F_285982046_zzxKDt4O2ntMLBObfqU2bdEovgRclEqa.jpg"
         }
-    ],
-    newMessageBody: ""
+    ]
 }
 
 export const dialogsReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
@@ -59,23 +54,15 @@ export const dialogsReducer = (state: InitialStateType = initialState, action: A
         case "SEND_MESSAGE": {
             const newMessage: MessageType = {
                 id: 7,
-                message: state.newMessageBody
+                message: action.newMessageBody
             };
             return {
                 ...state,
-                newMessageBody: "",
                 messages: [...state.messages, newMessage]
             };
-        }
-        case "UPDATE_NEW_MESSAGE_BODY": {
-            return {...state, newMessageBody: action.message};
         }
         default:
             return state;
     }
 }
-export const sendMessageCreator = (): sendMessageType => ({type: SEND_MESSAGE})
-export const updateNewMessageBodyCreator = (newMessage: string): updateMessageType => ({
-    type: UPDATE_NEW_MESSAGE_BODY,
-    message: newMessage
-})
+export const sendMessageCreator = (newMessageBody: string): sendMessageType => ({type: SEND_MESSAGE, newMessageBody: newMessageBody})

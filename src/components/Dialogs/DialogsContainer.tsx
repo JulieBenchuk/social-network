@@ -1,10 +1,10 @@
 import React from 'react';
-import {sendMessageCreator, updateNewMessageBodyCreator} from "../../redux/dialogs-reducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
 import {compose, Dispatch} from "redux";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {sendMessageCreator} from "../../redux/dialogs-reducer";
 
 type MessageType = {
     id: number
@@ -18,31 +18,24 @@ type DialogType = {
 type DialogsPageType = {
     messages: Array<MessageType>
     dialogs: Array<DialogType>
-    newMessageBody: string
 }
 type MapStatePopsType = {
     dialogsPage: DialogsPageType
-    newMessageBody: string
 }
 type MapDispatchToPropsType = {
-    changeNewMessageBody: (body: string)=>void
-    sendMessage: ()=> void
+    sendMessage: (newMessageBody: string)=> void
 }
 export type DialogsPropsType = MapStatePopsType & MapDispatchToPropsType
 
 let mapStateToProps = (state: AppStateType) : MapStatePopsType => {
     return {
-        dialogsPage: state.dialogsPage,
-        newMessageBody: state.dialogsPage.newMessageBody,
+        dialogsPage: state.dialogsPage
     }
 }
 let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
     return {
-        changeNewMessageBody: (body: string)=>{
-            dispatch(updateNewMessageBodyCreator(body))
-        },
-        sendMessage: ()=>{
-            dispatch(sendMessageCreator())
+        sendMessage: (newMessageBody: string)=>{
+            dispatch(sendMessageCreator(newMessageBody))
         }
     }
 }
