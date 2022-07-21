@@ -57,17 +57,38 @@ export const authReducer = (state: InitialStateType = initialState, action: Acti
     }
 }
 
-export const setUserData = (  id: number, email: string, login: string, isAuth: boolean) => ({type: SET_USER_DATA, data: {email: email, id: id,  login: login, isAuth: isAuth}})
+export const setUserData = (id: number | null, email: string | null, login: string | null, isAuth: boolean) => ({
+    type: SET_USER_DATA,
+    data: {email: email, id: id, login: login, isAuth: isAuth}
+})
 export const setLoading = (isLoading: boolean) => ({type: SET_IS_LOADING, isLoading: isLoading})
-export const setUserDataThunkCreator = () => {
-    return (dispatch: Dispatch)=> {
+export const getUserDataThunkCreator = () => {
+    return (dispatch: Dispatch) => {
         authAPI.me().then(response => {
             if (response.resultCode === 0) {
                 let data = response.data
-                dispatch(setUserData(data.email, data.id, data.login, data.isAuth))
+                dispatch(setUserData(data.email, data.id, data.login, true))
             }
         })
     }
+}
+export const login = (email: string, password: string, rememberMe: boolean) => {
+    return (dispatch: any) => {
+        authAPI.login(email, password, rememberMe)
+            .then(response => {
+                if (response.data.resultCode === 0) {
+                    dispatch(getUserDataThunkCreator())
+                }
+            })
+    }
+}
+export const logout = () => (dispatch: any) => {
+    authAPI.logout()
+        .then(response => {
+            if (response.data.resultCode === 0) {
+                dispatch(setUserData(null, null, null, false))
+            }
+        })
 }
 
 

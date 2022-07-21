@@ -35,6 +35,12 @@ export const authAPI = {
     me() {
         return instance.get(`auth/me`).then(response => response.data) ///need to use headers??????
     },
+    login(email: string, password: string, rememberMe: boolean) {
+        return instance.post(`auth/login`, {email, password, rememberMe})
+    },
+    logout(){
+        return instance.delete(`auth/login`)
+    }
 }
 
 

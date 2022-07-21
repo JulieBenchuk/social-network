@@ -2,7 +2,7 @@ import React from "react";
 import Header from "./Header";
 import {AppStateType} from "../../redux/redux-store";
 import {connect} from "react-redux";
-import {setUserDataThunkCreator} from "../../redux/auth-reducer";
+import {getUserDataThunkCreator} from "../../redux/auth-reducer";
 
 type MapStatePropsType = {
     id: number | null
@@ -29,4 +29,4 @@ class HeaderContainer extends React.Component<any> {
     }
 }
 
-export default connect(mapStateToProps, {setUserData: setUserDataThunkCreator})(HeaderContainer);
+export default connect(mapStateToProps, {setUserData: getUserDataThunkCreator})(HeaderContainer);
