@@ -53,6 +53,6 @@ const Login = (props: any) => {
 const mapStateToProps = (state: AppStateType) => {
     return {
         isAuth: state.auth.isAuth
-    }
+    } 
 }
 export default connect(mapStateToProps, {login})(Login)
