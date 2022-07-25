@@ -58,7 +58,7 @@ export const authReducer = (state: InitialStateType = initialState, action: Acti
 
 export const setUserData = (id: number | null, email: string | null, login: string | null, isAuth: boolean) => ({
     type: SET_USER_DATA,
-    data: {email: email, id: id, login: login, isAuth: isAuth}
+    data: {id: id, email: email,  login: login, isAuth: isAuth}
 })
 export const setLoading = (isLoading: boolean) => ({type: SET_IS_LOADING, isLoading: isLoading})
 export const getUserDataThunkCreator = () => {
@@ -66,7 +66,7 @@ export const getUserDataThunkCreator = () => {
         authAPI.me().then(response => {
             if (response.resultCode === 0) {
                 let data = response.data
-                dispatch(setUserData(data.email, data.id, data.login, true))
+                dispatch(setUserData(data.id, data.email, data.login, true))
             }
         })
     }
