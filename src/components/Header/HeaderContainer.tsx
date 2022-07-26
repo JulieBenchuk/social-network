@@ -21,7 +21,7 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType => {
 
 class HeaderContainer extends React.Component<any> {
     componentDidMount() {
-        this.props.setUserData()
+        this.props.getAuthUserData()
     }
 
     render() {
@@ -29,4 +29,4 @@ class HeaderContainer extends React.Component<any> {
     }
 }
 
-export default connect(mapStateToProps, {setUserData: getUserDataThunkCreator, logout})(HeaderContainer);
+export default connect(mapStateToProps, {getAuthUserData: getUserDataThunkCreator, logout})(HeaderContainer);
