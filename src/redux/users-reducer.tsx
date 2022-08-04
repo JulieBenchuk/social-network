@@ -1,5 +1,7 @@
 import {usersAPI} from "../api/api";
 import {Dispatch} from "redux";
+import {ThunkAction} from "redux-thunk";
+import {AppStateType} from "./redux-store";
 
 const FOLLOW = "FOLLOW"
 const UNFOLLOW = "UNFOLLOW"
@@ -76,6 +78,8 @@ type ActionsType =
     | setLoadingACType
     | setFollowingInProgressACType
 
+type AuthThunk = ThunkAction<void, AppStateType, unknown, ActionsType>
+
 export const usersReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
         case FOLLOW:
@@ -120,8 +124,8 @@ export const usersReducer = (state: InitialStateType = initialState, action: Act
             return state;
     }
 }
-export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
-    return (dispatch: Dispatch) => {
+export const getUsersThunkCreator = (currentPage: number, pageSize: number): AuthThunk => {
+    return (dispatch) => {
         dispatch(setLoading(true))
         usersAPI.getUsers(currentPage, pageSize).then(data => {
             dispatch(setLoading(false))
@@ -130,8 +134,8 @@ export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
         })
     }
 }
-export const followThunkCreator = (id: number) => {
-    return (dispatch: Dispatch) => {
+export const followThunkCreator = (id: number): AuthThunk => {
+    return (dispatch) => {
         dispatch(setFollowingInProgress(id, true))
         usersAPI.followUser(id).then(data => {
             if (data.resultCode === 0) {
@@ -141,8 +145,8 @@ export const followThunkCreator = (id: number) => {
         })
     }
 }
-export const unfollowThunkCreator = (id: number) => {
-    return (dispatch: Dispatch) => {
+export const unfollowThunkCreator = (id: number): AuthThunk => {
+    return (dispatch) => {
         dispatch(setFollowingInProgress(id, true))
         usersAPI.unfollowUser(id).then(data => {
             if (data.resultCode === 0) {
@@ -155,11 +159,11 @@ export const unfollowThunkCreator = (id: number) => {
 
 export const followSuccess = (userID: number): followACType => ({type: FOLLOW, ID: userID})
 export const unfollowSuccess = (userID: number): unfollowACType => ({type: UNFOLLOW, ID: userID})
-export const setUsers = (users: Array<UserType>) => ({type: SET_USERS, users: users})
-export const setCurrentPage = (currentPage: number) => ({type: SET_CURRENT_PAGE, currentPage: currentPage})
-export const setTotalUsersCount = (count: number) => ({type: SET_TOTAL_USERS_COUNT, count: count})
-export const setLoading = (isLoading: boolean) => ({type: SET_IS_LOADING, isLoading: isLoading})
-export const setFollowingInProgress = (id: number, followingInProgress: boolean) => ({
+export const setUsers = (users: Array<UserType>): setUsers => ({type: SET_USERS, users: users})
+export const setCurrentPage = (currentPage: number): setCurrentPageACType => ({type: SET_CURRENT_PAGE, currentPage: currentPage})
+export const setTotalUsersCount = (count: number): setTotalUsersCountACType => ({type: SET_TOTAL_USERS_COUNT, count: count})
+export const setLoading = (isLoading: boolean): setLoadingACType => ({type: SET_IS_LOADING, isLoading: isLoading})
+export const setFollowingInProgress = (id: number, followingInProgress: boolean): setFollowingInProgressACType => ({
     type: FOLLOWING_IN_PROGRESS,
     id: id,
     followingInProgress: followingInProgress

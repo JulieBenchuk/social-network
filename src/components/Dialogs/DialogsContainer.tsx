@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
 import {compose, Dispatch} from "redux";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
-import {sendMessageCreator} from "../../redux/dialogs-reducer";
+import {sendMessageAC} from "../../redux/dialogs-reducer";
 
 type MessageType = {
     id: number
@@ -35,7 +35,7 @@ let mapStateToProps = (state: AppStateType) : MapStatePopsType => {
 let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
     return {
         sendMessage: (newMessageBody: string)=>{
-            dispatch(sendMessageCreator(newMessageBody))
+            dispatch(sendMessageAC(newMessageBody))
         }
     }
 }
