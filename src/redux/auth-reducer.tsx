@@ -66,22 +66,21 @@ export const setUserData = (id: number | null, email: string | null, login: stri
 
 /*export const setLoading = (isLoading: boolean) => ({type: SET_IS_LOADING, isLoading: isLoading})*/
 
-export const getUserDataThunkCreator = ():AuthThunk => {
-    return (dispatch) => {
-        authAPI.me().then(response => {
+export const getAuthUserData = ():AuthThunk => (dispatch) => {
+        return authAPI.me().then(response => {
             if (response.resultCode === 0) {
                 let data = response.data
                 dispatch(setUserData(data.id, data.email, data.login, true))
             }
         })
     }
-}
+
 export const login = (email: string, password: string, rememberMe: boolean):AuthThunk => {
     return (dispatch: any) => {
         authAPI.login(email, password, rememberMe)
             .then(response => {
                 if (response.data.resultCode === 0) {
-                    dispatch(getUserDataThunkCreator())
+                    dispatch(getAuthUserData())
                 } else {
                    const errorMessage = response.data.messages.length>0 ? response.data.messages[0] : "Some error"
                     dispatch(stopSubmit("login", {_error: errorMessage}))
