@@ -37,7 +37,6 @@ export const setInitializedSuccessAC = (): setInitializedSuccessACType => ({
 export const initializeApp = () => (dispatch: any) => {
     let promise = dispatch(getAuthUserData())
     promise.then(() => {
-        debugger
         dispatch(setInitializedSuccessAC())
     })
 }

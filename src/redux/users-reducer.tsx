@@ -1,5 +1,4 @@
 import {usersAPI} from "../api/api";
-import {Dispatch} from "redux";
 import {ThunkAction} from "redux-thunk";
 import {AppStateType} from "./redux-store";
 
@@ -160,8 +159,14 @@ export const unfollowThunkCreator = (id: number): AuthThunk => {
 export const followSuccess = (userID: number): followACType => ({type: FOLLOW, ID: userID})
 export const unfollowSuccess = (userID: number): unfollowACType => ({type: UNFOLLOW, ID: userID})
 export const setUsers = (users: Array<UserType>): setUsers => ({type: SET_USERS, users: users})
-export const setCurrentPage = (currentPage: number): setCurrentPageACType => ({type: SET_CURRENT_PAGE, currentPage: currentPage})
-export const setTotalUsersCount = (count: number): setTotalUsersCountACType => ({type: SET_TOTAL_USERS_COUNT, count: count})
+export const setCurrentPage = (currentPage: number): setCurrentPageACType => ({
+    type: SET_CURRENT_PAGE,
+    currentPage: currentPage
+})
+export const setTotalUsersCount = (count: number): setTotalUsersCountACType => ({
+    type: SET_TOTAL_USERS_COUNT,
+    count: count
+})
 export const setLoading = (isLoading: boolean): setLoadingACType => ({type: SET_IS_LOADING, isLoading: isLoading})
 export const setFollowingInProgress = (id: number, followingInProgress: boolean): setFollowingInProgressACType => ({
     type: FOLLOWING_IN_PROGRESS,

@@ -77,5 +77,5 @@ export default compose<React.ComponentType>(connect(mapStateToProps, {
     unfollow: unfollowThunkCreator,
     setCurrentPage: setCurrentPage,
     getUsers: getUsersThunkCreator
-}), withAuthRedirect)(UsersContainer)
+}))(UsersContainer)
 
