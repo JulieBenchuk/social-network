@@ -3,7 +3,7 @@ import {Users} from "./Users";
 import {connect} from "react-redux";
 import {
     followThunkCreator, getUsersThunkCreator,
-    setCurrentPage,
+    setPage,
     unfollowThunkCreator,
     UserType
 } from "../../redux/users-reducer";
@@ -75,7 +75,7 @@ class UsersContainer extends React.Component<UserPropsType> {
 export default compose<React.ComponentType>(connect(mapStateToProps, {
     follow: followThunkCreator,
     unfollow: unfollowThunkCreator,
-    setCurrentPage: setCurrentPage,
+    setCurrentPage: setPage,
     getUsers: getUsersThunkCreator
 }))(UsersContainer)
 

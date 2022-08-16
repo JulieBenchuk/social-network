@@ -50,7 +50,7 @@ type setUsers = {
     type: "SET-USERS"
     users: Array<UserType>
 }
-type setCurrentPageACType = {
+type setPageACType = {
     type: "SET_CURRENT_PAGE"
     currentPage: number
 }
@@ -72,7 +72,7 @@ type ActionsType =
     followACType
     | unfollowACType
     | setUsers
-    | setCurrentPageACType
+    | setPageACType
     | setTotalUsersCountACType
     | setLoadingACType
     | setFollowingInProgressACType
@@ -159,7 +159,7 @@ export const unfollowThunkCreator = (id: number): AuthThunk => {
 export const followSuccess = (userID: number): followACType => ({type: FOLLOW, ID: userID})
 export const unfollowSuccess = (userID: number): unfollowACType => ({type: UNFOLLOW, ID: userID})
 export const setUsers = (users: Array<UserType>): setUsers => ({type: SET_USERS, users: users})
-export const setCurrentPage = (currentPage: number): setCurrentPageACType => ({
+export const setPage = (currentPage: number): setPageACType => ({
     type: SET_CURRENT_PAGE,
     currentPage: currentPage
 })
