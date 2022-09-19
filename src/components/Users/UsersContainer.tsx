@@ -9,7 +9,6 @@ import {
 } from "../../redux/users-reducer";
 import {AppStateType} from "../../redux/redux-store";
 import {Preloader} from "../../common/Preloader";
-import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
 
 
@@ -67,6 +66,7 @@ class UsersContainer extends React.Component<UserPropsType> {
                    pageSize={this.props.pageSize} currentPage={this.props.currentPage}
                    changePage={this.changePage}
                    unfollow={this.unfollow} follow={this.follow} isAuth={this.props.isAuth}
+                   followingInProgress={this.props.isLoading}
             />
         </div>
     }
