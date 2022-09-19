@@ -1,7 +1,8 @@
 import React from 'react';
 import s from "./Users.module.css";
-import {followThunkCreator, unfollowThunkCreator, UserType} from "../../redux/users-reducer";
-import {NavLink, Redirect} from "react-router-dom";
+import {UserType} from "../../redux/users-reducer";
+import {NavLink} from "react-router-dom";
+import {Paginator} from "../../common/Paginator/Paginator";
 
 type UsersPropsType = {
     totalUsersCount: number
@@ -14,19 +15,12 @@ type UsersPropsType = {
     follow: (id: number) => void
 }
 export const Users = (props: UsersPropsType) => {
-    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
-    let allPages = []
-    for (let i = 1; i <= pagesCount; i++) {
-        allPages.push(i)
-    }
+
     return (
         <div>
-            <div>
-                {allPages.map(p => {
-                    return <span className={(p === props.currentPage) ? s.currentPade : ""}
-                                 onClick={(e) => props.changePage(p)}>{p}</span>
-                })}
-            </div>
+            <Paginator totalUsersCount={props.totalUsersCount} pageSize={props.pageSize} currentPage={props.currentPage}
+                       changePage={props.changePage}/>
+
             {props.users.map(u => <div key={u.id}>
                 <span>
                     <div>
@@ -35,7 +29,7 @@ export const Users = (props: UsersPropsType) => {
                             className={s.avatar}/></NavLink>
                     </div>
                     <div> {u.followed ? <button disabled={u.followingInProgress} onClick={() => {
-                          props.unfollow(u.id)
+                            props.unfollow(u.id)
                         }}>Unfollowed</button> :
                         <button disabled={u.followingInProgress} onClick={() => {
                             props.follow(u.id)

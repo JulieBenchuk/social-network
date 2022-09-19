@@ -1,12 +1,12 @@
 import React from 'react';
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import {Input} from "../../common/forms-control/FormsControl";
+import {Input} from "../../common/Forms-control/FormsControl";
 import {required} from "../../utils/validators/validators";
 import {connect} from "react-redux";
 import {login} from "../../redux/auth-reducer";
 import {Redirect} from "react-router-dom";
 import {AppStateType} from "../../redux/redux-store";
-import style from "./../../common/forms-control/FormsControl.module.css"
+import style from "../../common/Forms-control/FormsControl.module.css"
 
 type FormDataType = {
     email: string
