@@ -23,3 +23,6 @@ yarn-debug.log*
 yarn-error.log*
 
 .idea
+/Global.d.ts
+/public/logo192.png
+/public/logo512.png
