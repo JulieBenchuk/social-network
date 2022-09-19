@@ -1,5 +1,5 @@
 import React from 'react';
-import s from "../../components/Users/Users.module.css";
+import s from "./Paginator.module.css";
 
 type PaginatorPropsType = {
     totalUsersCount: number
@@ -16,7 +16,7 @@ export const Paginator: React.FC<PaginatorPropsType> = ({totalUsersCount, pageSi
     return (
         <div>
             {allPages.map(p => {
-                return <span className={(p === currentPage) ? s.currentPade : ""}
+                return <span className={(p === currentPage) ? s.currentPage : ""}
                              onClick={(e) => changePage(p)}>{p}</span>
             })}
         </div>
