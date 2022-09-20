@@ -8,18 +8,16 @@ export type DialogItemPropsType = {
     avatar: string
 };
 
-const DialogItem = (props: DialogItemPropsType) => { //не выделяется активная ссылка
-    let path = "messages/" + props.id
+export const DialogItem: React.FC<DialogItemPropsType> = ({id, name, avatar, ...restProps}) => { //не выделяется активная ссылка
+    let path = "messages/" + id
     return (
         <div className={classes.dialogItemLink}>
             <NavLink to={path} className={classes.dialogItem}>
-                <img src={props.avatar} alt={props.name}/>
-                <span>{props.name}</span>
+                <img src={avatar} alt={name}/>
+                <span>{name}</span>
             </NavLink>
         </div>
     )
 }
-
-export default DialogItem;
 
 

@@ -15,7 +15,6 @@ type setInitializedSuccessACType = {
 const SET_INITIALIZED_SUCCESS = "SET_INITIALIZED_SUCCESS"
 
 type ActionsType = setInitializedSuccessACType
-type AuthThunk = ThunkAction<void, AppStateType, unknown, ActionsType>
 
 export const appReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {

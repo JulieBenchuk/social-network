@@ -1,7 +1,7 @@
 import React from 'react';
 import classes from "./Dialogs.module.css";
-import MessageItem from "./Message/Message";
-import DialogItem from "./DialogItem/DialogItem"
+import {MessageItem} from "./Message/Message";
+import {DialogItem} from "./DialogItem/DialogItem"
 import {DialogsPropsType} from "./DialogsContainer";
 import {Field, reduxForm} from "redux-form";
 import {Textarea} from "../../common/Forms-control/FormsControl";

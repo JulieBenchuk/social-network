@@ -6,13 +6,13 @@ import {Field, reduxForm} from "redux-form";
 import {maxLengthCreator, required} from "../../../utils/validators/validators";
 import {Textarea} from "../../../common/Forms-control/FormsControl";
 
-
 const maxLengthCreator30 = maxLengthCreator(30);
-const MyPosts = (props: MyPostsPropsType) => {
+
+export const MyPosts: React.FC<MyPostsPropsType> = ({addPost, posts, ...restProps}) => {
     let onAddPost = (values: any) => {
-        props.addPost(values.newPostText);
+        addPost(values.newPostText);
     }
-    let postElements = props.posts.map((p, index) => (
+    let postElements = posts.map((p, index) => (
         <Post key={index} id={p.id} post={p.post} likeCount={p.likeCount}/>))
 
     return (
@@ -23,6 +23,7 @@ const MyPosts = (props: MyPostsPropsType) => {
         </div>
     )
 }
+
 const AddNewPostForm = (props: any) => {
     return (<form className={classes.textArea_Button} onSubmit={props.handleSubmit}>
             <div>
@@ -35,4 +36,3 @@ const AddNewPostForm = (props: any) => {
     )
 }
 const AddNewPostFormRedux = reduxForm({form: "ProfileAddNewPostFormRedux"})(AddNewPostForm)
-export default MyPosts;
