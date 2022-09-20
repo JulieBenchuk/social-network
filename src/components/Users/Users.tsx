@@ -12,7 +12,6 @@ type UsersPropsType = {
     users: UserType[]
     unfollow: (id: number) => void
     follow: (id: number) => void
-    followingInProgress: boolean
 }
 
 export const Users: React.FC<UsersPropsType> = ({
@@ -22,8 +21,7 @@ export const Users: React.FC<UsersPropsType> = ({
                                                     changePage,
                                                     users,
                                                     unfollow,
-                                                    follow,
-                                                    followingInProgress
+                                                    follow
                                                 }) => {
 
     return (
@@ -31,7 +29,7 @@ export const Users: React.FC<UsersPropsType> = ({
             <Paginator totalUsersCount={totalUsersCount} pageSize={pageSize} currentPage={currentPage}
                        changePage={changePage}/>
             <div>
-                {users.map(u => <User user={u} key={u.id} followingInProgress={followingInProgress}
+                {users.map(u => <User user={u} key={u.id} followingInProgress={u.followingInProgress}
                                       unfollow={unfollow} follow={follow}/>)}
 
             </div>

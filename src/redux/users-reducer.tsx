@@ -1,20 +1,19 @@
 import {usersAPI} from "../api/api";
 import {ActionsType, AppThunk} from "./redux-store";
+import {setLoadingAC} from "./app-reducer";
 
 const FOLLOW = "FOLLOW"
 const UNFOLLOW = "UNFOLLOW"
 const SET_USERS = "SET-USERS"
 const SET_CURRENT_PAGE = "SET_CURRENT_PAGE"
 const SET_TOTAL_USERS_COUNT = "SET_TOTAL_USERS_COUNT"
-const SET_IS_LOADING = "SET_IS_LOADING"
 const FOLLOWING_IN_PROGRESS = "FOLLOWING_IN_PROGRESS"
 
 let initialState = {
     users: [] as Array<UserType>,
     pageSize: 5,
     totalUsersCount: 0,
-    currentPage: 1,
-    isLoading: false,
+    currentPage: 1
 }
 
 
@@ -46,10 +45,6 @@ export const usersReducer = (state: InitialStateType = initialState, action: Act
             }
         case SET_CURRENT_PAGE:
             return {...state, currentPage: action.currentPage};
-        case SET_IS_LOADING:
-            return {
-                ...state, isLoading: action.isLoading
-            };
         case FOLLOWING_IN_PROGRESS:
             return {
                 ...state, users: state.users.map(u => {
@@ -76,7 +71,6 @@ export const setTotalUsersCountAC = (count: number): setTotalUsersCountACType =>
     type: SET_TOTAL_USERS_COUNT,
     count: count
 } as const)
-export const setLoadingAC = (isLoading: boolean): setLoadingACType => ({type: SET_IS_LOADING, isLoading: isLoading} as const)
 export const setFollowingInProgressAC = (id: number, followingInProgress: boolean): setFollowingInProgressACType => ({
     type: FOLLOWING_IN_PROGRESS,
     id: id,
@@ -153,10 +147,6 @@ export type setPageACType = {
 export type setTotalUsersCountACType = {
     type: "SET_TOTAL_USERS_COUNT"
     count: number
-}
-export type setLoadingACType = {
-    type: "SET_IS_LOADING"
-    isLoading: boolean
 }
 export type setFollowingInProgressACType = {
     type: "FOLLOWING_IN_PROGRESS"

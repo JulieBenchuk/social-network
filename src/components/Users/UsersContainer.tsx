@@ -35,7 +35,7 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType => {
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
-        isLoading: state.usersPage.isLoading,
+        isLoading: state.app.isLoading,
         isAuth: state.auth.isAuth
     }
 }
@@ -46,11 +46,11 @@ class UsersContainer extends React.Component<UserPropsType> {
     }
 
     follow = (id: number) => {
-        this.props.follow(id) /////////
+        this.props.follow(id)
         console.log(`${id} will be followed`)
     }
     unfollow = (id: number) => {
-        this.props.unfollow(id) //////////////
+        this.props.unfollow(id)
         console.log(`${id} will be unfollowed`)
     }
     changePage = (page: number) => {
@@ -66,7 +66,6 @@ class UsersContainer extends React.Component<UserPropsType> {
                    pageSize={this.props.pageSize} currentPage={this.props.currentPage}
                    changePage={this.changePage}
                    unfollow={this.unfollow} follow={this.follow} isAuth={this.props.isAuth}
-                   followingInProgress={this.props.isLoading}
             />
         </div>
     }
