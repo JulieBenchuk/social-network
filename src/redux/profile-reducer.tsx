@@ -1,5 +1,6 @@
 import {profileAPI} from "../api/api";
 import {ActionsType, AppThunk} from "./redux-store";
+import {setLoadingAC} from "./app-reducer";
 
 const ADD_POST = "ADD-POST"
 const SET_USER_PROFILE = "SET_USER_PROFILE"
@@ -51,29 +52,38 @@ export const setProfileStatusAC = (status: string): setProfileStatus => ({
 
 
 //thunk creators
-export const getUserProfileThunkCreator = (userID: number): AppThunk => {
+export const getUserProfileTC = (userID: number): AppThunk => {
     return (dispatch) => {
-        profileAPI.getUserProfile(userID).then(response => {
-            dispatch(setUserProfileAC(response.data))
-        })
+        dispatch(setLoadingAC(true))
+        profileAPI.getUserProfile(userID)
+            .then(response => {
+                dispatch(setUserProfileAC(response.data))
+                dispatch(setLoadingAC(false))
+            })
     }
 }
 
-export const getStatusThunkCreator = (userID: number): AppThunk => {
+export const getStatusTC = (userID: number): AppThunk => {
     return (dispatch) => {
-        profileAPI.getStatus(userID).then(response => {
-            dispatch(setProfileStatusAC(response.data))
-        })
+        dispatch(setLoadingAC(true))
+        profileAPI.getStatus(userID)
+            .then(response => {
+                dispatch(setProfileStatusAC(response.data))
+                dispatch(setLoadingAC(false))
+            })
     }
 }
 
-export const updateStatusThunkCreator = (status: string): AppThunk => {
+export const updateStatusTC = (status: string): AppThunk => {
     return (dispatch) => {
-        profileAPI.updateStatus(status).then(response => {
-            if (response.data.resultCode === 0) {
-                dispatch(setProfileStatusAC(status))
-            }
-        })
+        dispatch(setLoadingAC(true))
+        profileAPI.updateStatus(status)
+            .then(response => {
+                if (response.data.resultCode === 0) {
+                    dispatch(setProfileStatusAC(status))
+                    dispatch(setLoadingAC(false))
+                }
+            })
     }
 }
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from "./Dialogs.module.css";
+import s from "./Dialogs.module.css";
 import {MessageItem} from "./Message/Message";
 import {DialogItem} from "./DialogItem/DialogItem"
 import {DialogsPropsType} from "./DialogsContainer";
@@ -14,11 +14,11 @@ const Dialogs = (props: DialogsPropsType) => {
     }
 
     return (
-        <div className={classes.dialogs}>
-            <div className={classes.dialogItems}>
+        <div className={s.dialogs}>
+            <div className={s.dialogItems}>
                 {state.dialogs.map((d, index) => (<DialogItem key={index} id={d.id} name={d.name} avatar={d.avatar}/>))}
             </div>
-            <div className={classes.messageItems}>
+            <div className={s.messageItems}>
                 {state.messages.map(message => (
                     <MessageItem id={message.id} message={message.message}/>))}
             </div>
@@ -30,7 +30,7 @@ const maxLengthCreator100 = maxLengthCreator(100);
 const AddMessageForm = (props: any) => {
     return (
         <form onSubmit={props.handleSubmit}>
-            <div className={classes.sendMessageBlock}>
+            <div className={s.sendMessageBlock}>
                 <Field component={Textarea} name="newMessageBody" placeholder="Enter your message..."
                        validate={[required, maxLengthCreator100]}/>
 

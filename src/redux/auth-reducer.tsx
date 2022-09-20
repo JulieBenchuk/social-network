@@ -1,6 +1,7 @@
 import {authAPI} from "../api/api";
 import {stopSubmit} from "redux-form";
 import {ActionsType, AppThunk} from "./redux-store";
+import {setLoadingAC} from "./app-reducer";
 
 const SET_USER_DATA = "SET_USER_DATA"
 
@@ -32,16 +33,20 @@ export const setUserDataAC = (id: number | null, email: string | null, login: st
 
 //thunk creators
 export const getAuthUserDataTC = (): AppThunk => (dispatch) => {
-    return authAPI.me().then(response => {
-        if (response.resultCode === 0) {
-            let data = response.data
-            dispatch(setUserDataAC(data.id, data.email, data.login, true))
-        }
-    })
+    dispatch(setLoadingAC(true))
+    return authAPI.me()
+        .then(response => {
+            if (response.resultCode === 0) {
+                let data = response.data
+                dispatch(setUserDataAC(data.id, data.email, data.login, true))
+            }
+            dispatch(setLoadingAC(false))
+        })
 }
 
 export const loginTC = (email: string, password: string, rememberMe: boolean): AppThunk => {
     return (dispatch: any) => {
+        dispatch(setLoadingAC(true))
         authAPI.login(email, password, rememberMe)
             .then(response => {
                 if (response.data.resultCode === 0) {
@@ -50,16 +55,19 @@ export const loginTC = (email: string, password: string, rememberMe: boolean): A
                     const errorMessage = response.data.messages.length > 0 ? response.data.messages[0] : "Some error"
                     dispatch(stopSubmit("login", {_error: errorMessage}))
                 }
+                dispatch(setLoadingAC(false))
             })
     }
 }
 
 export const logoutTC = (): AppThunk => (dispatch) => {
+    dispatch(setLoadingAC(true))
     authAPI.logout()
         .then(response => {
             if (response.data.resultCode === 0) {
                 dispatch(setUserDataAC(null, null, null, false))
             }
+            dispatch(setLoadingAC(false))
         })
 }
 

@@ -28,7 +28,7 @@ let initialState = {
             name: "Veronika",
             avatar: "https://as1.ftcdn.net/v2/jpg/02/85/98/20/1000_F_285982046_zzxKDt4O2ntMLBObfqU2bdEovgRclEqa.jpg"
         }
-    ]
+    ] as DialogType[]
 }
 
 export const dialogsReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {

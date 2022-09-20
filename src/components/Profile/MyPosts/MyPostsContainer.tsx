@@ -11,7 +11,7 @@ type PostType = {
     likeCount: number
 }
 type MapStateToPropsType = {
-    posts: Array<PostType>
+    posts: PostType[]
 }
 type MapDispatchToProps = {
     addPost: (newPostText: string)=>void

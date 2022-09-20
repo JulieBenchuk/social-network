@@ -36,9 +36,11 @@ export const setLoadingAC = (isLoading: boolean) => ({type: SET_IS_LOADING, isLo
 
 //thunk creators
 export const initializeAppTC = (): AppThunk => (dispatch: any) => {
+    dispatch(setLoadingAC(true))
     dispatch(getAuthUserDataTC())
     .then(() => {
         dispatch(setInitializedSuccessAC())
+        dispatch(setLoadingAC(false))
     })
 }
 

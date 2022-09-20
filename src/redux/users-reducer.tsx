@@ -10,7 +10,7 @@ const SET_TOTAL_USERS_COUNT = "SET_TOTAL_USERS_COUNT"
 const FOLLOWING_IN_PROGRESS = "FOLLOWING_IN_PROGRESS"
 
 let initialState = {
-    users: [] as Array<UserType>,
+    users: [] as UserType[],
     pageSize: 5,
     totalUsersCount: 0,
     currentPage: 1
@@ -83,19 +83,21 @@ export const getUsersTC = (currentPage: number, pageSize: number): AppThunk => {
     return (dispatch) => {
         dispatch(setLoadingAC(true))
         usersAPI.getUsers(currentPage, pageSize).then(data => {
-            dispatch(setLoadingAC(false))
             dispatch(setUsersAC(data.items))
             dispatch(setTotalUsersCountAC(data.totalCount))
+            dispatch(setLoadingAC(false))
         })
     }
 }
 export const followTC = (id: number): AppThunk => {
     return (dispatch) => {
         dispatch(setFollowingInProgressAC(id, true))
+        dispatch(setLoadingAC(true))
         usersAPI.followUser(id).then(data => {
             if (data.resultCode === 0) {
                 dispatch(followSuccessAC(id))
                 dispatch(setFollowingInProgressAC(id, false))
+                dispatch(setLoadingAC(false))
             }
         })
     }
@@ -103,10 +105,12 @@ export const followTC = (id: number): AppThunk => {
 export const unfollowTC = (id: number): AppThunk => {
     return (dispatch) => {
         dispatch(setFollowingInProgressAC(id, true))
+        dispatch(setLoadingAC(true))
         usersAPI.unfollowUser(id).then(data => {
             if (data.resultCode === 0) {
                 dispatch(unfollowSuccessAC(id))
                 dispatch(setFollowingInProgressAC(id, false))
+                dispatch(setLoadingAC(false))
             }
         })
     }
