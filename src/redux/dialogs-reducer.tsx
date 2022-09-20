@@ -1,24 +1,6 @@
+import {ActionsType} from "./redux-store";
 
-export type sendMessageType = {
-    type: "SEND_MESSAGE",
-    newMessageBody: string
-}
 const SEND_MESSAGE = "SEND_MESSAGE"
-
-type MessageType = {
-    id: number
-    message: string
-}
-type DialogType = {
-    id: number
-    name: string
-    avatar: string
-}
-export type InitialStateType = {
-    messages: Array<MessageType>
-    dialogs: Array<DialogType>
-}
-type ActionsType =  sendMessageType
 
 let initialState = {
     messages: [
@@ -65,4 +47,25 @@ export const dialogsReducer = (state: InitialStateType = initialState, action: A
             return state;
     }
 }
-export const sendMessageAC = (newMessageBody: string): sendMessageType => ({type: SEND_MESSAGE, newMessageBody: newMessageBody})
+export const sendMessageAC = (newMessageBody: string): sendMessageType => ({type: SEND_MESSAGE, newMessageBody: newMessageBody} as const)
+
+//types
+type InitialStateType = typeof initialState
+
+export type sendMessageType = {
+    type: "SEND_MESSAGE",
+    newMessageBody: string
+}
+
+type MessageType = {
+    id: number
+    message: string
+}
+
+type DialogType = {
+    id: number
+    name: string
+    avatar: string
+}
+
+

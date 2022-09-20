@@ -1,47 +1,15 @@
 import {authAPI} from "../api/api";
 import {stopSubmit} from "redux-form";
-import {ThunkAction} from "redux-thunk";
-import {AppStateType} from "./redux-store";
-import {FormAction} from "redux-form/lib/actions";
-import {Dispatch} from "redux";
+import {ActionsType, AppThunk} from "./redux-store";
 
 const SET_USER_DATA = "SET_USER_DATA"
-const SET_IS_LOADING = "SET_IS_LOADING"
 
-
-type InitialStateType = {
-    email: string | null
-    id: number | null
-    login: string | null
-    isLoading: boolean
-    isAuth: boolean
-}
 let initialState = {
     email: null,
     id: null,
     login: null,
-    isLoading: false,
     isAuth: false
 }
-type dataType = {
-    email: string | null
-    id: number | null
-    login: string | null
-    isAuth: boolean
-}
-
-type setUserDataACType = {
-    type: "SET_USER_DATA"
-    data: dataType
-}
-
-type setLoadingACType = {
-    type: "SET_IS_LOADING"
-    isLoading: boolean
-}
-
-type ActionsType = setLoadingACType | setUserDataACType
-type AuthThunk = ThunkAction<void, AppStateType, unknown, ActionsType>
 
 export const authReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
@@ -50,51 +18,70 @@ export const authReducer = (state: InitialStateType = initialState, action: Acti
                 ...state,
                 ...action.data
             };
-        case SET_IS_LOADING:
-            return {
-                ...state, isLoading: action.isLoading
-            }
         default:
             return state;
     }
 }
 
-export const setUserData = (id: number | null, email: string | null, login: string | null, isAuth: boolean): setUserDataACType => ({
+//action creators
+export const setUserDataAC = (id: number | null, email: string | null, login: string | null, isAuth: boolean): setUserDataACType => ({
     type: SET_USER_DATA,
-    data: {id: id, email: email,  login: login, isAuth: isAuth}
-})
+    data: {id: id, email: email, login: login, isAuth: isAuth}
+} as const)
 
-/*export const setLoading = (isLoading: boolean) => ({type: SET_IS_LOADING, isLoading: isLoading})*/
 
-export const getAuthUserData = ():AuthThunk => (dispatch) => {
-        return authAPI.me().then(response => {
-            if (response.resultCode === 0) {
-                let data = response.data
-                dispatch(setUserData(data.id, data.email, data.login, true))
-            }
-        })
-    }
+//thunk creators
+export const getAuthUserDataTC = (): AppThunk => (dispatch) => {
+    return authAPI.me().then(response => {
+        if (response.resultCode === 0) {
+            let data = response.data
+            dispatch(setUserDataAC(data.id, data.email, data.login, true))
+        }
+    })
+}
 
-export const login = (email: string, password: string, rememberMe: boolean):AuthThunk => {
+export const loginTC = (email: string, password: string, rememberMe: boolean): AppThunk => {
     return (dispatch: any) => {
         authAPI.login(email, password, rememberMe)
             .then(response => {
                 if (response.data.resultCode === 0) {
-                    dispatch(getAuthUserData())
+                    dispatch(getAuthUserDataTC())
                 } else {
-                   const errorMessage = response.data.messages.length>0 ? response.data.messages[0] : "Some error"
+                    const errorMessage = response.data.messages.length > 0 ? response.data.messages[0] : "Some error"
                     dispatch(stopSubmit("login", {_error: errorMessage}))
                 }
             })
     }
 }
-export const logout = ():AuthThunk => (dispatch) => {
+
+export const logoutTC = (): AppThunk => (dispatch) => {
     authAPI.logout()
         .then(response => {
             if (response.data.resultCode === 0) {
-                dispatch(setUserData(null, null, null, false))
+                dispatch(setUserDataAC(null, null, null, false))
             }
         })
 }
+
+//types
+type InitialStateType = {
+    email: string | null
+    id: number | null
+    login: string | null
+    isAuth: boolean
+}
+
+type dataType = {
+    email: string | null
+    id: number | null
+    login: string | null
+    isAuth: boolean
+}
+
+export type setUserDataACType = {
+    type: "SET_USER_DATA"
+    data: dataType
+}
+
 
 

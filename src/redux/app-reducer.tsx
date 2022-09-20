@@ -1,20 +1,13 @@
-import {ThunkAction} from "redux-thunk";
-import {AppStateType} from "./redux-store";
-import {getAuthUserData} from "./auth-reducer";
+import {ActionsType, AppThunk} from "./redux-store";
+import {getAuthUserDataTC} from "./auth-reducer";
 
-type InitialStateType = {
-    isInitializedSuccess: boolean
-}
-let initialState = {
-    isInitializedSuccess: false
-}
-type setInitializedSuccessACType = {
-    type: "SET_INITIALIZED_SUCCESS"
-    isInitializedSuccess: boolean
-}
 const SET_INITIALIZED_SUCCESS = "SET_INITIALIZED_SUCCESS"
+const SET_IS_LOADING = "SET_IS_LOADING"
 
-type ActionsType = setInitializedSuccessACType
+let initialState = {
+    isInitializedSuccess: false,
+    isLoading: false
+}
 
 export const appReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
@@ -23,22 +16,42 @@ export const appReducer = (state: InitialStateType = initialState, action: Actio
                 ...state,
                 isInitializedSuccess: true
             };
+        case SET_IS_LOADING:
+            return {
+                ...state, isLoading: action.isLoading
+            }
         default:
             return state;
     }
 }
 
-export const setInitializedSuccessAC = (): setInitializedSuccessACType => ({
+//action creators
+export const setInitializedSuccessAC = () => ({
     type: SET_INITIALIZED_SUCCESS,
     isInitializedSuccess: true
-})
+} as const)
 
-export const initializeApp = () => (dispatch: any) => {
-    let promise = dispatch(getAuthUserData())
-    promise.then(() => {
+export const setLoadingAC = (isLoading: boolean) => ({type: SET_IS_LOADING, isLoading: isLoading} as const)
+
+
+//thunk creators
+export const initializeAppTC = (): AppThunk => (dispatch: any) => {
+    dispatch(getAuthUserDataTC())
+    .then(() => {
         dispatch(setInitializedSuccessAC())
     })
 }
+
+//types
+type InitialStateType = typeof initialState
+
+export type setLoadingACType = {
+    type: "SET_IS_LOADING"
+    isLoading: boolean
+}
+
+
+
 
 
 

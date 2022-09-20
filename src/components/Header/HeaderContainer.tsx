@@ -2,7 +2,7 @@ import React from "react";
 import {Header} from "./Header";
 import {AppStateType} from "../../redux/redux-store";
 import {connect} from "react-redux";
-import {logout} from "../../redux/auth-reducer";
+import {logoutTC} from "../../redux/auth-reducer";
 
 type MapStatePropsType = {
     id: number | null
@@ -26,4 +26,4 @@ class HeaderContainer extends React.Component<any> {
     }
 }
 
-export default connect(mapStateToProps, {logout})(HeaderContainer);
+export default connect(mapStateToProps, {logout: logoutTC})(HeaderContainer);

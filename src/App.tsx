@@ -12,7 +12,7 @@ import Login from "./components/Login/Login";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import {connect} from "react-redux";
 import {compose} from "redux";
-import {initializeApp} from "./redux/app-reducer";
+import {initializeAppTC} from "./redux/app-reducer";
 import {AppStateType} from "./redux/redux-store";
 import {Preloader} from "./common/Preloader";
 
@@ -54,4 +54,4 @@ const MapStateToProps = (state: AppStateType)=> ({
     }
 }
 
-export default compose<React.ComponentType>(withRouter, connect(MapStateToProps, {initializeApp})) (App);
+export default compose<React.ComponentType>(withRouter, connect(MapStateToProps, {initializeApp: initializeAppTC})) (App);
