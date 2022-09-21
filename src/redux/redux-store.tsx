@@ -1,12 +1,11 @@
 import {applyMiddleware, combineReducers, legacy_createStore} from "redux";
 import {
-    addPostType,
+    addPostType, deletePost,
     profileReducer,
     setProfileStatus,
-    setUserProfileType,
-    updateProfileStatus
+    setUserProfileType
 } from "./profile-reducer";
-import {dialogsReducer, sendMessageType} from "./dialogs-reducer";
+import {deleteMessageType, dialogsReducer, sendMessageType} from "./dialogs-reducer";
 import {
     followACType, setFollowingInProgressACType,
     setPageACType,
@@ -37,7 +36,6 @@ export type ActionsType =
     addPostType
     | setUserProfileType
     | setProfileStatus
-    | updateProfileStatus
     | setLoadingACType
     | setUserDataACType
     | sendMessageType
@@ -47,6 +45,8 @@ export type ActionsType =
     | setPageACType
     | setTotalUsersCountACType
     | setFollowingInProgressACType
+    | deletePost
+    | deleteMessageType
     | ReturnType<typeof setInitializedSuccessAC>
 
 

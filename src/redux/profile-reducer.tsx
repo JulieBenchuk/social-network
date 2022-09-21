@@ -5,7 +5,7 @@ import {setLoadingAC} from "./app-reducer";
 const ADD_POST = "profile/ADD-POST"
 const SET_USER_PROFILE = "profile/SET_USER_PROFILE"
 const SET_PROFILE_STATUS = "profile/SET_PROFILE_STATUS"
-const UPDATE_PROFILE_STATUS = "profile/UPDATE_PROFILE_STATUS"
+const DELETE_POST = "profile/DELETE_POST"
 
 let initialState = {
     posts: [
@@ -32,8 +32,8 @@ export const profileReducer = (state: InitialStateType = initialState, action: A
             return {...state, profile: action.profile}
         case SET_PROFILE_STATUS:
             return {...state, status: action.status}
-        case UPDATE_PROFILE_STATUS:
-            return {...state, status: action.status}
+        case DELETE_POST:
+            return {...state, posts: state.posts.filter(p=>p.id!==action.postID)}
         default:
             return state;
     }
@@ -50,6 +50,7 @@ export const setProfileStatusAC = (status: string): setProfileStatus => ({
     type: SET_PROFILE_STATUS,
     status: status
 } as const)
+export const deletePostAC = (postID: number): deletePost => ({type: DELETE_POST, postID} as const)
 
 
 //thunk creators
@@ -112,8 +113,7 @@ export type setProfileStatus = {
     type: "profile/SET_PROFILE_STATUS"
     status: string
 }
-
-export type updateProfileStatus = {
-    type: "profile/UPDATE_PROFILE_STATUS"
-    status: string
+export type deletePost = {
+    type: "profile/DELETE_POST"
+    postID: number
 }

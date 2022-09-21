@@ -1,6 +1,7 @@
 import {ActionsType} from "./redux-store";
 
 const SEND_MESSAGE = "dialogs/SEND_MESSAGE"
+const DELETE_MESSAGE = "dialogs/DELETE_MESSAGE"
 
 let initialState = {
     messages: [
@@ -43,19 +44,20 @@ export const dialogsReducer = (state: InitialStateType = initialState, action: A
                 messages: [...state.messages, newMessage]
             };
         }
+        case DELETE_MESSAGE:
+            return {...state, messages: state.messages.filter(m => m.id !== action.messageID)}
         default:
             return state;
     }
 }
-export const sendMessageAC = (newMessageBody: string): sendMessageType => ({type: SEND_MESSAGE, newMessageBody: newMessageBody} as const)
+export const sendMessageAC = (newMessageBody: string): sendMessageType => ({
+    type: SEND_MESSAGE,
+    newMessageBody
+} as const)
+export const deleteMessageAC = (messageID: number): deleteMessageType => ({type: DELETE_MESSAGE, messageID} as const)
 
 //types
 type InitialStateType = typeof initialState
-
-export type sendMessageType = {
-    type: "dialogs/SEND_MESSAGE",
-    newMessageBody: string
-}
 
 type MessageType = {
     id: number
@@ -67,5 +69,14 @@ type DialogType = {
     name: string
     avatar: string
 }
+export type sendMessageType = {
+    type: "dialogs/SEND_MESSAGE"
+    newMessageBody: string
+}
+export type deleteMessageType = {
+    type: "dialogs/DELETE_MESSAGE"
+    messageID: number
+}
+
 
 
