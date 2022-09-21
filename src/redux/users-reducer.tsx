@@ -2,12 +2,12 @@ import {usersAPI} from "../api/api";
 import {ActionsType, AppThunk} from "./redux-store";
 import {setLoadingAC} from "./app-reducer";
 
-const FOLLOW = "FOLLOW"
-const UNFOLLOW = "UNFOLLOW"
-const SET_USERS = "SET-USERS"
-const SET_CURRENT_PAGE = "SET_CURRENT_PAGE"
-const SET_TOTAL_USERS_COUNT = "SET_TOTAL_USERS_COUNT"
-const FOLLOWING_IN_PROGRESS = "FOLLOWING_IN_PROGRESS"
+const FOLLOW = "users/FOLLOW"
+const UNFOLLOW = "users/UNFOLLOW"
+const SET_USERS = "users/SET-USERS"
+const SET_CURRENT_PAGE = "users/SET_CURRENT_PAGE"
+const SET_TOTAL_USERS_COUNT = "users/SET_TOTAL_USERS_COUNT"
+const FOLLOWING_IN_PROGRESS = "users/FOLLOWING_IN_PROGRESS"
 
 let initialState = {
     users: [] as UserType[],
@@ -133,27 +133,27 @@ export type UserType = {
 }
 
 export type followACType = {
-    type: "FOLLOW"
+    type: "users/FOLLOW"
     ID: number
 }
 export type unfollowACType = {
-    type: "UNFOLLOW"
+    type: "users/UNFOLLOW"
     ID: number
 }
 export type setUsersACType = {
-    type: "SET-USERS"
+    type: "users/SET-USERS"
     users: Array<UserType>
 }
 export type setPageACType = {
-    type: "SET_CURRENT_PAGE"
+    type: "users/SET_CURRENT_PAGE"
     currentPage: number
 }
 export type setTotalUsersCountACType = {
-    type: "SET_TOTAL_USERS_COUNT"
+    type: "users/SET_TOTAL_USERS_COUNT"
     count: number
 }
 export type setFollowingInProgressACType = {
-    type: "FOLLOWING_IN_PROGRESS"
+    type: "users/FOLLOWING_IN_PROGRESS"
     id: number
     followingInProgress: boolean
 }

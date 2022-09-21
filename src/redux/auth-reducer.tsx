@@ -3,7 +3,7 @@ import {stopSubmit} from "redux-form";
 import {ActionsType, AppThunk} from "./redux-store";
 import {setLoadingAC} from "./app-reducer";
 
-const SET_USER_DATA = "SET_USER_DATA"
+const SET_USER_DATA = "auth/SET_USER_DATA"
 
 let initialState = {
     email: null,
@@ -87,7 +87,7 @@ type dataType = {
 }
 
 export type setUserDataACType = {
-    type: "SET_USER_DATA"
+    type: "auth/SET_USER_DATA"
     data: dataType
 }
 

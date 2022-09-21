@@ -1,8 +1,8 @@
 import {ActionsType, AppThunk} from "./redux-store";
 import {getAuthUserDataTC} from "./auth-reducer";
 
-const SET_INITIALIZED_SUCCESS = "SET_INITIALIZED_SUCCESS"
-const SET_IS_LOADING = "SET_IS_LOADING"
+const SET_INITIALIZED_SUCCESS = "app/SET_INITIALIZED_SUCCESS"
+const SET_IS_LOADING = "app/SET_IS_LOADING"
 
 let initialState = {
     isInitializedSuccess: false,
@@ -48,7 +48,7 @@ export const initializeAppTC = (): AppThunk => (dispatch: any) => {
 type InitialStateType = typeof initialState
 
 export type setLoadingACType = {
-    type: "SET_IS_LOADING"
+    type: "app/SET_IS_LOADING"
     isLoading: boolean
 }
 

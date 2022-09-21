@@ -2,9 +2,10 @@ import {profileAPI} from "../api/api";
 import {ActionsType, AppThunk} from "./redux-store";
 import {setLoadingAC} from "./app-reducer";
 
-const ADD_POST = "ADD-POST"
-const SET_USER_PROFILE = "SET_USER_PROFILE"
-const SET_PROFILE_STATUS = "SET_PROFILE_STATUS"
+const ADD_POST = "profile/ADD-POST"
+const SET_USER_PROFILE = "profile/SET_USER_PROFILE"
+const SET_PROFILE_STATUS = "profile/SET_PROFILE_STATUS"
+const UPDATE_PROFILE_STATUS = "profile/UPDATE_PROFILE_STATUS"
 
 let initialState = {
     posts: [
@@ -19,7 +20,7 @@ let initialState = {
 
 export const profileReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
-        case "ADD-POST": {
+        case ADD_POST: {
             const newPost: PostType = {
                 id: 5,
                 post: action.newPostText,
@@ -27,11 +28,11 @@ export const profileReducer = (state: InitialStateType = initialState, action: A
             };
             return {...state, posts: [...state.posts, newPost]};
         }
-        case "SET_USER_PROFILE":
+        case SET_USER_PROFILE:
             return {...state, profile: action.profile}
-        case "SET_PROFILE_STATUS":
+        case SET_PROFILE_STATUS:
             return {...state, status: action.status}
-        case "UPDATE_PROFILE_STATUS":
+        case UPDATE_PROFILE_STATUS:
             return {...state, status: action.status}
         default:
             return state;
@@ -98,21 +99,21 @@ export type PostType = {
 }
 
 export type addPostType = {
-    type: "ADD-POST",
+    type: "profile/ADD-POST",
     newPostText: string
 }
 
 export type setUserProfileType = {
-    type: "SET_USER_PROFILE"
+    type: "profile/SET_USER_PROFILE"
     profile: any
 }
 
 export type setProfileStatus = {
-    type: "SET_PROFILE_STATUS"
+    type: "profile/SET_PROFILE_STATUS"
     status: string
 }
 
 export type updateProfileStatus = {
-    type: "UPDATE_PROFILE_STATUS"
+    type: "profile/UPDATE_PROFILE_STATUS"
     status: string
 }
