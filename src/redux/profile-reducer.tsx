@@ -5,7 +5,6 @@ import {setLoadingAC} from "./app-reducer";
 const ADD_POST = "profile/ADD-POST"
 const SET_USER_PROFILE = "profile/SET_USER_PROFILE"
 const SET_PROFILE_STATUS = "profile/SET_PROFILE_STATUS"
-const UPDATE_PROFILE_STATUS = "profile/UPDATE_PROFILE_STATUS"
 
 let initialState = {
     posts: [
@@ -31,8 +30,6 @@ export const profileReducer = (state: InitialStateType = initialState, action: A
         case SET_USER_PROFILE:
             return {...state, profile: action.profile}
         case SET_PROFILE_STATUS:
-            return {...state, status: action.status}
-        case UPDATE_PROFILE_STATUS:
             return {...state, status: action.status}
         default:
             return state;
@@ -110,10 +107,5 @@ export type setUserProfileType = {
 
 export type setProfileStatus = {
     type: "profile/SET_PROFILE_STATUS"
-    status: string
-}
-
-export type updateProfileStatus = {
-    type: "profile/UPDATE_PROFILE_STATUS"
     status: string
 }

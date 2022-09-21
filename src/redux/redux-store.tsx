@@ -3,8 +3,7 @@ import {
     addPostType,
     profileReducer,
     setProfileStatus,
-    setUserProfileType,
-    updateProfileStatus
+    setUserProfileType
 } from "./profile-reducer";
 import {dialogsReducer, sendMessageType} from "./dialogs-reducer";
 import {
@@ -37,7 +36,6 @@ export type ActionsType =
     addPostType
     | setUserProfileType
     | setProfileStatus
-    | updateProfileStatus
     | setLoadingACType
     | setUserDataACType
     | sendMessageType
