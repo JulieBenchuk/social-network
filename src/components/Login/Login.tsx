@@ -14,9 +14,9 @@ type FormDataType = {
     rememberMe: boolean
 }
 
-export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props: any) => {
+export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = ({handleSubmit, error}) => {
     return <div>
-        <form onSubmit={props.handleSubmit}>
+        <form onSubmit={handleSubmit}>
             <div>
                 <Field placeholder="email" name={"email"} component={Input} validate={[required]}/>
             </div>
@@ -27,7 +27,7 @@ export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props: any)
             <div>
                 <Field type={"checkbox"} name={"rememberMe"} component={Input}/> remember me
             </div>
-            {props.error && <div className={style.formSummaryError}> {props.error} </div>}
+            {error && <div className={style.formSummaryError}> {error} </div>}
             <div>
                 <button>log in</button>
             </div>
@@ -36,12 +36,18 @@ export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props: any)
 }
 
 const LoginReduxForm = reduxForm<FormDataType>({form: "login"})(LoginForm)
+type MapStateToPropsType = {
+    isAuth: boolean
+}
+type MapDispatchToPropsType= {
+    login: (email: string, password: string, rememberMe: boolean) => void
+}
 
-const Login = (props: any) => {
+const Login: React.FC<MapStateToPropsType&MapDispatchToPropsType> = ({login, isAuth}) => {
     const onSubmit = (formData: FormDataType) => {
-        props.login(formData.email, formData.password, formData.rememberMe)
+        login(formData.email, formData.password, formData.rememberMe)
     }
-    if (props.isAuth) {
+    if (isAuth) {
         return <Redirect to={"/profile"}/>
     }
 
@@ -52,7 +58,7 @@ const Login = (props: any) => {
         </div>
     );
 };
-const mapStateToProps = (state: AppStateType) => {
+const mapStateToProps = (state: AppStateType):MapStateToPropsType => {
     return {
         isAuth: state.auth.isAuth
     }
