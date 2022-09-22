@@ -9,7 +9,7 @@ type UserPropsType = {
     follow: (id: number) => void
     followingInProgress: boolean
 }
-export const User: React.FC<UserPropsType> = ({user, unfollow, follow, ...restProps}) => {
+export const  User: React.FC<UserPropsType> = ({user, unfollow, follow, ...restProps}) => {
     return (
         <div>
                 <span>

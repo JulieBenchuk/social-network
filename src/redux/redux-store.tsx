@@ -1,4 +1,4 @@
-import {applyMiddleware, combineReducers, legacy_createStore} from "redux";
+import {applyMiddleware, combineReducers, compose, legacy_createStore} from "redux";
 import {
     addPostType, deletePost,
     profileReducer,
@@ -27,8 +27,9 @@ let rootReducer = combineReducers({
     form: formReducer,
     app: appReducer
 })
-
-export let store = legacy_createStore(rootReducer, applyMiddleware(thunkMiddleware));
+// @ts-ignore
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+export const store = legacy_createStore(rootReducer, composeEnhancers(applyMiddleware(thunkMiddleware)));
 
 export type AppStateType = ReturnType<typeof rootReducer>
 export type AppThunk = ThunkAction<void, AppStateType, unknown, ActionsType>
@@ -49,6 +50,3 @@ export type ActionsType =
     | deleteMessageType
     | ReturnType<typeof setInitializedSuccessAC>
 
-
-// @ts-ignore
-window.store = store
