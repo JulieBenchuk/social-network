@@ -83,10 +83,11 @@ export const getUsersTC = (currentPage: number, pageSize: number): AppThunk => {
     return (dispatch) => {
         dispatch(setLoadingAC(true))
         usersAPI.getUsers(currentPage, pageSize).then(data => {
+            debugger
             dispatch(setUsersAC(data.items))
             dispatch(setTotalUsersCountAC(data.totalCount))
-            dispatch(setLoadingAC(false))
         })
+        dispatch(setLoadingAC(false))
     }
 }
 export const followTC = (id: number): AppThunk => {
@@ -97,8 +98,8 @@ export const followTC = (id: number): AppThunk => {
             if (data.resultCode === 0) {
                 dispatch(followSuccessAC(id))
                 dispatch(setFollowingInProgressAC(id, false))
-                dispatch(setLoadingAC(false))
             }
+            dispatch(setLoadingAC(false))
         })
     }
 }
@@ -110,8 +111,8 @@ export const unfollowTC = (id: number): AppThunk => {
             if (data.resultCode === 0) {
                 dispatch(unfollowSuccessAC(id))
                 dispatch(setFollowingInProgressAC(id, false))
-                dispatch(setLoadingAC(false))
             }
+            dispatch(setLoadingAC(false))
         })
     }
 }
