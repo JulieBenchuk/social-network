@@ -1,13 +1,26 @@
+.paginator{
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 5px;
+    width: 60%;
+}
 .default{
-    border: 1px solid black;
-    padding-left: 10px;
-    padding-right: 10px;
+    border: 1px solid #b0b0b0;
+    cursor: pointer;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .currentPage {
     font-weight: bold;
     font-size: larger;
     background-color: #b0b0b0;
-    border: 1px solid black;
-    padding-left: 10px;
-    padding-right: 10px;
+    color: white;
+}
+.button{
+
 }
