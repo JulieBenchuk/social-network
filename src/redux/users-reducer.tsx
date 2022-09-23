@@ -83,7 +83,6 @@ export const getUsersTC = (currentPage: number, pageSize: number): AppThunk => {
     return (dispatch) => {
         dispatch(setLoadingAC(true))
         usersAPI.getUsers(currentPage, pageSize).then(data => {
-            debugger
             dispatch(setUsersAC(data.items))
             dispatch(setTotalUsersCountAC(data.totalCount))
         })
