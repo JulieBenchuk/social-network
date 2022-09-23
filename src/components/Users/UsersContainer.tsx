@@ -54,6 +54,7 @@ class UsersContainer extends React.Component<UserPropsType> {
         console.log(`${id} will be unfollowed`)
     }
     changePage = (page: number) => {
+        console.log("wanna change page " + page)
         this.props.setCurrentPage(page)
         this.props.getUsers(page, this.props.pageSize)
     }

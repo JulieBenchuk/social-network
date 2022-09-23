@@ -1,4 +1,13 @@
+.default{
+    border: 1px solid black;
+    padding-left: 10px;
+    padding-right: 10px;
+}
 .currentPage {
     font-weight: bold;
     font-size: larger;
+    background-color: #b0b0b0;
+    border: 1px solid black;
+    padding-left: 10px;
+    padding-right: 10px;
 }
