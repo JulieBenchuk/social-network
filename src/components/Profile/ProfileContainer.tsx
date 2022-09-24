@@ -21,8 +21,8 @@ type MapStateToPropsType = {
 }
 type MapDispatchToPropsType = {
     getUserProfile: (profile: any) => void
-    getUserStatus: (userID: number ) => void
-    updateStatus: (status: string)=> void
+    getUserStatus: (userID: number) => void
+    updateStatus: (status: string) => void
 }
 type OwnPropsType = MapStateToPropsType & MapDispatchToPropsType
 type PathParamsType = {
@@ -39,11 +39,11 @@ let mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
 })
 
 class ProfileContainer extends React.Component<PropsType> {
-    componentDidMount() {
+    refreshProfile() {
         let userID = this.props.match.params.userID
-        if(!userID){
-            userID=this.props.authorizedUserID
-            if (!userID){
+        if (!userID) {
+            userID = this.props.authorizedUserID
+            if (!userID) {
                 this.props.history.push("/login")
             }
         }
@@ -51,13 +51,29 @@ class ProfileContainer extends React.Component<PropsType> {
         this.props.getUserStatus(userID)
     }
 
+    componentDidMount() {
+        this.refreshProfile()
+    }
+
+    componentDidUpdate(prevProps: Readonly<PropsType>, prevState: Readonly<{}>, snapshot?: any) {
+        if (this.props.match.params.userID !== prevProps.match.params.userID) {
+            this.refreshProfile()
+        }
+    }
+
+
     render() {
         return (
-            <Profile {...this.props} profile={this.props.profile} status={this.props.status} updateStatus={this.props.updateStatus}/>
+            <Profile {...this.props} profile={this.props.profile} status={this.props.status}
+                     updateStatus={this.props.updateStatus}/>
         )
     }
 }
 
-export default compose <React.ComponentType>(
-    connect(mapStateToProps, {getUserProfile: getUserProfileTC, getUserStatus: getStatusTC, updateStatus: updateStatusTC}),
+export default compose<React.ComponentType>(
+    connect(mapStateToProps, {
+        getUserProfile: getUserProfileTC,
+        getUserStatus: getStatusTC,
+        updateStatus: updateStatusTC
+    }),
     withRouter, withAuthRedirect)(ProfileContainer)
