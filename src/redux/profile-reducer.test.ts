@@ -11,8 +11,16 @@ beforeEach(()=>{
             {id: 4, post: "Woooow", likeCount: 200},
             {id: 999, post: "To delete", likeCount: 200}
         ],
-        profile: null,
-        status: ""
+        profile:  {
+            name: "Shubert",
+            id: 1,
+            photos: {
+                small: null,
+                large: null,
+            },
+            status: null,
+            followed: false
+        }
     }
 })
 it("new post should be added", () => {
@@ -45,5 +53,5 @@ it("status should be updated", () => {
     let newState = profileReducer(initialState, action)
 
     //expectation
-    expect(newState.status).toBe("new status")
+    expect(newState.profile.status).toBe("new status")
 })

@@ -1,7 +1,7 @@
 import {applyMiddleware, combineReducers, compose, legacy_createStore} from "redux";
 import {
     addPostType, deletePost,
-    profileReducer,
+    profileReducer, savePhoto,
     setProfileStatus,
     setUserProfileType
 } from "./profile-reducer";
@@ -48,5 +48,6 @@ export type ActionsType =
     | setFollowingInProgressACType
     | deletePost
     | deleteMessageType
+    | savePhoto
     | ReturnType<typeof setInitializedSuccessAC>
 

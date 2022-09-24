@@ -1,25 +1,24 @@
 .profileInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
 }
 
 .profile_avatar img {
     width: 150px;
     border-radius: 5px;
-    margin: 20px;
     z-index: 2;
-    position: absolute;
 }
 
 .profile_top img {
     width: 640px;
     height: 100px;
     border-radius: 5px;
-    position: absolute;
     z-index: 1;
 }
 
 .description {
-    padding-top: 200px;
-    margin-left: 20px;
     color: #424242;
     font-size: large;
 }

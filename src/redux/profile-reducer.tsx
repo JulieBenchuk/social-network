@@ -6,6 +6,7 @@ const ADD_POST = "profile/ADD-POST"
 const SET_USER_PROFILE = "profile/SET_USER_PROFILE"
 const SET_PROFILE_STATUS = "profile/SET_PROFILE_STATUS"
 const DELETE_POST = "profile/DELETE_POST"
+const SAVE_PHOTO = "profile/SAVE_PHOTO"
 
 let initialState = {
     posts: [
@@ -14,9 +15,17 @@ let initialState = {
         {id: 3, post: "I like this  network!", likeCount: 200},
         {id: 4, post: "Woooow", likeCount: 200}
     ],
-    profile: null,
-    status: ""
-}
+    profile:  {
+        name: "Shubert",
+        id: 1,
+        photos: {
+            small: null,
+            large: null,
+        },
+        status: null,
+        followed: false
+    }
+} as InitialStateType
 
 export const profileReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
@@ -31,9 +40,11 @@ export const profileReducer = (state: InitialStateType = initialState, action: A
         case SET_USER_PROFILE:
             return {...state, profile: action.profile}
         case SET_PROFILE_STATUS:
-            return {...state, status: action.status}
+            return {...state, profile: {...state.profile, status: action.status}}
         case DELETE_POST:
             return {...state, posts: state.posts.filter(p=>p.id!==action.postID)}
+        case SAVE_PHOTO:
+            return {...state, profile: {...state.profile, photos: {...state.profile.photos, large: action.photo, small: action.photo}}}
         default:
             return state;
     }
@@ -51,6 +62,8 @@ export const setProfileStatusAC = (status: string): setProfileStatus => ({
     status: status
 } as const)
 export const deletePostAC = (postID: number): deletePost => ({type: DELETE_POST, postID} as const)
+export const savePhotoAC = (photo: File): savePhoto => ({type: SAVE_PHOTO, photo} as const)
+
 
 
 //thunk creators
@@ -89,10 +102,35 @@ export const updateStatusTC = (status: string): AppThunk => {
     }
 }
 
+export const saveSelectedPhotoTC = (photo: File): AppThunk => {
+    return (dispatch) => {
+        dispatch(setLoadingAC(true))
+        profileAPI.savePhoto(photo)
+            .then(response => {
+                if (response.data.resultCode === 0) {
+                    dispatch(savePhotoAC(response.data.data.large))
+                    dispatch(setLoadingAC(false))
+                }
+            })
+    }
+}
+
 
 //types
-type InitialStateType = typeof initialState
-
+type InitialStateType = {
+    posts: PostType[]
+    profile: ProfileType
+}
+type ProfileType = {
+    name: string
+    id: number
+    photos: {
+        small: File | null,
+        large: File | null
+    }
+    status: string | null
+    followed: boolean
+}
 export type PostType = {
     id: number
     post: string
@@ -103,12 +141,10 @@ export type addPostType = {
     type: "profile/ADD-POST",
     newPostText: string
 }
-
 export type setUserProfileType = {
     type: "profile/SET_USER_PROFILE"
     profile: any
 }
-
 export type setProfileStatus = {
     type: "profile/SET_PROFILE_STATUS"
     status: string
@@ -116,4 +152,8 @@ export type setProfileStatus = {
 export type deletePost = {
     type: "profile/DELETE_POST"
     postID: number
+}
+export type savePhoto ={
+    type: "profile/SAVE_PHOTO"
+    photo: File
 }
