@@ -1,5 +1,5 @@
 import ReactDOM from "react-dom";
-import {BrowserRouter, HashRouter} from "react-router-dom";
+import {HashRouter} from "react-router-dom";
 import React from "react";
 import {store} from "./redux/redux-store";
 import {Provider} from "react-redux";
