@@ -5,6 +5,7 @@ import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 import avatar_default from "./../../../assets/img/avatar_default.webp"
 import {Contact} from "../Contact/Contact";
 import {UserProfileType} from "../../../api/api";
+import {ProfileData} from "./ProfileData/ProfileData";
 
 type ProfileInfoPropsType = {
     profile: UserProfileType
@@ -45,25 +46,8 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({
 
                 {isOwner && <input type="file" onChange={onPhotoSelectedHandler}/>}
 
-                <div className={s.description}>
-                    <h2>{profile.fullName}</h2>
-                    <ProfileStatusWithHooks status={status} updateStatus={updateStatus}/>
-                    <div>
-                        <b>About me: </b>
-                        {profile.lookingForAJobDescription}
-                    </div>
-                    <div>
-                        <b>Looking job: </b>
-                        {profile.lookingForAJobDescription ? "yes" : "no"}
-                    </div>
-                    <div>
-                        <b>Contacts:</b>
-                        {Object.keys(profile.contacts).map(key=>{
-                            return <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]}/>
-                        })}
-                    </div>
-
-                </div>
+                <ProfileStatusWithHooks status={status} updateStatus={updateStatus}/>
+                <ProfileData profile={profile}/>
             </div>
         </>
     );
