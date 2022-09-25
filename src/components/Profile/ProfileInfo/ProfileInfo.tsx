@@ -3,7 +3,6 @@ import s from "./ProfileInfo.module.css";
 import {Preloader} from "../../../common/Preloader";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 import avatar_default from "./../../../assets/img/avatar_default.webp"
-import {Contact} from "../Contact/Contact";
 import {UserProfileType} from "../../../api/api";
 import {ProfileData} from "./ProfileData/ProfileData";
 

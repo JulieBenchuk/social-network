@@ -19,8 +19,8 @@ export const ProfileData: React.FC<ProfileDataPropsType> = ({profile}) => {
                 {profile.lookingForAJobDescription ? "yes" : "no"}
             </div>
             <div>
-                <b>Contacts:</b>
-                {Object.keys(profile.contacts).map(key => {
+                <b>Contacts: </b>
+                {profile.contacts && Object.keys(profile.contacts).map(key => {
                     return <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]}/>
                 })}
             </div>
