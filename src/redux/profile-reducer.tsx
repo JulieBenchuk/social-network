@@ -1,4 +1,4 @@
-import {profileAPI} from "../api/api";
+import {UserProfileType, profileAPI} from "../api/api";
 import {ActionsType, AppThunk} from "./redux-store";
 import {setLoadingAC} from "./app-reducer";
 
@@ -15,16 +15,8 @@ let initialState = {
         {id: 3, post: "I like this  network!", likeCount: 200},
         {id: 4, post: "Woooow", likeCount: 200}
     ],
-    profile:  {
-        name: "Shubert",
-        id: 1,
-        photos: {
-            small: null,
-            large: null,
-        },
-        status: null,
-        followed: false
-    }
+    profile:  {} as UserProfileType,
+    status: "",
 } as InitialStateType
 
 export const profileReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
@@ -38,13 +30,13 @@ export const profileReducer = (state: InitialStateType = initialState, action: A
             return {...state, posts: [...state.posts, newPost]};
         }
         case SET_USER_PROFILE:
-            return {...state, profile: action.profile}
+            return {...state, profile: action.profile};
         case SET_PROFILE_STATUS:
-            return {...state, profile: {...state.profile, status: action.status}}
+            return {...state, status: action.status};
         case DELETE_POST:
-            return {...state, posts: state.posts.filter(p=>p.id!==action.postID)}
+            return {...state, posts: state.posts.filter(p=>p.id!==action.postID)};
         case SAVE_PHOTO:
-            return {...state, profile: {...state.profile, photos: {...state.profile.photos, large: action.photo, small: action.photo}}}
+            return {...state, profile: {...state.profile, photos: {...state.profile.photos, large: action.photo, small: action.photo}}};
         default:
             return state;
     }
@@ -53,7 +45,7 @@ export const profileReducer = (state: InitialStateType = initialState, action: A
 
 //action creators
 export const addPostAC = (newPostText: string): addPostType => ({type: ADD_POST, newPostText} as const)
-export const setUserProfileAC = (profile: any): setUserProfileType => ({
+export const setUserProfileAC = (profile: UserProfileType): setUserProfileType => ({
     type: SET_USER_PROFILE,
     profile: profile
 } as const)
@@ -119,17 +111,8 @@ export const saveSelectedPhotoTC = (photo: File): AppThunk => {
 //types
 type InitialStateType = {
     posts: PostType[]
-    profile: ProfileType
-}
-type ProfileType = {
-    name: string
-    id: number
-    photos: {
-        small: File | null,
-        large: File | null
-    }
-    status: string | null
-    followed: boolean
+    profile: UserProfileType
+    status: string
 }
 export type PostType = {
     id: number
@@ -143,7 +126,7 @@ export type addPostType = {
 }
 export type setUserProfileType = {
     type: "profile/SET_USER_PROFILE"
-    profile: any
+    profile: UserProfileType
 }
 export type setProfileStatus = {
     type: "profile/SET_PROFILE_STATUS"

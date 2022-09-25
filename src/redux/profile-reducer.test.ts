@@ -18,9 +18,9 @@ beforeEach(()=>{
                 small: null,
                 large: null,
             },
-            status: null,
             followed: false
-        }
+        },
+        status: null,
     }
 })
 it("new post should be added", () => {
@@ -53,5 +53,5 @@ it("status should be updated", () => {
     let newState = profileReducer(initialState, action)
 
     //expectation
-    expect(newState.profile.status).toBe("new status")
+    expect(newState.status).toBe("new status")
 })

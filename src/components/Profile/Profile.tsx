@@ -1,9 +1,11 @@
 import React from "react";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
+import {UserProfileType} from "../../api/api";
+
 
 type ProfilePropsType = {
-    profile: any
+    profile: UserProfileType
     status: string
     updateStatus: (status: string) => void
     isOwner: boolean

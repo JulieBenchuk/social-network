@@ -3,21 +3,30 @@ import s from "./ProfileInfo.module.css";
 import {Preloader} from "../../../common/Preloader";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 import avatar_default from "./../../../assets/img/avatar_default.webp"
+import {Contact} from "../Contact/Contact";
+import {UserProfileType} from "../../../api/api";
 
 type ProfileInfoPropsType = {
-    profile: any
+    profile: UserProfileType
     status: string
     updateStatus: (status: string) => void
     isOwner: boolean
-    saveSelectedPhoto: (photo: File)=>void
+    saveSelectedPhoto: (photo: File) => void
 }
 
-export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({profile, updateStatus, status, isOwner, saveSelectedPhoto,...restProps}) => {
+export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({
+                                                                profile,
+                                                                updateStatus,
+                                                                status,
+                                                                isOwner,
+                                                                saveSelectedPhoto,
+                                                                ...restProps
+                                                            }) => {
     if (!profile) {
         return <Preloader/>
     }
     const onPhotoSelectedHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        if(e.target.files && e.target.files.length){
+        if (e.target.files && e.target.files.length) {
             saveSelectedPhoto(e.target.files[0])
         }
     }
@@ -31,16 +40,30 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({profile, updateStat
 
             <div className={s.profileInfo}>
                 <div className={s.profile_avatar}>
-                    <img src={profile.photos.large || avatar_default}/>
+                    <img src={profile.photos ? profile.photos.large : avatar_default}/>
                 </div>
 
                 {isOwner && <input type="file" onChange={onPhotoSelectedHandler}/>}
 
                 <div className={s.description}>
                     <h2>{profile.fullName}</h2>
-                    <p>{profile.aboutMe}</p>
-                    <p>Looking job: {profile.lookingForAJobDescription}</p>
                     <ProfileStatusWithHooks status={status} updateStatus={updateStatus}/>
+                    <div>
+                        <b>About me: </b>
+                        {profile.lookingForAJobDescription}
+                    </div>
+                    <div>
+                        <b>Looking job: </b>
+                        {profile.lookingForAJobDescription ? "yes" : "no"}
+                    </div>
+                    <div>
+                        <b>Contacts:</b>
+                      {/*  {Object.keys(profile.contacts).map(key=>{
+                            return <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]}/>
+                        })}*/}
+
+                    </div>
+
                 </div>
             </div>
         </>

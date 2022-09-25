@@ -10,10 +10,12 @@ import {
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
+import {UserProfileType} from "../../api/api";
 
 
 type MapStateToPropsType = {
-    profile: any
+    profile: UserProfileType
+    status: string
     isAuth: boolean
     authorizedUserID: number | null
 
@@ -32,6 +34,7 @@ type PropsType = RouteComponentProps<PathParamsType> & OwnPropsType
 
 let mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
     profile: state.profilePage.profile,
+    status: state.profilePage.status,
     isAuth: state.auth.isAuth,
     authorizedUserID: state.auth.id
 
@@ -64,7 +67,7 @@ class ProfileContainer extends React.Component<PropsType> {
     render() {
         return (
             <Profile {...this.props} isOwner={!this.props.match.params.userID} profile={this.props.profile}
-                     status={this.props.profile.status}
+                     status={this.props.status}
                      updateStatus={this.props.updateStatus} saveSelectedPhoto={this.props.saveSelectedPhoto}/>
         )
     }
