@@ -1,5 +1,5 @@
 import {UserProfileType, profileAPI} from "../api/api";
-import {ActionsType, AppThunk} from "./redux-store";
+import {ActionsType, AppStateType, AppThunk} from "./redux-store";
 import {setLoadingAC} from "./app-reducer";
 
 const ADD_POST = "profile/ADD-POST"
@@ -110,12 +110,13 @@ export const saveSelectedPhotoTC = (photo: File): AppThunk => {
 }
 
 export const saveProfileTC = (profile: UserProfileType): AppThunk => {
-    return (dispatch) => {
+    return (dispatch, getState: () => AppStateType) => {
+        const userID = getState().auth.id
         dispatch(setLoadingAC(true))
         profileAPI.saveProfile(profile)
             .then(response => {
-                console.log(response)
-                if (response.data.resultCode === 0) {
+                if (response.data.resultCode === 0 && userID) {
+                    dispatch(getUserProfileTC(userID))
                     dispatch(setLoadingAC(false))
                 }
             })

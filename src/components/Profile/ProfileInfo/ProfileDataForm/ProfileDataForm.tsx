@@ -2,8 +2,6 @@ import React from 'react';
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {Contact} from "../../Contact/Contact";
 import {Input, Textarea} from "../../../../common/Forms-control/FormsControl";
-import {UserProfileType} from "../../../../api/api";
-
 
 export type ProfileDataFormDataType = {
     fullName: string
@@ -25,7 +23,7 @@ export const ProfileDataForm: React.FC<InjectedFormProps<ProfileDataFormDataType
                 <Field placeholder="full name" name={"fullName"} component={Input}/>
                 <div>
                     <b>About me: </b>
-                    <Field placeholder="about me" name={"aboutMe"} component={Textarea} />
+                    <Field placeholder="about me" name={"aboutMe"} component={Textarea}/>
                 </div>
                 <div>
                     <b>Looking job: </b>

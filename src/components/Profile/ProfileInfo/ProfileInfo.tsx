@@ -36,8 +36,9 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({
             saveSelectedPhoto(e.target.files[0])
         }
     }
-    const onSubmit = (profile: UserProfileType) => {
+    const onSubmit = (profile: ProfileDataFormDataType) => {
         saveProfile(profile)
+        setEditMode((false))
     }
 
     return (
