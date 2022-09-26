@@ -3,7 +3,7 @@ import s from "./ProfileData.module.css";
 import {UserProfileType} from "../../../../api/api";
 import {Contact} from "../../Contact/Contact";
 
-type ProfileDataPropsType = {
+export type ProfileDataPropsType = {
     profile: UserProfileType
     isOwner: boolean
     setEditMode: ()=>void

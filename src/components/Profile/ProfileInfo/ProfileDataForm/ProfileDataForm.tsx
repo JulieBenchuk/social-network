@@ -1,16 +1,20 @@
 import React from 'react';
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import {Contact} from "../../Contact/Contact";
 import {Input, Textarea} from "../../../../common/Forms-control/FormsControl";
+import {ContactsType} from "../../../../api/api";
 
 export type ProfileDataFormDataType = {
     fullName: string
     lookingForAJob: boolean
     lookingForAJobDescription: string
+    contacts: ContactsType
     aboutMe: string
 }
 
-export const ProfileDataForm: React.FC<InjectedFormProps<ProfileDataFormDataType>> = ({handleSubmit}) => {
+export const ProfileDataForm: React.FC<InjectedFormProps<ProfileDataFormDataType>> = ({
+                                                                                          handleSubmit,
+                                                                                          initialValues
+                                                                                      }) => {
     return (
         <form onSubmit={handleSubmit}>
 
@@ -34,12 +38,15 @@ export const ProfileDataForm: React.FC<InjectedFormProps<ProfileDataFormDataType
                     <Field placeholder="my skills" name={"lookingForAJobDescription"} component={Textarea}/>
                 </div>
 
-                {/*  <div>
+                <div>
                     <b>Contacts: </b>
-                    {profile.contacts && Object.keys(profile.contacts).map(key => {
-                        return <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]}/>
+                    {initialValues.contacts && Object.keys(initialValues.contacts).map(key => {
+                        return <div key={key}>
+                            <b>{key}:</b>
+                            <Field placeholder={key} name={"contacts." + key} component={Input}/>
+                        </div>
                     })}
-                </div>*/}
+                </div>
             </div>
         </form>
     );
