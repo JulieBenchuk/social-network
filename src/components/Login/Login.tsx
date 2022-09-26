@@ -8,13 +8,13 @@ import {Redirect} from "react-router-dom";
 import {AppStateType} from "../../redux/redux-store";
 import style from "../../common/Forms-control/FormsControl.module.css"
 
-type FormDataType = {
+type LoginFormDataType = {
     email: string
     password: string
     rememberMe: boolean
 }
 
-export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = ({handleSubmit, error}) => {
+export const LoginForm: React.FC<InjectedFormProps<LoginFormDataType>> = ({handleSubmit, error}) => {
     return <div>
         <form onSubmit={handleSubmit}>
             <div>
@@ -35,7 +35,7 @@ export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = ({handleSubm
     </div>
 }
 
-const LoginReduxForm = reduxForm<FormDataType>({form: "login"})(LoginForm)
+const LoginReduxForm = reduxForm<LoginFormDataType>({form: "login"})(LoginForm)
 type MapStateToPropsType = {
     isAuth: boolean
 }
@@ -44,7 +44,7 @@ type MapDispatchToPropsType= {
 }
 
 const Login: React.FC<MapStateToPropsType&MapDispatchToPropsType> = ({login, isAuth}) => {
-    const onSubmit = (formData: FormDataType) => {
+    const onSubmit = (formData: LoginFormDataType) => {
         login(formData.email, formData.password, formData.rememberMe)
     }
     if (isAuth) {

@@ -27,6 +27,9 @@ export const profileAPI = {
                 "Content-Type": "multipart/form-data"
             }
         })
+    },
+    saveProfile(profile: UserProfileType){
+        return instance.put("profile", profile)
     }
 }
 export const usersAPI = {
@@ -53,13 +56,13 @@ export const authAPI = {
 }
 
 export type UserProfileType = {
-	aboutMe?: string
-	contacts: any
+	aboutMe: string
+	contacts?: any
 	lookingForAJob: boolean
 	lookingForAJobDescription?: string
 	fullName: string
-	userId: number
-	photos: PhotosType
+	userId?: number
+	photos?: PhotosType
 }
 export type ContactsType = {
 	facebook?: string

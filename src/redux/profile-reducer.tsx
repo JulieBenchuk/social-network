@@ -15,7 +15,7 @@ let initialState = {
         {id: 3, post: "I like this  network!", likeCount: 200},
         {id: 4, post: "Woooow", likeCount: 200}
     ],
-    profile:  {} as UserProfileType,
+    profile: {} as UserProfileType,
     status: "",
 } as InitialStateType
 
@@ -34,9 +34,12 @@ export const profileReducer = (state: InitialStateType = initialState, action: A
         case SET_PROFILE_STATUS:
             return {...state, status: action.status};
         case DELETE_POST:
-            return {...state, posts: state.posts.filter(p=>p.id!==action.postID)};
+            return {...state, posts: state.posts.filter(p => p.id !== action.postID)};
         case SAVE_PHOTO:
-            return {...state, profile: {...state.profile, photos: {...state.profile.photos, large: action.photo, small: action.photo}}};
+            return {
+                ...state,
+                profile: {...state.profile, photos: {...state.profile.photos, large: action.photo, small: action.photo}}
+            };
         default:
             return state;
     }
@@ -55,7 +58,6 @@ export const setProfileStatusAC = (status: string): setProfileStatus => ({
 } as const)
 export const deletePostAC = (postID: number): deletePost => ({type: DELETE_POST, postID} as const)
 export const savePhotoAC = (photo: File): savePhoto => ({type: SAVE_PHOTO, photo} as const)
-
 
 
 //thunk creators
@@ -107,6 +109,19 @@ export const saveSelectedPhotoTC = (photo: File): AppThunk => {
     }
 }
 
+export const saveProfileTC = (profile: UserProfileType): AppThunk => {
+    return (dispatch) => {
+        dispatch(setLoadingAC(true))
+        profileAPI.saveProfile(profile)
+            .then(response => {
+                console.log(response)
+                if (response.data.resultCode === 0) {
+                    dispatch(setLoadingAC(false))
+                }
+            })
+    }
+}
+
 
 //types
 type InitialStateType = {
@@ -136,7 +151,7 @@ export type deletePost = {
     type: "profile/DELETE_POST"
     postID: number
 }
-export type savePhoto ={
+export type savePhoto = {
     type: "profile/SAVE_PHOTO"
     photo: File
 }

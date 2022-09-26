@@ -1,4 +1,12 @@
+.profile_data {
+    display: flex;
+    flex-direction: column;
+}
+
 .description {
     color: #424242;
     font-size: large;
+}
+
+.edit {
 }
