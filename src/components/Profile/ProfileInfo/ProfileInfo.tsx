@@ -39,7 +39,7 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({
     }
     const onSubmit = (profile: ProfileDataFormDataType) => {
         saveProfile(profile)
-        setEditMode(false)
+        //setEditMode(false)
     }
 
     return (

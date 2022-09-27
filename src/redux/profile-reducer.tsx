@@ -119,10 +119,19 @@ export const saveProfileTC = (profile: UserProfileType): AppThunk => {
                 if (response.data.resultCode === 0 && userID) {
                     dispatch(getUserProfileTC(userID))
                     dispatch(setLoadingAC(false))
-                }
-                else {
+                } else {
                     const errorMessage = response.data.messages.length > 0 ? response.data.messages[0] : "Some error"
-                    dispatch(stopSubmit("edit_profile", {_error: errorMessage}))
+
+                    //find contact with error
+                    const errorArray = response.data.messages[0].toLowerCase().split("->")
+                    let contactWithError = errorArray[1].slice(0, -1)
+                    if (contactWithError === "mainlink") {
+                        contactWithError = "mainLink"
+                    }
+                    const obj: any = {}
+                    obj[contactWithError] = errorMessage
+
+                    dispatch(stopSubmit("edit_profile", {"contacts": obj}))
                 }
             })
     }

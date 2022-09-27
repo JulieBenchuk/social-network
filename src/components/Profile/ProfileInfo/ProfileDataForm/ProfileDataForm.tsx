@@ -42,12 +42,11 @@ export const ProfileDataForm: React.FC<InjectedFormProps<ProfileDataFormDataType
                 <div>
                     <b>Contacts: </b>
 
-                    {error && <div className={s.error}>{error}</div>}
-
                     {initialValues.contacts && Object.keys(initialValues.contacts).map(key => {
                         return <div key={key}>
                             <b>{key}:</b>
                             <Field placeholder={key} name={"contacts." + key} component={Input}/>
+                            {error && <div className={s.error}>{error}</div>}
                         </div>
                     })}
                 </div>
