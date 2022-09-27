@@ -24,7 +24,7 @@ export const ProfileDataForm: React.FC<InjectedFormProps<ProfileDataFormDataType
             </div>
 
             <div>
-                <div><b>Full name: </b></div>
+                <b>Full name: </b>
                 <Field placeholder="full name" name={"fullName"} component={Input}/>
                 <div>
                     <b>About me: </b>

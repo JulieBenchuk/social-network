@@ -8,8 +8,8 @@ type ContactPropsType = {
 export const Contact: React.FC<ContactPropsType> = ({contactTitle, contactValue}) => {
     return (
         <div className={s.contact}>
-            <p className={s.title}>{contactTitle}:</p>
-            <p className={s.value}>{contactValue}</p>
+            <span className={s.title}>{contactTitle}:</span>
+            <span className={s.value}>{contactValue}</span>
         </div>
     );
 };
