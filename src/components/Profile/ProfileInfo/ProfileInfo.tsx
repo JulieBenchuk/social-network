@@ -7,6 +7,7 @@ import {UserProfileType} from "../../../api/api";
 import {ProfileData} from "./ProfileData/ProfileData";
 import {ProfileDataFormDataType, ProfileDataReduxForm} from "./ProfileDataForm/ProfileDataForm";
 
+
 type ProfileInfoPropsType = {
     profile: UserProfileType
     status: string
@@ -38,7 +39,7 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({
     }
     const onSubmit = (profile: ProfileDataFormDataType) => {
         saveProfile(profile)
-        setEditMode((false))
+        setEditMode(false)
     }
 
     return (
@@ -58,7 +59,7 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({
                 <ProfileStatusWithHooks status={status} updateStatus={updateStatus}/>
 
                 {editMode
-                    ? <ProfileDataReduxForm onSubmit={onSubmit} initialValues={profile} />
+                    ? <ProfileDataReduxForm onSubmit={onSubmit} initialValues={profile}/>
                     : <ProfileData profile={profile} isOwner={isOwner} setEditMode={() => setEditMode(true)}/>}
             </div>
         </>

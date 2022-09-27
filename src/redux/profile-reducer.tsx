@@ -1,6 +1,7 @@
 import {UserProfileType, profileAPI} from "../api/api";
 import {ActionsType, AppStateType, AppThunk} from "./redux-store";
 import {setLoadingAC} from "./app-reducer";
+import {stopSubmit} from "redux-form";
 
 const ADD_POST = "profile/ADD-POST"
 const SET_USER_PROFILE = "profile/SET_USER_PROFILE"
@@ -52,12 +53,12 @@ export const setUserProfileAC = (profile: UserProfileType): setUserProfileType =
     type: SET_USER_PROFILE,
     profile: profile
 } as const)
-export const setProfileStatusAC = (status: string): setProfileStatus => ({
+export const setProfileStatusAC = (status: string): setProfileStatusType => ({
     type: SET_PROFILE_STATUS,
     status: status
 } as const)
-export const deletePostAC = (postID: number): deletePost => ({type: DELETE_POST, postID} as const)
-export const savePhotoAC = (photo: File): savePhoto => ({type: SAVE_PHOTO, photo} as const)
+export const deletePostAC = (postID: number): deletePostType => ({type: DELETE_POST, postID} as const)
+export const savePhotoAC = (photo: File): savePhotoType => ({type: SAVE_PHOTO, photo} as const)
 
 
 //thunk creators
@@ -110,7 +111,7 @@ export const saveSelectedPhotoTC = (photo: File): AppThunk => {
 }
 
 export const saveProfileTC = (profile: UserProfileType): AppThunk => {
-    return (dispatch, getState: () => AppStateType) => {
+    return (dispatch: any, getState: () => AppStateType) => {
         const userID = getState().auth.id
         dispatch(setLoadingAC(true))
         profileAPI.saveProfile(profile)
@@ -118,6 +119,10 @@ export const saveProfileTC = (profile: UserProfileType): AppThunk => {
                 if (response.data.resultCode === 0 && userID) {
                     dispatch(getUserProfileTC(userID))
                     dispatch(setLoadingAC(false))
+                }
+                else {
+                    const errorMessage = response.data.messages.length > 0 ? response.data.messages[0] : "Some error"
+                    dispatch(stopSubmit("edit_profile", {_error: errorMessage}))
                 }
             })
     }
@@ -144,15 +149,15 @@ export type setUserProfileType = {
     type: "profile/SET_USER_PROFILE"
     profile: UserProfileType
 }
-export type setProfileStatus = {
+export type setProfileStatusType = {
     type: "profile/SET_PROFILE_STATUS"
     status: string
 }
-export type deletePost = {
+export type deletePostType = {
     type: "profile/DELETE_POST"
     postID: number
 }
-export type savePhoto = {
+export type savePhotoType = {
     type: "profile/SAVE_PHOTO"
     photo: File
 }

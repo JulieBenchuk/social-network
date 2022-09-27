@@ -1,8 +1,8 @@
 import {applyMiddleware, combineReducers, compose, legacy_createStore} from "redux";
 import {
-    addPostType, deletePost,
-    profileReducer, savePhoto,
-    setProfileStatus,
+    addPostType, deletePostType,
+    profileReducer, savePhotoType,
+    setProfileStatusType,
     setUserProfileType
 } from "./profile-reducer";
 import {deleteMessageType, dialogsReducer, sendMessageType} from "./dialogs-reducer";
@@ -32,11 +32,11 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 export const store = legacy_createStore(rootReducer, composeEnhancers(applyMiddleware(thunkMiddleware)));
 
 export type AppStateType = ReturnType<typeof rootReducer>
-export type AppThunk = ThunkAction<void, AppStateType, unknown, ActionsType>
+export type AppThunk = ThunkAction<void | Promise<any>, AppStateType, unknown, ActionsType>
 export type ActionsType =
     addPostType
     | setUserProfileType
-    | setProfileStatus
+    | setProfileStatusType
     | setLoadingACType
     | setUserDataACType
     | sendMessageType
@@ -46,8 +46,8 @@ export type ActionsType =
     | setPageACType
     | setTotalUsersCountACType
     | setFollowingInProgressACType
-    | deletePost
+    | deletePostType
     | deleteMessageType
-    | savePhoto
+    | savePhotoType
     | ReturnType<typeof setInitializedSuccessAC>
 

@@ -2,6 +2,7 @@ import React from 'react';
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {Input, Textarea} from "../../../../common/Forms-control/FormsControl";
 import {ContactsType} from "../../../../api/api";
+import s from "./ProfileDataForm.module.css"
 
 export type ProfileDataFormDataType = {
     fullName: string
@@ -13,7 +14,7 @@ export type ProfileDataFormDataType = {
 
 export const ProfileDataForm: React.FC<InjectedFormProps<ProfileDataFormDataType>> = ({
                                                                                           handleSubmit,
-                                                                                          initialValues
+                                                                                          initialValues, error
                                                                                       }) => {
     return (
         <form onSubmit={handleSubmit}>
@@ -40,6 +41,9 @@ export const ProfileDataForm: React.FC<InjectedFormProps<ProfileDataFormDataType
 
                 <div>
                     <b>Contacts: </b>
+
+                    {error && <div className={s.error}>{error}</div>}
+
                     {initialValues.contacts && Object.keys(initialValues.contacts).map(key => {
                         return <div key={key}>
                             <b>{key}:</b>
@@ -52,4 +56,4 @@ export const ProfileDataForm: React.FC<InjectedFormProps<ProfileDataFormDataType
     );
 };
 
-export const ProfileDataReduxForm = reduxForm<ProfileDataFormDataType>({form: "profileData"})(ProfileDataForm)
+export const ProfileDataReduxForm = reduxForm<ProfileDataFormDataType>({form: "edit_profile"})(ProfileDataForm)
