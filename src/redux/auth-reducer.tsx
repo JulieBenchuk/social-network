@@ -11,7 +11,7 @@ let initialState = {
     id: null,
     login: null,
     isAuth: false,
-
+    captcha: ""
 }
 
 export const authReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
@@ -21,6 +21,8 @@ export const authReducer = (state: InitialStateType = initialState, action: Acti
                 ...state,
                 ...action.data
             };
+        case SET_CAPTCHA_URL:
+            return {...state, captcha: action.captcha}
         default:
             return state;
     }
@@ -56,7 +58,7 @@ export const loginTC = (email: string, password: string, rememberMe: boolean, ca
                 if (response.data.resultCode === 0) {
                     dispatch(getAuthUserDataTC())
                 } else {
-                    if (response.data.resultCode === 10){
+                    if (response.data.resultCode === 10) {
                         dispatch(getCaptchaUrlTC())
                     }
                     const errorMessage = response.data.messages.length > 0 ? response.data.messages[0] : "Some error"
@@ -78,10 +80,10 @@ export const logoutTC = (): AppThunk => (dispatch) => {
         })
 }
 
-export const getCaptchaUrlTC = ():AppThunk => (dispatch) => {
+export const getCaptchaUrlTC = (): AppThunk => (dispatch) => {
     dispatch(setLoadingAC(true))
     securityAPI.getCaptchaURL()
-        .then(response=>{
+        .then(response => {
             dispatch(setCaptchaUrlAC(response.data.url))
             dispatch(setLoadingAC(false))
         })

@@ -32,7 +32,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 export const store = legacy_createStore(rootReducer, composeEnhancers(applyMiddleware(thunkMiddleware)));
 
 export type AppStateType = ReturnType<typeof rootReducer>
-export type AppThunk = ThunkAction<void | Promise<any>, AppStateType, unknown, ActionsType>
+export type AppThunk = ThunkAction<void, AppStateType, unknown, ActionsType>
 export type ActionsType =
     addPostType
     | setUserProfileType

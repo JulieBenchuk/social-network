@@ -15,7 +15,7 @@ type LoginFormDataType = {
     captcha: string
 }
 
-export const LoginForm: React.FC<InjectedFormProps<LoginFormDataType>> = ({handleSubmit, error}) => {
+export const LoginForm: React.FC<InjectedFormProps<LoginFormDataType>> = ({handleSubmit, error, captcha}) => {
     return <div>
         <form onSubmit={handleSubmit}>
             <div>
@@ -28,8 +28,13 @@ export const LoginForm: React.FC<InjectedFormProps<LoginFormDataType>> = ({handl
             <div>
                 <Field type={"checkbox"} name={"rememberMe"} component={Input}/> remember me
             </div>
-            {}
             {error && <div className={style.formSummaryError}> {error} </div>}
+            {captcha && <img src={captcha} alt="captcha"/>}
+            {captcha &&  <div>
+                <Field placeholder="enter symbols from image" name={"captcha"} component={Input}
+                       validate={[required]}/>
+            </div>}
+            
             <div>
                 <button>log in</button>
             </div>
@@ -40,12 +45,13 @@ export const LoginForm: React.FC<InjectedFormProps<LoginFormDataType>> = ({handl
 const LoginReduxForm = reduxForm<LoginFormDataType>({form: "login"})(LoginForm)
 type MapStateToPropsType = {
     isAuth: boolean
+    captcha?: string
 }
 type MapDispatchToPropsType= {
-    login: (email: string, password: string, rememberMe: boolean, captcha: string) => void
+    login: (email: string, password: string, rememberMe: boolean, captcha?: string) => void
 }
 
-const Login: React.FC<MapStateToPropsType&MapDispatchToPropsType> = ({login, isAuth}) => {
+const Login: React.FC<MapStateToPropsType&MapDispatchToPropsType> = ({login, isAuth, captcha}) => {
     const onSubmit = (formData: LoginFormDataType) => {
         login(formData.email, formData.password, formData.rememberMe, formData.captcha)
     }
@@ -56,13 +62,14 @@ const Login: React.FC<MapStateToPropsType&MapDispatchToPropsType> = ({login, isA
     return (
         <div>
             <h1>Login</h1>
-            <LoginReduxForm onSubmit={onSubmit}/>
+            <LoginReduxForm onSubmit={onSubmit} captcha={captcha}/>
         </div>
     );
 };
 const mapStateToProps = (state: AppStateType):MapStateToPropsType => {
     return {
-        isAuth: state.auth.isAuth
+        isAuth: state.auth.isAuth,
+        captcha: state.auth.captcha
     }
 }
 export default connect(mapStateToProps, {login: loginTC})(Login)
