@@ -28,7 +28,7 @@ export const profileAPI = {
             }
         })
     },
-    saveProfile(profile: UserProfileType){
+    saveProfile(profile: UserProfileType) {
         return instance.put("profile", profile)
     }
 }
@@ -45,38 +45,46 @@ export const usersAPI = {
 }
 export const authAPI = {
     me() {
-        return instance.get(`auth/me`).then(response => response.data) ///need to use headers??????
+        return instance.get(`auth/me`).then(response => response.data)
     },
-    login(email: string, password: string, rememberMe: boolean) {
-        return instance.post(`auth/login`, {email, password, rememberMe})
+    login(email: string, password: string, rememberMe: boolean, captcha: string) {
+        return instance.post(`auth/login`, {email, password, rememberMe, captcha})
     },
     logout() {
         return instance.delete(`auth/login`)
     }
 }
+export const securityAPI = {
+    getCaptchaURL() {
+        return instance.get<SecurityResponseType>("security/get-captcha-url")
+    }
+}
 
 export type UserProfileType = {
-	aboutMe: string
-	contacts?: any
-	lookingForAJob: boolean
-	lookingForAJobDescription?: string
-	fullName: string
-	userId?: number
-	photos?: PhotosType
+    aboutMe: string
+    contacts?: any
+    lookingForAJob: boolean
+    lookingForAJobDescription?: string
+    fullName: string
+    userId?: number
+    photos?: PhotosType
 }
 export type ContactsType = {
-	facebook?: string
-	website?: string
-	vk?: string
-	twitter?: string
-	instagram?: string
-	youtube?: string
-	github?: string
-	mainLink?: string
+    facebook?: string
+    website?: string
+    vk?: string
+    twitter?: string
+    instagram?: string
+    youtube?: string
+    github?: string
+    mainLink?: string
 }
 export type PhotosType = {
-	small: any
-	large: any
+    small: any
+    large: any
+}
+export type SecurityResponseType = {
+    url: string
 }
 
 

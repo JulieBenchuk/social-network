@@ -14,7 +14,7 @@ import {
     unfollowACType,
     usersReducer
 } from "./users-reducer";
-import {authReducer, setUserDataACType} from "./auth-reducer";
+import {authReducer, setCaptchaUrlACType, setUserDataACType} from "./auth-reducer";
 import thunkMiddleware, {ThunkAction} from "redux-thunk";
 import {reducer as formReducer} from 'redux-form'
 import {appReducer, setInitializedSuccessAC, setLoadingACType} from "./app-reducer";
@@ -49,5 +49,6 @@ export type ActionsType =
     | deletePostType
     | deleteMessageType
     | savePhotoType
+    | setCaptchaUrlACType
     | ReturnType<typeof setInitializedSuccessAC>
 

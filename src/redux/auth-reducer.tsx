@@ -1,15 +1,17 @@
-import {authAPI} from "../api/api";
+import {authAPI, securityAPI} from "../api/api";
 import {stopSubmit} from "redux-form";
 import {ActionsType, AppThunk} from "./redux-store";
 import {setLoadingAC} from "./app-reducer";
 
 const SET_USER_DATA = "auth/SET_USER_DATA"
+const SET_CAPTCHA_URL = "auth/SET_CAPTCHA_URL"
 
 let initialState = {
     email: null,
     id: null,
     login: null,
-    isAuth: false
+    isAuth: false,
+
 }
 
 export const authReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
@@ -30,6 +32,8 @@ export const setUserDataAC = (id: number | null, email: string | null, login: st
     data: {id: id, email: email, login: login, isAuth: isAuth}
 } as const)
 
+export const setCaptchaUrlAC = (captcha: string): setCaptchaUrlACType => ({type: SET_CAPTCHA_URL, captcha})
+
 
 //thunk creators
 export const getAuthUserDataTC = (): AppThunk => (dispatch) => {
@@ -44,14 +48,17 @@ export const getAuthUserDataTC = (): AppThunk => (dispatch) => {
         })
 }
 
-export const loginTC = (email: string, password: string, rememberMe: boolean): AppThunk => {
+export const loginTC = (email: string, password: string, rememberMe: boolean, captcha: string): AppThunk => {
     return (dispatch: any) => {
         dispatch(setLoadingAC(true))
-        authAPI.login(email, password, rememberMe)
+        authAPI.login(email, password, rememberMe, captcha)
             .then(response => {
                 if (response.data.resultCode === 0) {
                     dispatch(getAuthUserDataTC())
                 } else {
+                    if (response.data.resultCode === 10){
+                        dispatch(getCaptchaUrlTC())
+                    }
                     const errorMessage = response.data.messages.length > 0 ? response.data.messages[0] : "Some error"
                     dispatch(stopSubmit("login", {_error: errorMessage}))
                 }
@@ -71,12 +78,22 @@ export const logoutTC = (): AppThunk => (dispatch) => {
         })
 }
 
+export const getCaptchaUrlTC = ():AppThunk => (dispatch) => {
+    dispatch(setLoadingAC(true))
+    securityAPI.getCaptchaURL()
+        .then(response=>{
+            dispatch(setCaptchaUrlAC(response.data.url))
+            dispatch(setLoadingAC(false))
+        })
+}
+
 //types
 type InitialStateType = {
     email: string | null
     id: number | null
     login: string | null
     isAuth: boolean
+    captcha?: string
 }
 
 type dataType = {
@@ -89,6 +106,10 @@ type dataType = {
 export type setUserDataACType = {
     type: "auth/SET_USER_DATA"
     data: dataType
+}
+export type setCaptchaUrlACType = {
+    type: "auth/SET_CAPTCHA_URL"
+    captcha: string
 }
 
 

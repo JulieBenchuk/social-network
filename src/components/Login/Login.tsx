@@ -12,6 +12,7 @@ type LoginFormDataType = {
     email: string
     password: string
     rememberMe: boolean
+    captcha: string
 }
 
 export const LoginForm: React.FC<InjectedFormProps<LoginFormDataType>> = ({handleSubmit, error}) => {
@@ -27,6 +28,7 @@ export const LoginForm: React.FC<InjectedFormProps<LoginFormDataType>> = ({handl
             <div>
                 <Field type={"checkbox"} name={"rememberMe"} component={Input}/> remember me
             </div>
+            {}
             {error && <div className={style.formSummaryError}> {error} </div>}
             <div>
                 <button>log in</button>
@@ -40,12 +42,12 @@ type MapStateToPropsType = {
     isAuth: boolean
 }
 type MapDispatchToPropsType= {
-    login: (email: string, password: string, rememberMe: boolean) => void
+    login: (email: string, password: string, rememberMe: boolean, captcha: string) => void
 }
 
 const Login: React.FC<MapStateToPropsType&MapDispatchToPropsType> = ({login, isAuth}) => {
     const onSubmit = (formData: LoginFormDataType) => {
-        login(formData.email, formData.password, formData.rememberMe)
+        login(formData.email, formData.password, formData.rememberMe, formData.captcha)
     }
     if (isAuth) {
         return <Redirect to={"/profile"}/>
