@@ -2,6 +2,8 @@ import {UserProfileType, profileAPI} from "../api/api";
 import {ActionsType, AppStateType, AppThunk} from "./redux-store";
 import {setLoadingAC} from "./app-reducer";
 import {stopSubmit} from "redux-form";
+import {serverErrorHandler} from "../utils/serverErrorHandler";
+import {AxiosError} from "axios";
 
 const ADD_POST = "profile/ADD-POST"
 const SET_USER_PROFILE = "profile/SET_USER_PROFILE"
@@ -70,6 +72,9 @@ export const getUserProfileTC = (userID: number): AppThunk => {
                 dispatch(setUserProfileAC(response.data))
                 dispatch(setLoadingAC(false))
             })
+            .catch((e) => {
+                serverErrorHandler(e as AxiosError | Error, dispatch)
+            })
     }
 }
 
@@ -80,6 +85,9 @@ export const getStatusTC = (userID: number): AppThunk => {
             .then(response => {
                 dispatch(setProfileStatusAC(response.data))
                 dispatch(setLoadingAC(false))
+            })
+            .catch((e) => {
+                serverErrorHandler(e as AxiosError | Error, dispatch)
             })
     }
 }
@@ -94,6 +102,9 @@ export const updateStatusTC = (status: string): AppThunk => {
                     dispatch(setLoadingAC(false))
                 }
             })
+            .catch((e) => {
+                serverErrorHandler(e as AxiosError | Error, dispatch)
+            })
     }
 }
 
@@ -106,6 +117,9 @@ export const saveSelectedPhotoTC = (photo: File): AppThunk => {
                     dispatch(savePhotoAC(response.data.data.large))
                     dispatch(setLoadingAC(false))
                 }
+            })
+            .catch((e) => {
+                serverErrorHandler(e as AxiosError | Error, dispatch)
             })
     }
 }
@@ -133,6 +147,9 @@ export const saveProfileTC = (profile: UserProfileType): AppThunk => {
 
                     dispatch(stopSubmit("edit_profile", {"contacts": obj}))
                 }
+            })
+            .catch((e) => {
+                serverErrorHandler(e as AxiosError | Error, dispatch)
             })
     }
 }

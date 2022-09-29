@@ -17,7 +17,7 @@ import {
 import {authReducer, setCaptchaUrlACType, setUserDataACType} from "./auth-reducer";
 import thunkMiddleware, {ThunkAction} from "redux-thunk";
 import {reducer as formReducer} from 'redux-form'
-import {appReducer, setInitializedSuccessAC, setLoadingACType} from "./app-reducer";
+import {appReducer, setAppErrorType, setInitializedSuccessAC, setLoadingACType} from "./app-reducer";
 
 let rootReducer = combineReducers({
     profilePage: profileReducer,
@@ -38,6 +38,7 @@ export type ActionsType =
     | setUserProfileType
     | setProfileStatusType
     | setLoadingACType
+    | setAppErrorType
     | setUserDataACType
     | sendMessageType
     | followACType

@@ -24,9 +24,11 @@ type MapDispatchToPropsType = {
 }
 type MapStateToPropsType = {
     initialized: boolean
+    error: string
 }
 const MapStateToProps = (state: AppStateType) => ({
-    initialized: state.app.isInitializedSuccess
+    initialized: state.app.isInitializedSuccess,
+    error: state.app.error
 })
 
 class App extends React.Component<MapDispatchToPropsType & MapStateToPropsType> {
@@ -40,6 +42,7 @@ class App extends React.Component<MapDispatchToPropsType & MapStateToPropsType> 
         }
         return (
             <div className="app-wrapper">
+                {this.props.error && "!!!!!!error"}
                 <HeaderContainer/>
                 <Nav_bar/>
                 <div className="app-wrapper-content">

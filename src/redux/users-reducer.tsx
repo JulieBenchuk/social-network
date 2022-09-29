@@ -1,6 +1,8 @@
 import {usersAPI} from "../api/api";
 import {ActionsType, AppThunk} from "./redux-store";
 import {setLoadingAC} from "./app-reducer";
+import {serverErrorHandler} from "../utils/serverErrorHandler";
+import {AxiosError} from "axios";
 
 const FOLLOW = "users/FOLLOW"
 const UNFOLLOW = "users/UNFOLLOW"
@@ -82,37 +84,50 @@ export const setFollowingInProgressAC = (id: number, followingInProgress: boolea
 export const getUsersTC = (currentPage: number, pageSize: number): AppThunk => {
     return (dispatch) => {
         dispatch(setLoadingAC(true))
-        usersAPI.getUsers(currentPage, pageSize).then(data => {
-            dispatch(setUsersAC(data.items))
-            dispatch(setTotalUsersCountAC(data.totalCount))
-        })
-        dispatch(setLoadingAC(false))
+        usersAPI.getUsers(currentPage, pageSize)
+            .then(data => {
+                dispatch(setUsersAC(data.items))
+                dispatch(setTotalUsersCountAC(data.totalCount))
+                dispatch(setLoadingAC(false))
+            })
+            .catch((e) => {
+                serverErrorHandler(e as AxiosError | Error, dispatch)
+            })
+
     }
 }
 export const followTC = (id: number): AppThunk => {
     return (dispatch) => {
         dispatch(setFollowingInProgressAC(id, true))
         dispatch(setLoadingAC(true))
-        usersAPI.followUser(id).then(data => {
-            if (data.resultCode === 0) {
-                dispatch(followSuccessAC(id))
-                dispatch(setFollowingInProgressAC(id, false))
-            }
-            dispatch(setLoadingAC(false))
-        })
+        usersAPI.followUser(id)
+            .then(data => {
+                if (data.resultCode === 0) {
+                    dispatch(followSuccessAC(id))
+                    dispatch(setFollowingInProgressAC(id, false))
+                }
+                dispatch(setLoadingAC(false))
+            })
+            .catch((e) => {
+                serverErrorHandler(e as AxiosError | Error, dispatch)
+            })
     }
 }
 export const unfollowTC = (id: number): AppThunk => {
     return (dispatch) => {
         dispatch(setFollowingInProgressAC(id, true))
         dispatch(setLoadingAC(true))
-        usersAPI.unfollowUser(id).then(data => {
-            if (data.resultCode === 0) {
-                dispatch(unfollowSuccessAC(id))
-                dispatch(setFollowingInProgressAC(id, false))
-            }
-            dispatch(setLoadingAC(false))
-        })
+        usersAPI.unfollowUser(id)
+            .then(data => {
+                if (data.resultCode === 0) {
+                    dispatch(unfollowSuccessAC(id))
+                    dispatch(setFollowingInProgressAC(id, false))
+                }
+                dispatch(setLoadingAC(false))
+            })
+            .catch((e) => {
+                serverErrorHandler(e as AxiosError | Error, dispatch)
+            })
     }
 }
 

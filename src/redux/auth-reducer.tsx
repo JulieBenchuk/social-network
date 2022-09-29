@@ -2,6 +2,8 @@ import {authAPI, securityAPI} from "../api/api";
 import {stopSubmit} from "redux-form";
 import {ActionsType, AppThunk} from "./redux-store";
 import {setLoadingAC} from "./app-reducer";
+import {serverErrorHandler} from "../utils/serverErrorHandler";
+import {AxiosError} from "axios";
 
 const SET_USER_DATA = "auth/SET_USER_DATA"
 const SET_CAPTCHA_URL = "auth/SET_CAPTCHA_URL"
@@ -31,7 +33,7 @@ export const authReducer = (state: InitialStateType = initialState, action: Acti
 //action creators
 export const setUserDataAC = (id: number | null, email: string | null, login: string | null, isAuth: boolean): setUserDataACType => ({
     type: SET_USER_DATA,
-    data: {id: id, email: email, login: login, isAuth: isAuth}
+    data: {id, email, login, isAuth}
 } as const)
 
 export const setCaptchaUrlAC = (captcha: string): setCaptchaUrlACType => ({type: SET_CAPTCHA_URL, captcha})
@@ -47,6 +49,9 @@ export const getAuthUserDataTC = (): AppThunk => (dispatch) => {
                 dispatch(setUserDataAC(data.id, data.email, data.login, true))
             }
             dispatch(setLoadingAC(false))
+        })
+        .catch((e) => {
+            serverErrorHandler(e as AxiosError | Error, dispatch)
         })
 }
 
@@ -67,6 +72,9 @@ export const loginTC = (email: string, password: string, rememberMe: boolean, ca
                 }
                 dispatch(setLoadingAC(false))
             })
+            .catch((e) => {
+                serverErrorHandler(e as AxiosError | Error, dispatch)
+            })
     }
 }
 
@@ -79,6 +87,9 @@ export const logoutTC = (): AppThunk => (dispatch) => {
             }
             dispatch(setLoadingAC(false))
         })
+        .catch((e) => {
+            serverErrorHandler(e as AxiosError | Error, dispatch)
+        })
 }
 
 export const getCaptchaUrlTC = (): AppThunk => (dispatch) => {
@@ -87,6 +98,9 @@ export const getCaptchaUrlTC = (): AppThunk => (dispatch) => {
         .then(response => {
             dispatch(setCaptchaUrlAC(response.data.url))
             dispatch(setLoadingAC(false))
+        })
+        .catch((e) => {
+            serverErrorHandler(e as AxiosError | Error, dispatch)
         })
 }
 
