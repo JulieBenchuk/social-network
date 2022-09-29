@@ -57,6 +57,7 @@ export const loginTC = (email: string, password: string, rememberMe: boolean, ca
             .then(response => {
                 if (response.data.resultCode === 0) {
                     dispatch(getAuthUserDataTC())
+                    dispatch(setCaptchaUrlAC(""))
                 } else {
                     if (response.data.resultCode === 10) {
                         dispatch(getCaptchaUrlTC())
@@ -95,7 +96,7 @@ type InitialStateType = {
     id: number | null
     login: string | null
     isAuth: boolean
-    captcha?: string
+    captcha: string
 }
 
 type dataType = {

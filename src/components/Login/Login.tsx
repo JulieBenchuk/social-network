@@ -15,7 +15,7 @@ type LoginFormDataType = {
     captcha: string
 }
 
-export const LoginForm: React.FC<InjectedFormProps<LoginFormDataType>> = ({handleSubmit, error, captcha}) => {
+export const LoginForm: React.FC<InjectedFormProps<LoginFormDataType>> = ({handleSubmit, error, initialValues}) => {
     return <div>
         <form onSubmit={handleSubmit}>
             <div>
@@ -28,9 +28,11 @@ export const LoginForm: React.FC<InjectedFormProps<LoginFormDataType>> = ({handl
             <div>
                 <Field type={"checkbox"} name={"rememberMe"} component={Input}/> remember me
             </div>
+
             {error && <div className={style.formSummaryError}> {error} </div>}
-            {captcha && <img src={captcha} alt="captcha"/>}
-            {captcha &&  <div>
+
+            {initialValues.captcha && <img src={initialValues.captcha} alt="captcha"/>}
+            {initialValues.captcha &&  <div>
                 <Field placeholder="enter symbols from image" name={"captcha"} component={Input}
                        validate={[required]}/>
             </div>}
@@ -45,10 +47,10 @@ export const LoginForm: React.FC<InjectedFormProps<LoginFormDataType>> = ({handl
 const LoginReduxForm = reduxForm<LoginFormDataType>({form: "login"})(LoginForm)
 type MapStateToPropsType = {
     isAuth: boolean
-    captcha?: string
+    captcha: string
 }
 type MapDispatchToPropsType= {
-    login: (email: string, password: string, rememberMe: boolean, captcha?: string) => void
+    login: (email: string, password: string, rememberMe: boolean, captcha: string) => void
 }
 
 const Login: React.FC<MapStateToPropsType&MapDispatchToPropsType> = ({login, isAuth, captcha}) => {
@@ -62,7 +64,7 @@ const Login: React.FC<MapStateToPropsType&MapDispatchToPropsType> = ({login, isA
     return (
         <div>
             <h1>Login</h1>
-            <LoginReduxForm onSubmit={onSubmit} captcha={captcha}/>
+            <LoginReduxForm onSubmit={onSubmit} initialValues={{captcha}}/>
         </div>
     );
 };
