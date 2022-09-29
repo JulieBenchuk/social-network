@@ -20,7 +20,7 @@ const Dialogs = (props: DialogsPropsType) => {
             </div>
             <div className={s.messageItems}>
                 {state.messages.map(message => (
-                    <MessageItem id={message.id} message={message.message}/>))}
+                    <MessageItem key={message.id} id={message.id} message={message.message}/>))}
             </div>
             <AddMessageFormRedux onSubmit={addNewMessage}/>
         </div>
