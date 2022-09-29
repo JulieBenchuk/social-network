@@ -27,11 +27,12 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({
                                                                 saveProfile,
                                                                 ...restProps
                                                             }) => {
+    const [editMode, setEditMode] = useState(false)
+
     if (!profile) {
         return <Preloader/>
     }
 
-    const [editMode, setEditMode] = useState(false)
 
     const onPhotoSelectedHandler = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files.length) {
