@@ -3,7 +3,8 @@ import {appReducer, setInitializedSuccessAC} from "./app-reducer";
 //data
 let initialState = {
     isInitializedSuccess: false,
-    isLoading: false
+    isLoading: false,
+    error: ""
 }
 
 it("app should be initialized", () => {

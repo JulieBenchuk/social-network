@@ -5,6 +5,7 @@ import {UserProfileType} from "../../api/api";
 
 
 type ProfilePropsType = {
+    userID: number | null
     profile: UserProfileType
     status: string
     updateStatus: (status: string) => void
@@ -14,6 +15,7 @@ type ProfilePropsType = {
 }
 
 const Profile: React.FC<ProfilePropsType> = ({
+                                                 userID,
                                                  profile,
                                                  status,
                                                  updateStatus,
@@ -25,7 +27,7 @@ const Profile: React.FC<ProfilePropsType> = ({
     return (
         <div>
             <ProfileInfo profile={profile} status={status} updateStatus={updateStatus} isOwner={isOwner}
-                         saveSelectedPhoto={saveSelectedPhoto} saveProfile={saveProfile}/>
+                         saveSelectedPhoto={saveSelectedPhoto} saveProfile={saveProfile} userID={userID}/>
             <MyPostsContainer/>
         </div>
     )

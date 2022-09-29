@@ -9,6 +9,7 @@ import {ProfileDataFormDataType, ProfileDataReduxForm} from "./ProfileDataForm/P
 
 
 type ProfileInfoPropsType = {
+    userID: number | null
     profile: UserProfileType
     status: string
     updateStatus: (status: string) => void

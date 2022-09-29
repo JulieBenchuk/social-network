@@ -19,6 +19,7 @@ type MapStateToPropsType = {
     isAuth: boolean
     authorizedUserID: number | null
 
+
 }
 type MapDispatchToPropsType = {
     getUserProfile: (profile: any) => void
@@ -67,7 +68,7 @@ class ProfileContainer extends React.Component<PropsType> {
 
     render() {
         return (
-            <Profile {...this.props} isOwner={!this.props.match.params.userID} profile={this.props.profile}
+            <Profile {...this.props} userID={this.props.authorizedUserID} isOwner={!this.props.match.params.userID} profile={this.props.profile}
                      status={this.props.status}
                      updateStatus={this.props.updateStatus} saveSelectedPhoto={this.props.saveSelectedPhoto}/>
         )
