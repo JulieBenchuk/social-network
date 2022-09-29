@@ -58,7 +58,7 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({
 
                 {isOwner && <input type="file" onChange={onPhotoSelectedHandler}/>}
 
-                <ProfileStatusWithHooks status={status} updateStatus={updateStatus}/>
+                <ProfileStatusWithHooks status={status} updateStatus={updateStatus} isOwner={isOwner}/>
 
                 {editMode
                     ? <ProfileDataReduxForm onSubmit={onSubmit} initialValues={profile}/>
