@@ -1,6 +1,5 @@
 .app-wrapper {
     background-color: #d5dfea;
-    width: 1200px;
     margin: 0 auto;
     display: grid;
     grid-template-areas:
@@ -9,6 +8,7 @@
     grid-template-rows: 60px 1fr;
     grid-template-columns: 2fr 10fr;
     grid-gap: 10px;
+    width: 100vw;
 
 }
 .app-wrapper-content {
@@ -16,6 +16,5 @@
     background-color: #ffffff;
     border-radius: 5px;
     font-family: "Comic Sans MS";
-    padding: 20px;
-    width: 100vw;
+
 }
