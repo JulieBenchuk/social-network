@@ -1,6 +1,8 @@
 import React from "react";
 import style from "./Header.module.css";
 import {NavLink} from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUserAstronaut } from '@fortawesome/free-solid-svg-icons'
 
 type HeaderPropsType = {
     login: string | null
@@ -11,7 +13,7 @@ type HeaderPropsType = {
 export const Header: React.FC<HeaderPropsType> = ({isAuth, login, logout}) => {
     return (
         <header className={style.header}>
-            <img src="https://www.citypng.com/public/uploads/preview/-41601584220o1ckpwphjh.png"/>
+            <FontAwesomeIcon icon={faUserAstronaut} className={style.socNetworkLogo}/>
             <div className={style.loginBlock}>
                 {isAuth
                     ? <div>{login}  <button onClick={logout}>log out</button></div>

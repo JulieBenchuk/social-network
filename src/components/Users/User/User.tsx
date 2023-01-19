@@ -10,14 +10,14 @@ type UserPropsType = {
     follow: (id: number) => void
     followingInProgress: boolean
 }
-export const  User: React.FC<UserPropsType> = ({user, unfollow, follow, ...restProps}) => {
+export const User: React.FC<UserPropsType> = ({user, unfollow, follow}) => {
     return (
-        <div>
-                <span>
+        <div className={s.userBlock}>
+                <span className={s.avatarBlock}>
                     <div>
                         <NavLink to={"/profile/" + user.id}><img
                             src={user.photos.small ? user.photos.small : avatar_default}
-                            className={s.avatar}/></NavLink>
+                            className={s.avatar} alt={"avatar"}/></NavLink>
                     </div>
                     <div> {user.followed ? <button disabled={user.followingInProgress} onClick={() => {
                             unfollow(user.id)
@@ -26,17 +26,10 @@ export const  User: React.FC<UserPropsType> = ({user, unfollow, follow, ...restP
                             follow(user.id)
                         }}>Followed</button>}</div>
                 </span>
-            <span>
-                    <span>
-                        <div>{user.name}</div>
-                        <div>{user.status}</div>
-                    </span>
-                    <span>
-                        <div>{"u.location.country"}</div>
-                        <div>{"u.location.city"}</div>
-                    </span>
+            <span className={s.userInfo}>
+                        <div> <span>name: </span>{user.name.toUpperCase()}</div>
+                        <div><span>status: </span>{user.status ? user.status : "no status"}</div>
                 </span>
-            )
         </div>
     );
 };
