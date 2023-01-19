@@ -11,6 +11,7 @@ const Dialogs = (props: DialogsPropsType) => {
     let state = props.dialogsPage
     const addNewMessage = (values: any) => {
         props.sendMessage(values.newMessageBody)
+
     }
 
     return (
@@ -32,9 +33,9 @@ const AddMessageForm = (props: any) => {
         <form onSubmit={props.handleSubmit}>
             <div className={s.sendMessageBlock}>
                 <Field component={Textarea} name="newMessageBody" placeholder="Enter your message..."
-                       validate={[required, maxLengthCreator100]}/>
+                       validate={[required, maxLengthCreator100]} className={s.field}/>
 
-                <button>Send message</button>
+                <button className={s.sendBtn}>Send message</button>
             </div>
         </form>
     )

@@ -44,9 +44,16 @@
 }
 .sendMessageBlock {
     display: flex;
-    flex-direction: row;
-    width: 330px;
+    flex-direction: column;
+    width: 100%;
     justify-content: space-between;
+    align-items: center;
 
+}
+.field{
+    width: 100%;
+}
+.sendBtn{
+    width: 40%;
 }
 
