@@ -9,12 +9,14 @@
     grid-template-columns: 2fr 10fr;
     grid-gap: 10px;
     width: 100%;
+    min-height: 100vh;
+    padding-bottom: 5px;
 
 }
 .app-wrapper-content {
     grid-area: content;
     background-color: #ffffff;
     border-radius: 5px;
-    font-family: "Comic Sans MS";
+    font-family: Apple;
 
 }

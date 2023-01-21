@@ -11,7 +11,9 @@
     color: aqua;
 }
 .loginBlock{
-    background-color: #e86767;
+    background-color: #ffffff;
+    padding: 5px;
+    border: 1px dotted gray;
 }
 .loginBlock a {
     color: white;
