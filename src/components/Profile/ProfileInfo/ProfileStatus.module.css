@@ -1,5 +1,6 @@
 .status_span{
-    background-color: darkseagreen;
+    background-color: #bbbaba;
+    padding: 5px;
 }
 .status_input{
     background-color: #e86767;

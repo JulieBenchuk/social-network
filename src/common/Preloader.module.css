@@ -1,7 +1,8 @@
 .preloader{
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    height: 5px;
+    width: 5px;
     z-index: 999;
+    position: fixed;
+    display: block;
+    margin: 0 200px auto;
 }
