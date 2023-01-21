@@ -16,7 +16,7 @@ export const MyPosts: React.FC<MyPostsPropsType> = ({addPost, posts, ...restProp
         <Post key={index} id={p.id} post={p.post} likeCount={p.likeCount}/>))
 
     return (
-        <div>
+        <div className={classes.postsBlock}>
             <h3 className={classes.myPostsHeader}>My posts</h3>
             <AddNewPostFormRedux onSubmit={onAddPost}/>
             {postElements}
