@@ -1,4 +1,37 @@
-.error{
+.error {
     background-color: red;
     color: white;
+}
+
+.profileDataForm {
+    width: 100%;
+    background-color: #d5dfea;
+    padding: 10px;
+
+
+}
+
+.dataItem {
+    display: flex;
+    padding-bottom: 15px;
+    position: relative;
+
+}
+
+.dataItem input {
+    position: absolute;
+    left: 150px;
+    right: 0;
+}
+
+.dataItem textarea {
+    position: absolute;
+    left: 150px;
+    right: 0;
+}
+
+.contacts {
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
 }
