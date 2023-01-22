@@ -9,7 +9,7 @@ export const Contact: React.FC<ContactPropsType> = ({contactTitle, contactValue}
     return (
         <div className={s.contact}>
             <span className={s.title}>{contactTitle}:</span>
-            <span className={s.value}>{contactValue}</span>
+            <span className={s.value}>{contactValue ? contactValue : "no info"}</span>
         </div>
     );
 };

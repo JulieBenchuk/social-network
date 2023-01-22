@@ -53,7 +53,7 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({
 
             <div className={s.profileInfo}>
                 <div className={s.profile_avatar}>
-                    <img src={profile.photos?.large ? profile.photos.large : avatar_default}/>
+                    <img src={profile.photos?.large ? profile.photos.large : avatar_default} alt={"avatar"}/>
                 </div>
 
                 {isOwner && <input type="file" onChange={onPhotoSelectedHandler}/>}

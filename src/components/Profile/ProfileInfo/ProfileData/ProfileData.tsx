@@ -18,7 +18,7 @@ export const ProfileData: React.FC<ProfileDataPropsType> = ({profile, isOwner, s
                 <h2>{profile.fullName}</h2>
                 <div>
                     <b>About me: </b>
-                    {profile.aboutMe}
+                    {profile.aboutMe ? profile.aboutMe : "description is empty"}
                 </div>
                 <div>
                     <b>Looking job: </b>
@@ -26,7 +26,7 @@ export const ProfileData: React.FC<ProfileDataPropsType> = ({profile, isOwner, s
                 </div>
                 <div>
                     <b>My skills: : </b>
-                    {profile.lookingForAJobDescription}
+                    {profile.lookingForAJobDescription ? profile.lookingForAJobDescription : "description is empty"}
                 </div>
                 <div>
                     <b>Contacts: </b>
