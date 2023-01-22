@@ -29,6 +29,10 @@
     left: 150px;
     right: 0;
 }
+.checkbox{
+    width: 20px;
+    margin-top: 5px;
+}
 
 .contacts {
     padding-top: 20px;

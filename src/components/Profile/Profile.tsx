@@ -3,6 +3,7 @@ import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 import {UserProfileType} from "../../api/api";
 import style from "./Profile.module.css"
+import {UserType} from "../../redux/users-reducer";
 
 
 type ProfilePropsType = {
@@ -13,6 +14,7 @@ type ProfilePropsType = {
     isOwner: boolean
     saveSelectedPhoto: (photo: File) => void
     saveProfile: (profile: UserProfileType) => void
+    users: Array<UserType>
 }
 
 const Profile: React.FC<ProfilePropsType> = ({
@@ -23,12 +25,13 @@ const Profile: React.FC<ProfilePropsType> = ({
                                                  isOwner,
                                                  saveSelectedPhoto,
                                                  saveProfile,
+                                                 users,
                                                  ...restProps
                                              }) => {
     return (
         <div className={style.profile}>
             <ProfileInfo profile={profile} status={status} updateStatus={updateStatus} isOwner={isOwner}
-                         saveSelectedPhoto={saveSelectedPhoto} saveProfile={saveProfile} userID={userID}/>
+                         saveSelectedPhoto={saveSelectedPhoto} saveProfile={saveProfile} userID={userID} users={users}/>
             <MyPostsContainer/>
         </div>
     )

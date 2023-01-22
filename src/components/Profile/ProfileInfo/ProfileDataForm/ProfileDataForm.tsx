@@ -38,7 +38,7 @@ export const ProfileDataForm: React.FC<InjectedFormProps<ProfileDataFormDataType
                     <div className={s.dataItem}>
                         <FontAwesomeIcon icon={faMagnifyingGlass}/>
                         <b> Looking for a job: </b>
-                        <Field name={"lookingForAJob"} component={Input} type={"checkbox"}/>
+                        <Field name={"lookingForAJob"} component={Input} type={"checkbox"} className={s.checkbox}/>
                     </div>
 
                     <div className={s.dataItem}>

@@ -6,6 +6,7 @@ import avatar_default from "./../../../assets/img/avatar_default.webp"
 import {UserProfileType} from "../../../api/api";
 import {ProfileData} from "./ProfileData/ProfileData";
 import {ProfileDataFormDataType, ProfileDataReduxForm} from "./ProfileDataForm/ProfileDataForm";
+import {UserType} from "../../../redux/users-reducer";
 
 
 type ProfileInfoPropsType = {
@@ -16,6 +17,7 @@ type ProfileInfoPropsType = {
     isOwner: boolean
     saveSelectedPhoto: (photo: File) => void
     saveProfile: (profile: UserProfileType) => void
+    users: Array<UserType>
 }
 
 export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({
@@ -25,9 +27,14 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({
                                                                 isOwner,
                                                                 saveSelectedPhoto,
                                                                 saveProfile,
+                                                                userID,
+                                                                users,
                                                                 ...restProps
                                                             }) => {
     const [editMode, setEditMode] = useState(false)
+    const followed = users.find(u=>u.id===profile?.userId)?.followed
+    console.log(followed)
+
 
     if (!profile) {
         return <Preloader/>
@@ -50,8 +57,11 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({
             <div className={s.avatarBlock}>
                 <div className={s.profile_avatar}>
                     <img src={profile.photos?.large ? profile.photos.large : avatar_default} alt={"avatar"}/>
+                    <div className={s.onlineStatus}>online</div>
                     {isOwner && <input type="file" onChange={onPhotoSelectedHandler}/>}
+
                     <ProfileStatusWithHooks status={status} updateStatus={updateStatus} isOwner={isOwner}/>
+                    {followed && <div>FOLLOWING</div>}
                 </div>
             </div>
 

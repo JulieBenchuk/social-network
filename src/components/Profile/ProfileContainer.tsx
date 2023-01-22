@@ -11,6 +11,7 @@ import {RouteComponentProps, withRouter} from "react-router-dom";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
 import {UserProfileType} from "../../api/api";
+import {UserType} from "../../redux/users-reducer";
 
 
 type MapStateToPropsType = {
@@ -18,6 +19,7 @@ type MapStateToPropsType = {
     status: string
     isAuth: boolean
     authorizedUserID: number | null
+    users: Array<UserType> //////
 
 
 }
@@ -38,7 +40,8 @@ let mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
     profile: state.profilePage.profile,
     status: state.profilePage.status,
     isAuth: state.auth.isAuth,
-    authorizedUserID: state.auth.id
+    authorizedUserID: state.auth.id,
+    users: state.usersPage.users
 
 })
 
@@ -70,7 +73,7 @@ class ProfileContainer extends React.Component<PropsType> {
         return (
             <Profile {...this.props} userID={this.props.authorizedUserID} isOwner={!this.props.match.params.userID} profile={this.props.profile}
                      status={this.props.status}
-                     updateStatus={this.props.updateStatus} saveSelectedPhoto={this.props.saveSelectedPhoto}/>
+                     updateStatus={this.props.updateStatus} saveSelectedPhoto={this.props.saveSelectedPhoto} users={this.props.users}/>
         )
     }
 }
