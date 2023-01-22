@@ -62,7 +62,7 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({
 
                     {isOwner && <input type="file" onChange={onPhotoSelectedHandler}/>}
 
-                    {followed &&
+                    {followed && !isOwner &&
                         <div className={s.followingStatus}>
                             <FontAwesomeIcon icon={faPersonCircleCheck}/>
                             following
