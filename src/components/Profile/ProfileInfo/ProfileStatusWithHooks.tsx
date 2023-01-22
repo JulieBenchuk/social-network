@@ -1,5 +1,8 @@
 import React, {ChangeEvent, useEffect, useState} from 'react';
 import s from "./ProfileStatus.module.css"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faComment } from '@fortawesome/free-regular-svg-icons'
+
 
 type ProfileStatusWithHooksPropsType = {
     status: string
@@ -32,7 +35,10 @@ const ProfileStatusWithHooks: React.FC<ProfileStatusWithHooksPropsType> = ({stat
 
     return <h3>
         {!editMode && <div>
-            <span className={s.status_span} onDoubleClick={onDoubleClickOnSpanHandler}>{status || "no status :("}</span>
+            <span className={s.status_span} onDoubleClick={onDoubleClickOnSpanHandler}>
+                <FontAwesomeIcon icon={faComment} className={s.statusIcon}/>
+                {status ? " " + status : " no status"}
+            </span>
         </div>}
         {editMode && <div>
             <input className={s.status_input} onChange={onStatusChange} autoFocus onBlur={deactivateEditMode}

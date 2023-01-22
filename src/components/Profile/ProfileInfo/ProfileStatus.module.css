@@ -1,7 +1,11 @@
 .status_span{
-    background-color: #bbbaba;
     padding: 5px;
+    color: #205ac2;
 }
 .status_input{
     background-color: #e86767;
+}
+.statusIcon{
+    font-size: 20px;
+    color: #205ac2;
 }

@@ -1,13 +1,20 @@
-.contact{
+.contact {
     padding: 5px;
     display: flex;
     justify-content: space-between;
 
 }
-.title{
+
+.title {
 
 
 }
-.value{
+
+.noValue:hover {
+    color: #424242;
+}
+
+.value:hover {
+    color: #3367c5;
 
 }
