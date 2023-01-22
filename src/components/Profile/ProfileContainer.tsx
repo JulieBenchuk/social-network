@@ -19,7 +19,7 @@ type MapStateToPropsType = {
     status: string
     isAuth: boolean
     authorizedUserID: number | null
-    users: Array<UserType> //////
+    users: Array<UserType>
 
 
 }

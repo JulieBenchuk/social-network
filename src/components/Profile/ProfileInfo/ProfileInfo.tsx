@@ -7,6 +7,8 @@ import {UserProfileType} from "../../../api/api";
 import {ProfileData} from "./ProfileData/ProfileData";
 import {ProfileDataFormDataType, ProfileDataReduxForm} from "./ProfileDataForm/ProfileDataForm";
 import {UserType} from "../../../redux/users-reducer";
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faPersonCircleCheck} from '@fortawesome/free-solid-svg-icons'
 
 
 type ProfileInfoPropsType = {
@@ -32,8 +34,7 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({
                                                                 ...restProps
                                                             }) => {
     const [editMode, setEditMode] = useState(false)
-    const followed = users.find(u=>u.id===profile?.userId)?.followed
-    console.log(followed)
+    const followed = users.find(u => u.id === profile.userId)?.followed
 
 
     if (!profile) {
@@ -58,10 +59,16 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({
                 <div className={s.profile_avatar}>
                     <img src={profile.photos?.large ? profile.photos.large : avatar_default} alt={"avatar"}/>
                     <div className={s.onlineStatus}>online</div>
+
                     {isOwner && <input type="file" onChange={onPhotoSelectedHandler}/>}
 
+                    {followed &&
+                        <div className={s.followingStatus}>
+                            <FontAwesomeIcon icon={faPersonCircleCheck}/>
+                            following
+                        </div>}
+
                     <ProfileStatusWithHooks status={status} updateStatus={updateStatus} isOwner={isOwner}/>
-                    {followed && <div>FOLLOWING</div>}
                 </div>
             </div>
 

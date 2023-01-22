@@ -32,6 +32,15 @@
     animation: blink 2s linear infinite;
 
 }
+.followingStatus{
+    width: 90%;
+    background-color: #94ce5e;
+    color: white;
+    padding: 5%;
+    font-size: 20px;
+    display: flex;
+    justify-content: space-around;
+}
 .profileInfoBlock {
     width: 60%;
     display: flex;
