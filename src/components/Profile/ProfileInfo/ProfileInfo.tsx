@@ -45,26 +45,22 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({
     }
 
     return (
-        <>
-            <div className={s.profile_top}>
-                <img
-                    src="https://www.xmple.com/wallpaper/blue-violet-gradient-linear-1920x1080-c2-1e90ff-66078b-a-225-f-14.svg"/>
-            </div>
+        <div className={s.profile}>
 
-            <div className={s.profileInfo}>
+            <div className={s.avatarBlock}>
                 <div className={s.profile_avatar}>
                     <img src={profile.photos?.large ? profile.photos.large : avatar_default} alt={"avatar"}/>
+                    {isOwner && <input type="file" onChange={onPhotoSelectedHandler}/>}
+                    <ProfileStatusWithHooks status={status} updateStatus={updateStatus} isOwner={isOwner}/>
                 </div>
+            </div>
 
-                {isOwner && <input type="file" onChange={onPhotoSelectedHandler}/>}
-
-                <ProfileStatusWithHooks status={status} updateStatus={updateStatus} isOwner={isOwner}/>
-
+            <div className={s.profileInfoBlock}>
                 {editMode
                     ? <ProfileDataReduxForm onSubmit={onSubmit} initialValues={profile}/>
                     : <ProfileData profile={profile} isOwner={isOwner} setEditMode={() => setEditMode(true)}/>}
             </div>
-        </>
+        </div>
     );
 
 };

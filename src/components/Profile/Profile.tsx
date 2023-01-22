@@ -2,6 +2,7 @@ import React from "react";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 import {UserProfileType} from "../../api/api";
+import style from "./Profile.module.css"
 
 
 type ProfilePropsType = {
@@ -25,7 +26,7 @@ const Profile: React.FC<ProfilePropsType> = ({
                                                  ...restProps
                                              }) => {
     return (
-        <div>
+        <div className={style.profile}>
             <ProfileInfo profile={profile} status={status} updateStatus={updateStatus} isOwner={isOwner}
                          saveSelectedPhoto={saveSelectedPhoto} saveProfile={saveProfile} userID={userID}/>
             <MyPostsContainer/>

@@ -1,12 +1,19 @@
 .profile_data {
     display: flex;
     flex-direction: column;
+    background-color: #d5dfea;
+    padding: 10px;
+
 }
 
 .description {
+    display: flex;
+    flex-direction: column;
     color: #424242;
     font-size: large;
 }
 
 .edit {
+    display: flex;
+    justify-content: end;
 }

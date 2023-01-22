@@ -11,9 +11,6 @@ export type ProfileDataPropsType = {
 export const ProfileData: React.FC<ProfileDataPropsType> = ({profile, isOwner, setEditMode}) => {
     return (
         <div className={s.profile_data}>
-            {isOwner && <div className={s.edit}>
-                <button onClick={setEditMode}>Edit profile</button>
-            </div>}
             <div className={s.description}>
                 <h2>{profile.fullName}</h2>
                 <div>
@@ -35,6 +32,9 @@ export const ProfileData: React.FC<ProfileDataPropsType> = ({profile, isOwner, s
                     })}
                 </div>
             </div>
+            {isOwner && <div className={s.edit}>
+                <button onClick={setEditMode}>Edit profile</button>
+            </div>}
         </div>
     );
 };

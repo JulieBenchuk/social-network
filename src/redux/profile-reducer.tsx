@@ -30,7 +30,7 @@ export const profileReducer = (state: InitialStateType = initialState, action: A
                 post: action.newPostText,
                 likeCount: 0
             };
-            return {...state, posts: [...state.posts, newPost]};
+            return {...state, posts: [newPost, ...state.posts]};
         }
         case SET_USER_PROFILE:
             return {...state, profile: action.profile};
