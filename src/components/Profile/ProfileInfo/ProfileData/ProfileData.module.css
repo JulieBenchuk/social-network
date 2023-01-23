@@ -1,8 +1,9 @@
 .profile_data {
     display: flex;
     flex-direction: column;
-    background-color: #d5dfea;
+    background-color: rgb(255, 255, 255);
     padding: 10px;
+    box-shadow: 0 1px 8px 1px #919191;
 
 }
 

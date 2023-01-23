@@ -60,7 +60,7 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({
                     <img src={profile.photos?.large ? profile.photos.large : avatar_default} alt={"avatar"}/>
                     <div className={s.onlineStatus}>online</div>
 
-                    {isOwner && <input type="file" onChange={onPhotoSelectedHandler}/>}
+                    {isOwner && <input id="upload" type="file" accept="image/*" onChange={onPhotoSelectedHandler}/>}
 
                     {followed && !isOwner &&
                         <div className={s.followingStatus}>

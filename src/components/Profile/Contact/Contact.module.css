@@ -16,5 +16,6 @@
 
 .value:hover {
     color: #3367c5;
+    cursor: pointer;
 
 }
