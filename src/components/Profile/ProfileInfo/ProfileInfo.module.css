@@ -32,7 +32,8 @@
     animation: blink 2s linear infinite;
 
 }
-.followingStatus{
+
+.followingStatus {
     width: 90%;
     background-color: #94ce5e;
     color: white;
@@ -41,6 +42,11 @@
     display: flex;
     justify-content: space-around;
 }
+
+.followingStatus:hover {
+    cursor: pointer;
+}
+
 .profileInfoBlock {
     width: 60%;
     display: flex;

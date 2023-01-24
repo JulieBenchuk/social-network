@@ -9,6 +9,7 @@ import {ProfileDataFormDataType, ProfileDataReduxForm} from "./ProfileDataForm/P
 import {UserType} from "../../../redux/users-reducer";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faPersonCircleCheck} from '@fortawesome/free-solid-svg-icons'
+import {ModalWindow} from "../../../common/ModalWindow/ModalWindow";
 
 
 type ProfileInfoPropsType = {
@@ -34,6 +35,7 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({
                                                                 ...restProps
                                                             }) => {
     const [editMode, setEditMode] = useState(false)
+    const [activeModal, setActiveModal] = useState(false)
     const followed = users.find(u => u.id === profile.userId)?.followed
 
 
@@ -51,6 +53,9 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({
         saveProfile(profile)
         //setEditMode(false)
     }
+    const setActiveModalHandler = (value: boolean) => {
+        setActiveModal(value)
+    }
 
     return (
         <div className={s.profile}>
@@ -63,7 +68,7 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({
                     {isOwner && <input id="upload" type="file" accept="image/*" onChange={onPhotoSelectedHandler}/>}
 
                     {followed && !isOwner &&
-                        <div className={s.followingStatus}>
+                        <div className={s.followingStatus} onClick={()=>setActiveModalHandler(true)}>
                             <FontAwesomeIcon icon={faPersonCircleCheck}/>
                             following
                         </div>}
@@ -77,6 +82,9 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({
                     ? <ProfileDataReduxForm onSubmit={onSubmit} initialValues={profile}/>
                     : <ProfileData profile={profile} isOwner={isOwner} setEditMode={() => setEditMode(true)}/>}
             </div>
+            {activeModal && <ModalWindow active={activeModal} setActive={setActiveModalHandler}>
+                <div>CONTENT</div>
+                </ModalWindow>}
         </div>
     );
 
