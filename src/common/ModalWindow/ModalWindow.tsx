@@ -1,6 +1,5 @@
-import React, {ReactNode} from 'react';
+import React from 'react';
 import style from "./ModalWindow.module.css"
-import s from "../../components/Profile/ProfileInfo/ProfileInfo.module.css";
 
 type ModalWindowPropsType = {
     active: boolean
@@ -29,9 +28,9 @@ export const ModalWindow: React.FC<ModalWindowPropsType> = ({
             <div className={active ? `${style.modalContent} ${style.modalContentActive}` : style.modalContent}
                  onClick={e => e.stopPropagation()}>
 
-                <div className={s.modalBlock}>
+                <div className={style.modalBlock}>
                     <h3>{question}</h3>
-                    <div className={s.buttonsBlock}>
+                    <div className={style.buttonsBlock}>
                         <div>
                             <button onClick={onAgreeButtonClickHandler}>{answerAgree}</button>
                         </div>
