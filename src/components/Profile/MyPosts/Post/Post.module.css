@@ -19,11 +19,7 @@
 .likeCount {
     width: 600px;
     background-color: #ffffff;
-    color: #e86767;
+    color: #dc2727;
     text-align: end;
 
-}
-.likeCount img {
-    width: 20px;
-    border: none;
 }

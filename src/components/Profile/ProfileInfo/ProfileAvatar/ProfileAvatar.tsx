@@ -3,7 +3,7 @@ import style from "./ProfileAvatar.module.css";
 import avatar_default from "../../../../assets/img/avatar_default.webp";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPersonCircleCheck, faPersonCircleXmark} from "@fortawesome/free-solid-svg-icons";
-import ProfileStatusWithHooks from "../ProfileStatusWithHooks";
+import ProfileStatusWithHooks from "./ProfileStatus/ProfileStatusWithHooks";
 
 type ProfileAvatarPropsType = {
     photos?: { small: any; large: any },

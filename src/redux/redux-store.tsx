@@ -1,6 +1,6 @@
 import {applyMiddleware, combineReducers, compose, legacy_createStore} from "redux";
 import {
-    addPostType, deletePostType,
+    addPostType, deletePostType, likePostType,
     profileReducer, savePhotoType,
     setProfileStatusType,
     setUserProfileType
@@ -35,6 +35,7 @@ export type AppStateType = ReturnType<typeof rootReducer>
 export type AppThunk = ThunkAction<void, AppStateType, unknown, ActionsType>
 export type ActionsType =
     addPostType
+    | likePostType
     | setUserProfileType
     | setProfileStatusType
     | setLoadingACType

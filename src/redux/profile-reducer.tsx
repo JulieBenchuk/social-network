@@ -6,6 +6,7 @@ import {serverErrorHandler} from "../utils/serverErrorHandler";
 import {AxiosError} from "axios";
 
 const ADD_POST = "profile/ADD-POST"
+const LIKE_POST = "profile/LIKE-POST"
 const SET_USER_PROFILE = "profile/SET_USER_PROFILE"
 const SET_PROFILE_STATUS = "profile/SET_PROFILE_STATUS"
 const DELETE_POST = "profile/DELETE_POST"
@@ -26,11 +27,21 @@ export const profileReducer = (state: InitialStateType = initialState, action: A
     switch (action.type) {
         case ADD_POST: {
             const newPost: PostType = {
-                id: 5,
+                id: Math.ceil(Math.random() * 100),
                 post: action.newPostText,
                 likeCount: 0
             };
             return {...state, posts: [newPost, ...state.posts]};
+        }
+            ;
+        case LIKE_POST: {
+            return {
+                ...state, posts: state.posts.map(p => {
+                    if (p.id === action.postID) {
+                        return {...p, likeCount: action.likeCount}
+                    } else return p
+                })
+            }
         }
         case SET_USER_PROFILE:
             return {...state, profile: action.profile};
@@ -51,6 +62,11 @@ export const profileReducer = (state: InitialStateType = initialState, action: A
 
 //action creators
 export const addPostAC = (newPostText: string): addPostType => ({type: ADD_POST, newPostText} as const)
+export const likePostAC = (postID: number, likeCount: number): likePostType => ({
+    type: LIKE_POST,
+    postID,
+    likeCount
+} as const)
 export const setUserProfileAC = (profile: UserProfileType): setUserProfileType => ({
     type: SET_USER_PROFILE,
     profile: profile
@@ -170,6 +186,11 @@ export type PostType = {
 export type addPostType = {
     type: "profile/ADD-POST",
     newPostText: string
+}
+export type likePostType = {
+    type: "profile/LIKE-POST",
+    postID: number
+    likeCount: number
 }
 export type setUserProfileType = {
     type: "profile/SET_USER_PROFILE"
