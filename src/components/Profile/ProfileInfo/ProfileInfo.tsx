@@ -82,20 +82,9 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({
                     ? <ProfileDataReduxForm onSubmit={onSubmit} initialValues={profile}/>
                     : <ProfileData profile={profile} isOwner={isOwner} setEditMode={() => setEditMode(true)}/>}
             </div>
-            {activeModal && <ModalWindow active={activeModal} setActive={setActiveModalHandler}>
-                <div className={s.modalBlock}>
-                    <h3>Do you want to follow {profile.fullName}?</h3>
-                    <div className={s.buttonsBlock}>
-                        <div>
-                            <button>YES, I want</button>
-                        </div>
-                        <div>
-                            <button>NO, thanks</button>
-                        </div>
-                    </div>
-                </div>
-                </ModalWindow>}
+            {activeModal && <ModalWindow active={activeModal} setActive={setActiveModalHandler}
+                                         question={`Do you want to follow ${profile.fullName}?`}
+                                         answerAgree={"YES, I want"} answerReject={"No, thanks"}/>}
         </div>
     );
-
 };
