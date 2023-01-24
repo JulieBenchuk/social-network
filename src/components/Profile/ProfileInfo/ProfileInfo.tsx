@@ -1,5 +1,5 @@
 import React, {ChangeEvent, useState} from 'react';
-import s from "./ProfileInfo.module.css";
+import style from "./ProfileInfo.module.css";
 import {Preloader} from "../../../common/Preloader";
 import {UserProfileType} from "../../../api/api";
 import {ProfileData} from "./ProfileData/ProfileData";
@@ -66,12 +66,12 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({
     }
 
     return (
-        <div className={s.profile}>
+        <div className={style.profile}>
 
             <ProfileAvatar photos={profile.photos} owner={isOwner} onChange={onPhotoSelectedHandler} followed={followed}
                            onClick={() => setActiveModalHandler(true)} status={status} updateStatus={updateStatus}/>
 
-            <div className={s.profileInfoBlock}>
+            <div className={style.profileInfoBlock}>
                 {editMode
                     ? <ProfileDataReduxForm onSubmit={onSubmit} initialValues={profile}/>
                     : <ProfileData profile={profile} isOwner={isOwner} setEditMode={() => setEditMode(true)}/>}

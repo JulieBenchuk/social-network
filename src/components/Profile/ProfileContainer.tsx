@@ -70,7 +70,7 @@ class ProfileContainer extends React.Component<PropsType> {
     }
 
     componentDidUpdate(prevProps: Readonly<PropsType>, prevState: Readonly<{}>, snapshot?: any) {
-        if (this.props.match.params.userID !== prevProps.match.params.userID) {
+        if (this.props.match.params.userID !== prevProps.match.params.userID || this.props.profile.photos?.large !== prevProps.profile.photos?.large) {
             this.refreshProfile()
         }
     }
