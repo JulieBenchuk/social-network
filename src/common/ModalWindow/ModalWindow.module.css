@@ -11,34 +11,40 @@
     transition: 0.5s;
     opacity: 0;
     pointer-events: none;
-
-
 }
 
 .modalActive {
     opacity: 1;
     pointer-events: fill;
-
 }
 
 .modalContent {
     padding: 20px;
     border-radius: 12px;
     background-color: white;
-    height: 200px;
-    width: 400px;
     transform: scale(0.5);
     transition: 0.4s all;
-
-
 }
 
 .modalContentActive {
     transform: scale(1);
-
 }
 
-.modalContent {
+.modalBlock {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
 
+.modalBlock h3 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 
+.buttonsBlock {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
 }
