@@ -34,6 +34,7 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({
 
     const [editMode, setEditMode] = useState(false)
     const [activeModal, setActiveModal] = useState(false)
+
     const followed = users.find(u => u.id === profile.userId)?.followed
 
     if (!profile) {
