@@ -83,7 +83,17 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({
                     : <ProfileData profile={profile} isOwner={isOwner} setEditMode={() => setEditMode(true)}/>}
             </div>
             {activeModal && <ModalWindow active={activeModal} setActive={setActiveModalHandler}>
-                <div>CONTENT</div>
+                <div className={s.modalBlock}>
+                    <h3>Do you want to follow {profile.fullName}?</h3>
+                    <div className={s.buttonsBlock}>
+                        <div>
+                            <button>YES, I want</button>
+                        </div>
+                        <div>
+                            <button>NO, thanks</button>
+                        </div>
+                    </div>
+                </div>
                 </ModalWindow>}
         </div>
     );
