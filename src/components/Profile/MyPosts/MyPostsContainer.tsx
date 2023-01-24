@@ -12,15 +12,18 @@ type PostType = {
 }
 type MapStateToPropsType = {
     posts: PostType[]
+    profilePhoto: any
 }
 type MapDispatchToProps = {
-    addPost: (newPostText: string)=>void
-    likePost: (postID: number, likeCount: number)=>void
+    addPost: (newPostText: string) => void
+    likePost: (postID: number, likeCount: number) => void
 }
 export type MyPostsPropsType = MapStateToPropsType & MapDispatchToProps
-let mapStateToProps = (state: AppStateType): MapStateToPropsType=> {
+
+let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
-        posts: state.profilePage.posts
+        posts: state.profilePage.posts,
+        profilePhoto: state.profilePage.profile.photos?.large
     }
 }
 let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
@@ -28,7 +31,7 @@ let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
         addPost: (newPostText: string) => {
             dispatch(addPostAC(newPostText));
         },
-        likePost: (postID: number, likeCount: number)=> {
+        likePost: (postID: number, likeCount: number) => {
             dispatch(likePostAC(postID, likeCount))
         }
     }

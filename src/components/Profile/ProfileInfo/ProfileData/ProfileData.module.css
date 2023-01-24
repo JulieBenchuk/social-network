@@ -13,6 +13,15 @@
     color: #424242;
     font-size: large;
 }
+.description h2{
+    color: #884fc2;
+    background-color: rgba(162, 190, 241, 0.58);
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
 .descriptionItem{
     padding-bottom: 10px;
     overflow: hidden;

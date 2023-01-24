@@ -8,7 +8,7 @@ import {Textarea} from "../../../common/Forms-control/FormsControl";
 
 const maxLengthCreator30 = maxLengthCreator(30);
 
-export const MyPosts: React.FC<MyPostsPropsType> = ({addPost, posts, likePost, ...restProps}) => {
+export const MyPosts: React.FC<MyPostsPropsType> = ({addPost, posts, likePost, profilePhoto, ...restProps}) => {
     const onAddPost = (values: any) => {
         addPost(values.newPostText);
     }
@@ -16,7 +16,7 @@ export const MyPosts: React.FC<MyPostsPropsType> = ({addPost, posts, likePost, .
        likePost(postID, likeCount)
     }
     const postElements = posts.map((p, index) => (
-        <Post key={index} id={p.id} post={p.post} likeCount={p.likeCount} onLikePost={()=>onLikePost(p.id, p.likeCount+1)}/>))
+        <Post key={index} id={p.id} post={p.post} avatar={profilePhoto} likeCount={p.likeCount} onLikePost={()=>onLikePost(p.id, p.likeCount+1)}/>))
 
     return (
         <div className={classes.postsBlock}>

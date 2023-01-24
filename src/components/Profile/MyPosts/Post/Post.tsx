@@ -2,23 +2,24 @@ import React from "react";
 import classes from "./Post.module.css";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faHeart} from '@fortawesome/free-solid-svg-icons'
+import defaultAvatar from "./../../../../assets/img/avatar_default.webp"
 
 export type PostPropsType = {
     id: number
     post: string
     likeCount: number
     onLikePost: (id: number, likeCount: number)=>void
+    avatar: any
 }
 
-const Post: React.FC<PostPropsType> = ({id, post, likeCount, onLikePost}) => {
+const Post: React.FC<PostPropsType> = ({id, post, likeCount, onLikePost, avatar}) => {
     const onLikeClickHandler = ()=>{
         onLikePost(id, likeCount)
     }
     return (
         <div className={classes.post}>
             <div className={classes.avatarOfPost}>
-                <img
-                    src="https://static.vecteezy.com/system/resources/previews/004/899/833/large_2x/beautiful-girl-with-blue-hair-avatar-of-woman-for-social-network-vector.jpg"/>
+                <img src={avatar ? avatar : defaultAvatar}/>
                 <div className={classes.postStyle}>
                     {post}
                 </div>
