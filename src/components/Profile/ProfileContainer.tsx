@@ -21,7 +21,6 @@ type MapStateToPropsType = {
     authorizedUserID: number | null
     users: Array<UserType>
 
-
 }
 type MapDispatchToPropsType = {
     getUserProfile: (profile: any) => void
@@ -50,11 +49,9 @@ let mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
 class ProfileContainer extends React.Component<PropsType> {
     follow = (id: number) => {
         this.props.follow(id)
-        console.log(`${id} will be followed`)
     }
     unfollow = (id: number) => {
         this.props.unfollow(id)
-        console.log(`${id} will be unfollowed`)
     }
     refreshProfile() {
         let userID = this.props.match.params.userID

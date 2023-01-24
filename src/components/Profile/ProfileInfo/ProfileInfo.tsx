@@ -1,16 +1,12 @@
 import React, {ChangeEvent, useState} from 'react';
 import s from "./ProfileInfo.module.css";
 import {Preloader} from "../../../common/Preloader";
-import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
-import avatar_default from "./../../../assets/img/avatar_default.webp"
 import {UserProfileType} from "../../../api/api";
 import {ProfileData} from "./ProfileData/ProfileData";
 import {ProfileDataFormDataType, ProfileDataReduxForm} from "./ProfileDataForm/ProfileDataForm";
 import {UserType} from "../../../redux/users-reducer";
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faPersonCircleCheck} from '@fortawesome/free-solid-svg-icons'
-import {faPersonCircleXmark} from '@fortawesome/free-solid-svg-icons'
 import {ModalWindow} from "../../../common/ModalWindow/ModalWindow";
+import {ProfileAvatar} from "./ProfileAvatar/ProfileAvatar";
 
 
 type ProfileInfoPropsType = {
@@ -33,8 +29,7 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({
                                                                 isOwner,
                                                                 saveSelectedPhoto,
                                                                 saveProfile,
-                                                                userID,
-                                                                users, unfollow, follow
+                                                                users, unfollow, follow, ...restProps
                                                             }) => {
 
     const [editMode, setEditMode] = useState(false)
@@ -52,7 +47,7 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({
     }
     const onSubmit = (profile: ProfileDataFormDataType) => {
         saveProfile(profile)
-        //setEditMode(false)
+        setEditMode(false)
     }
     const setActiveModalHandler = (value: boolean) => {
         setActiveModal(value)
@@ -73,22 +68,8 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({
     return (
         <div className={s.profile}>
 
-            <div className={s.avatarBlock}>
-                <div className={s.profile_avatar}>
-                    <img src={profile.photos?.large ? profile.photos.large : avatar_default} alt={"avatar"}/>
-                    <div className={s.onlineStatus}>online</div>
-
-                    {isOwner && <input id="upload" type="file" accept="image/*" onChange={onPhotoSelectedHandler}/>}
-
-                    {!isOwner &&
-                        <div className={followed ? s.followingStatus : `${s.followingStatus} ${s.unfollowingStatus}`} onClick={() => setActiveModalHandler(true)}>
-                            {followed ? <FontAwesomeIcon icon={faPersonCircleCheck}/> : <FontAwesomeIcon icon={faPersonCircleXmark}/>}
-                            {followed ? "following" : "unfollowing"}
-                        </div>}
-
-                    <ProfileStatusWithHooks status={status} updateStatus={updateStatus} isOwner={isOwner}/>
-                </div>
-            </div>
+            <ProfileAvatar photos={profile.photos} owner={isOwner} onChange={onPhotoSelectedHandler} followed={followed}
+                           onClick={() => setActiveModalHandler(true)} status={status} updateStatus={updateStatus}/>
 
             <div className={s.profileInfoBlock}>
                 {editMode
@@ -98,7 +79,7 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({
 
             {activeModal && <ModalWindow active={activeModal} setActive={setActiveModalHandler}
                                          question={`Do you want to ${followed ? "unfollow" : "follow"} ${profile.fullName}?`}
-                                         answerAgree={"YES, I want"} answerReject={"No, thanks"}
+                                         answerAgree={"YES, I want"} answerReject={"NO, thanks"}
                                          agree={onAgreeModalHandler} reject={onRejectModalHandler}/>}
         </div>
     );

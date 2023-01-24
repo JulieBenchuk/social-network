@@ -1,4 +1,4 @@
-.app-wrapper {
+.app_wrapper {
     background-color: #d5dfea;
     margin: 0 auto;
     display: grid;
@@ -13,7 +13,7 @@
     padding-bottom: 5px;
 
 }
-.app-wrapper-content {
+.app_wrapper_content {
     grid-area: content;
     background-color: #ffffff;
     border-radius: 5px;

@@ -2,7 +2,7 @@ import React from 'react';
 import {Route, Switch, withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import {compose} from "redux";
-import './App.css';
+import style from './App.module.css';
 import {AppStateType} from "./redux/redux-store";
 import Login from "./components/Login/Login";
 import HeaderContainer from "./components/Header/HeaderContainer";
@@ -44,10 +44,10 @@ class App extends React.Component<MapDispatchToPropsType & MapStateToPropsType> 
             return <Preloader/>
         }
         return (
-            <div className="app-wrapper">
+            <div className={style.app_wrapper}>
                 <HeaderContainer/>
                 <Nav_bar/>
-                <div className="app-wrapper-content">
+                <div className={style.app_wrapper_content}>
                     {this.props.isLoading && <Preloader/>}
                     <Switch>
                         <Route path={"/profile/:userID?"}
