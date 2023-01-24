@@ -42,6 +42,9 @@
     display: flex;
     justify-content: space-around;
 }
+.unfollowingStatus{
+    background-color: #e86767;
+}
 
 .followingStatus:hover {
     cursor: pointer;

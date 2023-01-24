@@ -9,6 +9,7 @@ import {ProfileDataFormDataType, ProfileDataReduxForm} from "./ProfileDataForm/P
 import {UserType} from "../../../redux/users-reducer";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faPersonCircleCheck} from '@fortawesome/free-solid-svg-icons'
+import {faPersonCircleXmark} from '@fortawesome/free-solid-svg-icons'
 import {ModalWindow} from "../../../common/ModalWindow/ModalWindow";
 
 
@@ -80,8 +81,8 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({
                     {isOwner && <input id="upload" type="file" accept="image/*" onChange={onPhotoSelectedHandler}/>}
 
                     {!isOwner &&
-                        <div className={s.followingStatus} onClick={() => setActiveModalHandler(true)}>
-                            <FontAwesomeIcon icon={faPersonCircleCheck}/>
+                        <div className={followed ? s.followingStatus : `${s.followingStatus} ${s.unfollowingStatus}`} onClick={() => setActiveModalHandler(true)}>
+                            {followed ? <FontAwesomeIcon icon={faPersonCircleCheck}/> : <FontAwesomeIcon icon={faPersonCircleXmark}/>}
                             {followed ? "following" : "unfollowing"}
                         </div>}
 
