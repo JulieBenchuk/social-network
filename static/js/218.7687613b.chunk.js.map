@@ -1,0 +1,1 @@
+{"version":3,"file":"static/js/218.7687613b.chunk.js","mappings":"2IAUA,UARiB,WACb,OACI,qCAIP,C","sources":["components/Settings/Settings.tsx"],"sourcesContent":["import React from 'react';\n\nconst Settings = () => {\n    return (\n        <div>\n            SETTINGS\n        </div>\n    );\n};\n\nexport default Settings;"],"names":[],"sourceRoot":""}
