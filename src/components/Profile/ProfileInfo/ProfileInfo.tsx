@@ -21,6 +21,8 @@ type ProfileInfoPropsType = {
     saveSelectedPhoto: (photo: File) => void
     saveProfile: (profile: UserProfileType) => void
     users: Array<UserType>
+    unfollow: (id: number) => void
+    follow: (id: number) => void
 }
 
 export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({
@@ -31,18 +33,16 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({
                                                                 saveSelectedPhoto,
                                                                 saveProfile,
                                                                 userID,
-                                                                users,
-                                                                ...restProps
+                                                                users, unfollow, follow
                                                             }) => {
+
     const [editMode, setEditMode] = useState(false)
     const [activeModal, setActiveModal] = useState(false)
     const followed = users.find(u => u.id === profile.userId)?.followed
 
-
     if (!profile) {
         return <Preloader/>
     }
-
 
     const onPhotoSelectedHandler = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files.length) {
@@ -56,6 +56,18 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({
     const setActiveModalHandler = (value: boolean) => {
         setActiveModal(value)
     }
+    const onAgreeModalHandler = () => {
+        if (followed) {
+            profile.userId && unfollow(profile.userId)
+            setActiveModal(false)
+        } else {
+            profile.userId && follow(profile.userId)
+            setActiveModal(false)
+        }
+    }
+    const onRejectModalHandler = () => {
+        setActiveModal(false)
+    }
 
     return (
         <div className={s.profile}>
@@ -67,10 +79,10 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({
 
                     {isOwner && <input id="upload" type="file" accept="image/*" onChange={onPhotoSelectedHandler}/>}
 
-                    {followed && !isOwner &&
-                        <div className={s.followingStatus} onClick={()=>setActiveModalHandler(true)}>
+                    {!isOwner &&
+                        <div className={s.followingStatus} onClick={() => setActiveModalHandler(true)}>
                             <FontAwesomeIcon icon={faPersonCircleCheck}/>
-                            following
+                            {followed ? "following" : "unfollowing"}
                         </div>}
 
                     <ProfileStatusWithHooks status={status} updateStatus={updateStatus} isOwner={isOwner}/>
@@ -82,9 +94,11 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({
                     ? <ProfileDataReduxForm onSubmit={onSubmit} initialValues={profile}/>
                     : <ProfileData profile={profile} isOwner={isOwner} setEditMode={() => setEditMode(true)}/>}
             </div>
+
             {activeModal && <ModalWindow active={activeModal} setActive={setActiveModalHandler}
-                                         question={`Do you want to follow ${profile.fullName}?`}
-                                         answerAgree={"YES, I want"} answerReject={"No, thanks"}/>}
+                                         question={`Do you want to ${followed ? "unfollow" : "follow"} ${profile.fullName}?`}
+                                         answerAgree={"YES, I want"} answerReject={"No, thanks"}
+                                         agree={onAgreeModalHandler} reject={onRejectModalHandler}/>}
         </div>
     );
 };

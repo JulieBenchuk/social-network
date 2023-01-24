@@ -15,6 +15,8 @@ type ProfilePropsType = {
     saveSelectedPhoto: (photo: File) => void
     saveProfile: (profile: UserProfileType) => void
     users: Array<UserType>
+    unfollow: (id: number) => void
+    follow: (id: number) => void
 }
 
 const Profile: React.FC<ProfilePropsType> = ({
@@ -25,13 +27,12 @@ const Profile: React.FC<ProfilePropsType> = ({
                                                  isOwner,
                                                  saveSelectedPhoto,
                                                  saveProfile,
-                                                 users,
-                                                 ...restProps
+                                                 users, unfollow, follow
                                              }) => {
     return (
         <div className={style.profile}>
             <ProfileInfo profile={profile} status={status} updateStatus={updateStatus} isOwner={isOwner}
-                         saveSelectedPhoto={saveSelectedPhoto} saveProfile={saveProfile} userID={userID} users={users}/>
+                         saveSelectedPhoto={saveSelectedPhoto} saveProfile={saveProfile} userID={userID} users={users} unfollow={unfollow} follow={follow}/>
             <MyPostsContainer/>
         </div>
     )

@@ -8,14 +8,22 @@ type ModalWindowPropsType = {
     question: string
     answerAgree: string
     answerReject: string
+    agree: () => void
+    reject: () => void
 }
 export const ModalWindow: React.FC<ModalWindowPropsType> = ({
                                                                 active,
                                                                 setActive,
                                                                 answerReject,
                                                                 answerAgree,
-                                                                question
+                                                                question, agree, reject
                                                             }) => {
+    const onAgreeButtonClickHandler = () => {
+        agree()
+    }
+    const onRejectButtonClickHandler = () => {
+        reject()
+    }
     return (
         <div className={active ? `${style.modal} ${style.modalActive}` : style.modal} onClick={() => setActive(false)}>
             <div className={active ? `${style.modalContent} ${style.modalContentActive}` : style.modalContent}
@@ -25,10 +33,10 @@ export const ModalWindow: React.FC<ModalWindowPropsType> = ({
                     <h3>{question}</h3>
                     <div className={s.buttonsBlock}>
                         <div>
-                            <button>{answerAgree}</button>
+                            <button onClick={onAgreeButtonClickHandler}>{answerAgree}</button>
                         </div>
                         <div>
-                            <button>{answerReject}</button>
+                            <button onClick={onRejectButtonClickHandler}>{answerReject}</button>
                         </div>
                     </div>
                 </div>

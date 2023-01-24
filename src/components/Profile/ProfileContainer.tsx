@@ -11,7 +11,7 @@ import {RouteComponentProps, withRouter} from "react-router-dom";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
 import {UserProfileType} from "../../api/api";
-import {UserType} from "../../redux/users-reducer";
+import {followTC, unfollowTC, UserType} from "../../redux/users-reducer";
 
 
 type MapStateToPropsType = {
@@ -29,6 +29,8 @@ type MapDispatchToPropsType = {
     updateStatus: (status: string) => void
     saveSelectedPhoto: (photo: File) => void
     saveProfile: (profile: UserProfileType) => void
+    follow: (id: number) => void
+    unfollow: (id: number) => void
 }
 type OwnPropsType = MapStateToPropsType & MapDispatchToPropsType
 type PathParamsType = {
@@ -46,6 +48,14 @@ let mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
 })
 
 class ProfileContainer extends React.Component<PropsType> {
+    follow = (id: number) => {
+        this.props.follow(id)
+        console.log(`${id} will be followed`)
+    }
+    unfollow = (id: number) => {
+        this.props.unfollow(id)
+        console.log(`${id} will be unfollowed`)
+    }
     refreshProfile() {
         let userID = this.props.match.params.userID
         if (!userID) {
@@ -73,7 +83,7 @@ class ProfileContainer extends React.Component<PropsType> {
         return (
             <Profile {...this.props} userID={this.props.authorizedUserID} isOwner={!this.props.match.params.userID} profile={this.props.profile}
                      status={this.props.status}
-                     updateStatus={this.props.updateStatus} saveSelectedPhoto={this.props.saveSelectedPhoto} users={this.props.users}/>
+                     updateStatus={this.props.updateStatus} saveSelectedPhoto={this.props.saveSelectedPhoto} users={this.props.users} unfollow={this.unfollow} follow={this.follow}/>
         )
     }
 }
@@ -84,6 +94,8 @@ export default compose<React.ComponentType>(
         getUserStatus: getStatusTC,
         updateStatus: updateStatusTC,
         saveSelectedPhoto: saveSelectedPhotoTC,
-        saveProfile: saveProfileTC
+        saveProfile: saveProfileTC,
+        follow: followTC,
+        unfollow: unfollowTC,
     }),
     withRouter, withAuthRedirect)(ProfileContainer)
