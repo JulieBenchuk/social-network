@@ -6,6 +6,7 @@ import {DialogsPropsType} from "./DialogsContainer";
 import {Field, reduxForm} from "redux-form";
 import {Textarea} from "../../common/Forms-control/FormsControl";
 import {maxLengthCreator, required} from "../../utils/validators/validators";
+import {SuperButton} from "../../common/SuperButton/SuperButton";
 
 const Dialogs = (props: DialogsPropsType) => {
     let state = props.dialogsPage
@@ -35,7 +36,7 @@ const AddMessageForm = (props: any) => {
                 <Field component={Textarea} name="newMessageBody" placeholder="Enter your message..."
                        validate={[required, maxLengthCreator100]} className={s.field}/>
 
-                <button className={s.sendBtn}>Send message</button>
+                <SuperButton type={"submit"}>Send message</SuperButton>
             </div>
         </form>
     )

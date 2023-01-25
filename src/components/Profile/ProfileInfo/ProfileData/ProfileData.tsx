@@ -8,6 +8,7 @@ import {faCircleCheck} from '@fortawesome/free-regular-svg-icons'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import { faLink} from '@fortawesome/free-solid-svg-icons'
 import { faPen} from '@fortawesome/free-solid-svg-icons'
+import {SuperButton} from "../../../../common/SuperButton/SuperButton";
 
 export type ProfileDataPropsType = {
     profile: UserProfileType
@@ -43,10 +44,10 @@ export const ProfileData: React.FC<ProfileDataPropsType> = ({profile, isOwner, s
                 </div>
             </div>
             {isOwner && <div className={s.edit}>
-                <button onClick={setEditMode}>
+                <SuperButton onClick={setEditMode}>
                     <FontAwesomeIcon icon={faPen} className={s.descriptionIcon}/>
                     {" Edit profile"}
-                </button>
+                </SuperButton>
             </div>}
         </div>
     );

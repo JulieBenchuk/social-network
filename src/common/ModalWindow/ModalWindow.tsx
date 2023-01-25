@@ -1,5 +1,6 @@
 import React from 'react';
 import style from "./ModalWindow.module.css"
+import {SuperButton} from "../SuperButton/SuperButton";
 
 type ModalWindowPropsType = {
     active: boolean
@@ -32,10 +33,10 @@ export const ModalWindow: React.FC<ModalWindowPropsType> = ({
                     <h3>{question}</h3>
                     <div className={style.buttonsBlock}>
                         <div>
-                            <button onClick={onAgreeButtonClickHandler}>{answerAgree}</button>
+                            <SuperButton onClick={onAgreeButtonClickHandler}>{answerAgree}</SuperButton>
                         </div>
                         <div>
-                            <button onClick={onRejectButtonClickHandler}>{answerReject}</button>
+                            <SuperButton onClick={onRejectButtonClickHandler}>{answerReject}</SuperButton>
                         </div>
                     </div>
                 </div>

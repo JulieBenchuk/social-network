@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import s from "./Paginator.module.css";
+import {SuperButton} from "../SuperButton/SuperButton";
 
 type PaginatorPropsType = {
     totalItemsCount: number
@@ -28,9 +29,9 @@ export const Paginator: React.FC<PaginatorPropsType> = ({
 
     return (
         <div className={s.paginator}>
-            {portionNumber > 1 && <button onClick={() => {
+            {portionNumber > 1 && <SuperButton onClick={() => {
                 setPortionNumber(portionNumber - 1)
-            }} className={s.button}> PREV </button>}
+            }}> PREV </SuperButton>}
 
             {pages.filter(p => p >= leftPortionNumber && p <= rightPortionNumber)
                 .map(p => {
@@ -38,9 +39,9 @@ export const Paginator: React.FC<PaginatorPropsType> = ({
                                  onClick={(e) => changePage(p)}>{p}</span>
                 })}
 
-            {portionNumber < portionCount && <button onClick={() => {
+            {portionNumber < portionCount && <SuperButton onClick={() => {
                 setPortionNumber(portionNumber + 1)
-            }} className={s.button}> NEXT </button>}
+            }}> NEXT </SuperButton>}
         </div>
     );
 };

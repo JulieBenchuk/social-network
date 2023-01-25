@@ -3,6 +3,7 @@ import {NavLink} from "react-router-dom";
 import {UserType} from "../../../redux/users-reducer";
 import s from "./User.module.css"
 import avatar_default from "./../../../assets/img/avatar_default.webp"
+import {SuperButton} from "../../../common/SuperButton/SuperButton";
 
 type UserPropsType = {
     user: UserType
@@ -19,12 +20,12 @@ export const User: React.FC<UserPropsType> = ({user, unfollow, follow}) => {
                             src={user.photos.small ? user.photos.small : avatar_default}
                             className={s.avatar} alt={"avatar"}/></NavLink>
                     </div>
-                    <div> {user.followed ? <button disabled={user.followingInProgress} onClick={() => {
+                    <div> {user.followed ? <SuperButton disabled={user.followingInProgress} onClick={() => {
                             unfollow(user.id)
-                        }}>Unfollowed</button> :
-                        <button disabled={user.followingInProgress} onClick={() => {
+                        }}>Unfollowed</SuperButton> :
+                        <SuperButton disabled={user.followingInProgress} onClick={() => {
                             follow(user.id)
-                        }}>Followed</button>}</div>
+                        }}>Followed</SuperButton>}</div>
                 </span>
             <span className={s.userInfo}>
                         <div> <span>name: </span>{user.name.toUpperCase()}</div>
