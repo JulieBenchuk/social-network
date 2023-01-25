@@ -7,7 +7,7 @@ import {AppStateType} from "./redux/redux-store";
 import Login from "./components/Login/Login";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import {initializeAppTC} from "./redux/app-reducer";
-import {Preloader} from "./common/Preloader";
+import {Preloader} from "./common/Preloader/Preloader";
 import {withSuspense} from "./hoc/withSuspense";
 import Nav_bar from "./components/Nav_bar/Nav_bar";
 import {Error404} from "./components/Error404/Error404";

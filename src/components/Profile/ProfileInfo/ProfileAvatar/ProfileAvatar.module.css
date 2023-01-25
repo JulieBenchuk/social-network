@@ -28,10 +28,10 @@
 }
 
 .followingStatus {
-    width: 90%;
+    max-width: 130px;
     background-color: #94ce5e;
     color: white;
-    padding: 5%;
+    padding: 10px;
     font-size: 20px;
     display: flex;
     justify-content: space-around;

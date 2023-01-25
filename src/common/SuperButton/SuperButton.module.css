@@ -1,0 +1,25 @@
+.default {
+    cursor: pointer;
+
+    min-width: 90px;
+    height: 30px;
+    padding: 8px 10px;
+
+    font-weight: bold;
+    color: #ffffff;
+
+    background: #412a8f;
+    border: none;
+    border-radius: 30px;
+    box-shadow: 0 4px 18px rgb(65, 42, 143), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+
+    transition: background-color 200ms;
+}
+
+.default:hover {
+    background-color: #684ac7;
+}
+
+.default:disabled {
+    cursor: not-allowed;
+}

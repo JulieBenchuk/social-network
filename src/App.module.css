@@ -20,3 +20,9 @@
     font-family: Apple;
 
 }
+textarea:focus, input:focus{
+    outline: none;
+}
+input:-webkit-autofill {
+    color: #ffffff !important;
+}

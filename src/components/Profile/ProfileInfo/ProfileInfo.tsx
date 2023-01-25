@@ -1,6 +1,6 @@
 import React, {ChangeEvent, useState} from 'react';
 import style from "./ProfileInfo.module.css";
-import {Preloader} from "../../../common/Preloader";
+import {Preloader} from "../../../common/Preloader/Preloader";
 import {UserProfileType} from "../../../api/api";
 import {ProfileData} from "./ProfileData/ProfileData";
 import {ProfileDataFormDataType, ProfileDataReduxForm} from "./ProfileDataForm/ProfileDataForm";

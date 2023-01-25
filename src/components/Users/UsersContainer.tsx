@@ -8,7 +8,7 @@ import {
     UserType
 } from "../../redux/users-reducer";
 import {AppStateType} from "../../redux/redux-store";
-import {Preloader} from "../../common/Preloader";
+import {Preloader} from "../../common/Preloader/Preloader";
 import {compose} from "redux";
 
 

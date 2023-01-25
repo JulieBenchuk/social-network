@@ -34,7 +34,7 @@ const ProfileStatusWithHooks: React.FC<ProfileStatusWithHooksPropsType> = ({stat
 
 
     return <h3>
-        {!editMode && <div>
+        {!editMode && <div className={s.statusBlock}>
             <span className={s.status_span} onDoubleClick={onDoubleClickOnSpanHandler}>
                 <FontAwesomeIcon icon={faComment} className={s.statusIcon}/>
                 {status ? " " + status : " no status"}

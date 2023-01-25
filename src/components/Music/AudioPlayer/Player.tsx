@@ -13,7 +13,7 @@ export const Player = () => {
             {playlist.map(p=>{
                 return <div className={style.playerItem}>
                     {p.band} - {p.track}
-                    <ReactPlayer url={p.url}/>
+                    <ReactPlayer url={p.url} loop={true}/>
                 </div>
             })}
         </div>

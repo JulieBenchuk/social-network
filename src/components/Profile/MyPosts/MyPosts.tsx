@@ -5,6 +5,7 @@ import {MyPostsPropsType} from "./MyPostsContainer";
 import {Field, reduxForm} from "redux-form";
 import {maxLengthCreator, required} from "../../../utils/validators/validators";
 import {Textarea} from "../../../common/Forms-control/FormsControl";
+import {SuperButton} from "../../../common/SuperButton/SuperButton";
 
 const maxLengthCreator30 = maxLengthCreator(30);
 
@@ -33,7 +34,7 @@ const AddNewPostForm = (props: any) => {
                 <Field component={Textarea} name="newPostText" placeholder={"What's new?"} validate={[required, maxLengthCreator30]}/>
             </div>
             <div>
-                <button>Add post</button>
+                <SuperButton>Add post</SuperButton>
             </div>
         </form>
     )
