@@ -8,23 +8,25 @@ export type PostPropsType = {
     id: number
     post: string
     likeCount: number
-    onLikePost: (id: number, likeCount: number)=>void
+    onLikePost: (id: number, likeCount: number) => void
     avatar: any
+    img?: string
 }
 
-const Post: React.FC<PostPropsType> = ({id, post, likeCount, onLikePost, avatar}) => {
-    const onLikeClickHandler = ()=>{
+const Post: React.FC<PostPropsType> = ({id, post, likeCount, onLikePost, avatar, img}) => {
+    const onLikeClickHandler = () => {
         onLikePost(id, likeCount)
     }
     return (
         <div className={classes.post}>
             <div className={classes.avatarOfPost}>
                 <img src={avatar ? avatar : defaultAvatar}/>
-                <div className={classes.postStyle}>
-                    {post}
-                </div>
+            </div>
+            <div className={classes.postContentBlock}>
+                <div className={classes.postText}>{post}</div>
                 <div className={classes.likeCount} onClick={onLikeClickHandler}>
-                    <FontAwesomeIcon icon={faHeart}/> {likeCount}
+                    <FontAwesomeIcon icon={faHeart}/>
+                    <span>{likeCount}</span>
                 </div>
             </div>
         </div>

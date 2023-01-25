@@ -9,6 +9,7 @@ type PostType = {
     id: number
     post: string
     likeCount: number
+    img?: string
 }
 type MapStateToPropsType = {
     posts: PostType[]

@@ -181,6 +181,7 @@ export type PostType = {
     id: number
     post: string
     likeCount: number
+    img?: string
 }
 
 export type addPostType = {

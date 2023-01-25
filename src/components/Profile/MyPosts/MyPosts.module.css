@@ -1,9 +1,25 @@
 .postsBlock{
+    padding-top: 20px;
 
 }
 .myPostsHeader {
     font-size: large;
     border-radius: 5px;
 }
-.textArea_Button {
+.postElements{
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+.addPostForm {
+    width: 90%;
+}
+.newPostContent{
+
+}
+.newPostField{
+    width: 100%;
+    min-height: 30px;
+    text-align: center;
+    padding: 10px;
 }

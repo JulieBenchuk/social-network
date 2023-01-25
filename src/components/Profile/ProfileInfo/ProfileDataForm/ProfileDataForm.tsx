@@ -6,6 +6,7 @@ import s from "./ProfileDataForm.module.css"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faAddressCard, faCircleCheck} from "@fortawesome/free-regular-svg-icons";
 import {faLink, faMagnifyingGlass, faPerson, faSave} from "@fortawesome/free-solid-svg-icons";
+import {SuperButton} from "../../../../common/SuperButton/SuperButton";
 
 export type ProfileDataFormDataType = {
     fullName: string
@@ -64,7 +65,7 @@ export const ProfileDataForm: React.FC<InjectedFormProps<ProfileDataFormDataType
                     </div>
 
                 <div>
-                    <button><FontAwesomeIcon icon={faSave}/> Save</button>
+                    <SuperButton><FontAwesomeIcon icon={faSave}/> Save</SuperButton>
                 </div>
             </form>
         </div>
