@@ -16,7 +16,7 @@ const ProfileContainer = React.lazy(() => import("./components/Profile/ProfileCo
 const UsersContainer = React.lazy(() => import("./components/Users/UsersContainer"));
 const DialogsContainer = React.lazy(() => import("./components/Dialogs/DialogsContainer"));
 const News = React.lazy(() => import("./components/News/News"));
-const Music = React.lazy(() => import("./components/Music/Music"));
+const Playlist = React.lazy(() => import("./components/Music/Playlist"));
 const Settings = React.lazy(() => import("./components/Settings/Settings"));
 
 
@@ -54,7 +54,7 @@ class App extends React.Component<MapDispatchToPropsType & MapStateToPropsType> 
                                render={withSuspense(ProfileContainer)}/>
                         <Route path={"/messages"} render={withSuspense(DialogsContainer)}/>
                         <Route path={"/news"} render={withSuspense(News)}/>
-                        <Route path={"/music"} render={withSuspense(Music)}/>
+                        <Route path={"/music"} render={withSuspense(Playlist)}/>
                         <Route path={"/settings"} render={withSuspense(Settings)}/>
                         <Route path={"/users"} render={withSuspense(UsersContainer)}/>
                         <Route path={"/login"} render={() => <Login/>}/>
