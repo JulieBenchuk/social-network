@@ -6,6 +6,8 @@ import {Field, reduxForm} from "redux-form";
 import {maxLengthCreator, required} from "../../../utils/validators/validators";
 import {Textarea} from "../../../common/Forms-control/FormsControl";
 import {SuperButton} from "../../../common/SuperButton/SuperButton";
+import {getArrayWithRandomNumber} from "../../../common/utils/getArrayWithRandomNumber";
+import post from "./Post/Post";
 
 const maxLengthCreator30 = maxLengthCreator(30);
 
@@ -16,7 +18,10 @@ export const MyPosts: React.FC<MyPostsPropsType> = ({addPost, posts, likePost, p
     const onLikePost = (postID: number, likeCount: number) => {
         likePost(postID, likeCount)
     }
-    const postElements = posts.map((p, index) => (
+
+    const randomNumber = getArrayWithRandomNumber(posts)
+    const filteredRandomPosts = posts.filter(p=>randomNumber.includes(p.id))
+    const postElements = filteredRandomPosts.map((p, index) => (
         <Post key={index} id={p.id} post={p.post} avatar={profilePhoto} img={p.img} likeCount={p.likeCount}
               onLikePost={() => onLikePost(p.id, p.likeCount + 1)}/>))
 
