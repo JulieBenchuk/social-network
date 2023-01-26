@@ -11,8 +11,10 @@ import {getArrayWithRandomNumber} from "../../../common/utils/getArrayWithRandom
 const maxLengthCreator30 = maxLengthCreator(30);
 
 const MyPosts: React.FC<MyPostsPropsType> = ({addPost, posts, likePost, profilePhoto, ...restProps}) => {
+
     const onAddPost = (values: any) => {
         addPost(values.newPostText);
+
     }
     const onLikePost = (postID: number, likeCount: number) => {
         likePost(postID, likeCount)
