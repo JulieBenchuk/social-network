@@ -63,7 +63,7 @@ export const profileReducer = (state: InitialStateType = initialState, action: A
     switch (action.type) {
         case ADD_POST: {
             const newPost: PostType = {
-                id: Math.ceil(Math.random() * 100),
+                id: Math.ceil(Math.random() * 1000),
                 post: action.newPostText,
                 likeCount: 0
             };

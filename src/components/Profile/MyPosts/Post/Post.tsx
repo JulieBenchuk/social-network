@@ -33,4 +33,4 @@ const Post: React.FC<PostPropsType> = ({id, post, likeCount, onLikePost, avatar,
     )
 }
 
-export default Post;
+export default React.memo(Post);

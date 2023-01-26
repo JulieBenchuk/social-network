@@ -1,6 +1,9 @@
-export function getArrayWithRandomNumber(array: Array<any>) {
+//array ---> filtered arr
+//amount --->length of arr
+
+export function getArrayWithRandomNumber(array: Array<any>, amount: number) {
     const randomPostsArray: Array<number> = []
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < amount; i++) {
         let randomNum = Math.ceil(Math.random() * (array.length - 0) + 0);
         randomPostsArray.push(randomNum)
     }

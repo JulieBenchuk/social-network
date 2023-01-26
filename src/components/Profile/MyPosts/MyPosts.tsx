@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useMemo} from "react";
 import style from "./MyPosts.module.css";
 import Post from "./Post/Post";
 import {MyPostsPropsType} from "./MyPostsContainer";
@@ -7,11 +7,10 @@ import {maxLengthCreator, required} from "../../../utils/validators/validators";
 import {Textarea} from "../../../common/Forms-control/FormsControl";
 import {SuperButton} from "../../../common/SuperButton/SuperButton";
 import {getArrayWithRandomNumber} from "../../../common/utils/getArrayWithRandomNumber";
-import post from "./Post/Post";
 
 const maxLengthCreator30 = maxLengthCreator(30);
 
-export const MyPosts: React.FC<MyPostsPropsType> = ({addPost, posts, likePost, profilePhoto, ...restProps}) => {
+const MyPosts: React.FC<MyPostsPropsType> = ({addPost, posts, likePost, profilePhoto, ...restProps}) => {
     const onAddPost = (values: any) => {
         addPost(values.newPostText);
     }
@@ -19,8 +18,16 @@ export const MyPosts: React.FC<MyPostsPropsType> = ({addPost, posts, likePost, p
         likePost(postID, likeCount)
     }
 
-    const randomNumber = getArrayWithRandomNumber(posts)
-    const filteredRandomPosts = posts.filter(p=>randomNumber.includes(p.id))
+    const randomNumber = useMemo(() => {
+        return getArrayWithRandomNumber(posts, 3)
+    }, [])
+
+
+    const filteredRandomPosts = useMemo(() => {
+        return posts.filter(p => randomNumber.includes(p.id))
+    }, [posts])
+
+
     const postElements = filteredRandomPosts.map((p, index) => (
         <Post key={index} id={p.id} post={p.post} avatar={profilePhoto} img={p.img} likeCount={p.likeCount}
               onLikePost={() => onLikePost(p.id, p.likeCount + 1)}/>))
@@ -33,6 +40,7 @@ export const MyPosts: React.FC<MyPostsPropsType> = ({addPost, posts, likePost, p
         </div>
     )
 }
+export default React.memo(MyPosts)
 
 const AddNewPostForm = (props: any) => {
     return (<form className={style.addPostForm} onSubmit={props.handleSubmit}>
