@@ -27,8 +27,17 @@
     background-color: #ffffff;
 }
 .likeCount {
-    background-color: #ffffff;
     color: #dc2727;
     text-align: end;
-
+    position: relative;
+}
+.heart{
+    position: absolute;
+    left: -25px;
+    transition: 0.3s all;
+}
+.heart:hover{
+    cursor: pointer;
+    font-size: larger;
+    transition: 0.2s all;
 }

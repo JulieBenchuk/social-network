@@ -32,7 +32,7 @@ export const ProfileData: React.FC<ProfileDataPropsType> = ({profile, isOwner, s
                 </div>
                 <div className={s.descriptionItem}>
                     <FontAwesomeIcon icon={faCircleCheck} className={s.descriptionIcon}/>
-                    <b> My skills: : </b>
+                    <b> My skills: </b>
                     {profile.lookingForAJobDescription ? profile.lookingForAJobDescription : "description is empty"}
                 </div>
                 <div className={s.descriptionItem}>

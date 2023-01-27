@@ -1,5 +1,5 @@
 import React from "react";
-import classes from "./Post.module.css";
+import style from "./Post.module.css";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faHeart} from '@fortawesome/free-solid-svg-icons'
 import defaultAvatar from "./../../../../assets/img/avatar_default.webp"
@@ -18,14 +18,14 @@ const Post: React.FC<PostPropsType> = ({id, post, likeCount, onLikePost, avatar,
         onLikePost(id, likeCount)
     }
     return (
-        <div className={classes.post}>
-            <div className={classes.avatarOfPost}>
+        <div className={style.post}>
+            <div className={style.avatarOfPost}>
                 <img src={avatar ? avatar : defaultAvatar}/>
             </div>
-            <div className={classes.postContentBlock}>
-                <div className={classes.postText}>{post}</div>
-                <div className={classes.likeCount} onClick={onLikeClickHandler}>
-                    <FontAwesomeIcon icon={faHeart}/>
+            <div className={style.postContentBlock}>
+                <div className={style.postText}>{post}</div>
+                <div className={style.likeCount} onClick={onLikeClickHandler}>
+                    <FontAwesomeIcon icon={faHeart} className={style.heart}/>
                     <span>{likeCount}</span>
                 </div>
             </div>
