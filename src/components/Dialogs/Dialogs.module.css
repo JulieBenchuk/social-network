@@ -1,6 +1,15 @@
 .dialogs {
-    display: grid;
-    grid-template-columns: 1fr 4fr;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 70%;
+}
+
+.dialogsBlock {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+
 }
 
 .dialogItems {
@@ -42,15 +51,19 @@
     border-radius: 5px;
     margin: 10px;
 }
-.sendMessageBlock {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    justify-content: space-between;
-    align-items: center;
 
+
+.addMessageForm {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 90%;
+    justify-content: space-between;
+    padding: 10px;
 }
-.field{
-    width: 100%;
+
+.field {
+    width: 400px;
 }
+
 

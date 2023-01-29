@@ -36,7 +36,7 @@ export const dialogsReducer = (state: InitialStateType = initialState, action: A
     switch (action.type) {
         case SEND_MESSAGE: {
             const newMessage: MessageType = {
-                id: 7,
+                id: Math.random()*10000,
                 message: action.newMessageBody
             };
             return {
