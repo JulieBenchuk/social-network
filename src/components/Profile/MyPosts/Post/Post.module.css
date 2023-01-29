@@ -27,6 +27,7 @@
     background-color: #ffffff;
 }
 .likeCount {
+    user-select: none;
     color: #dc2727;
     text-align: end;
     position: relative;
