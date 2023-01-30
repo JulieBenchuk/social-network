@@ -13,7 +13,7 @@ const Dialogs = (props: DialogsPropsType) => {
     let state = props.dialogsPage
     const addNewMessage = (values: any) => {
         props.sendMessage(values.newMessageBody)
-
+        values.newMessageBody=""
     }
 
     return (
