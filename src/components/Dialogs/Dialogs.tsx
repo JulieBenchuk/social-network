@@ -7,11 +7,11 @@ import {Field, reduxForm} from "redux-form";
 import {Textarea} from "../../common/Forms-control/FormsControl";
 import {maxLengthCreator, required} from "../../utils/validators/validators";
 import {SuperButton} from "../../common/SuperButton/SuperButton";
-import {FormikValues} from "formik";
+
 
 const Dialogs = (props: DialogsPropsType) => {
     let state = props.dialogsPage
-    const addNewMessage = (values: FormikValues) => {
+    const addNewMessage = (values: any) => {
         props.sendMessage(values.newMessageBody)
 
     }
@@ -33,13 +33,13 @@ const Dialogs = (props: DialogsPropsType) => {
     )
 }
 const maxLengthCreator100 = maxLengthCreator(100);
-const AddMessageForm = (props: FormikValues) => {
+const AddMessageForm = (props: any) => {
     return (
         <form onSubmit={props.handleSubmit} className={style.addMessageForm}>
-                <Field component={Textarea} name="newMessageBody" placeholder="Enter your message..."
-                       validate={[required, maxLengthCreator100]} className={style.field}/>
+            <Field component={Textarea} name="newMessageBody" placeholder="Enter your message..."
+                   validate={[required, maxLengthCreator100]} className={style.field}/>
 
-                <SuperButton type={"submit"}>Send message</SuperButton>
+            <SuperButton type={"submit"}>Send message</SuperButton>
         </form>
     )
 }

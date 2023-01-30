@@ -6,7 +6,7 @@ import {Field, reduxForm} from "redux-form";
 import {maxLengthCreator, required} from "../../../utils/validators/validators";
 import {Textarea} from "../../../common/Forms-control/FormsControl";
 import {SuperButton} from "../../../common/SuperButton/SuperButton";
-import {getArrayWithRandomNumber} from "../../../common/utils/getArrayWithRandomNumber";
+import {getArrayWithRandomNumber} from "../../../utils/getArrayWithRandomNumber";
 import {PostType} from "../../../redux/profile-reducer";
 
 const maxLengthCreator30 = maxLengthCreator(30);
@@ -21,6 +21,7 @@ const MyPosts: React.FC<MyPostsPropsType> = ({addPost, posts, likePost, profileP
         /// simulate adding a new post to the state
         newPostArray.unshift({id: Math.ceil(Math.random()*10000), post: values.newPostText, likeCount: 0})
         setNewPostArray(newPostArray)
+        values.newPostText=""
     }
     const onLikePost = (postID: number, likeCount: number) => {
         likePost(postID, likeCount)

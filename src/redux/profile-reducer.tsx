@@ -69,7 +69,6 @@ export const profileReducer = (state: InitialStateType = initialState, action: A
             };
             return {...state, posts: [newPost, ...state.posts]};
         }
-            ;
         case LIKE_POST: {
             return {
                 ...state, posts: state.posts.map(p => {
