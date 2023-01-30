@@ -44,6 +44,9 @@ class UsersContainer extends React.Component<UserPropsType> {
     componentDidMount() {
         this.props.getUsers(this.props.currentPage, this.props.pageSize)
     }
+    componentWillUnmount() {
+        this.props.setCurrentPage(this.props.currentPage)
+    }
 
     follow = (id: number) => {
         this.props.follow(id)
